@@ -2,7 +2,7 @@ console.log("Iniciando arquivo server.js");
 
 //Iniciar o servidor express  
 const express = require('express'); 
-const app = express(); 
+const app = express();  
 //para remover: app.use(express.static('./'));
 console.log("Express: OK");
 
