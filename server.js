@@ -7,7 +7,7 @@ const app = express();
 console.log("Express: OK");
 
 //Definição da porta do servidor
-const http = require('http').Server(app);
+//const http = require('http').Server(app);
 const porta = process.env.PORT || 5500;
 
 //Cria um arquivo com atalhos
@@ -389,6 +389,6 @@ app.post('/atrasarAtiv', (req, res) => {
 })
 
 
-http.listen(porta, () => console.log(`App ok na porta ${porta}!`))
+app.listen(porta, () => console.log(`App ok na porta ${porta}!`))
 
 console.log("Finalizando leitura de server.js");
