@@ -61,6 +61,15 @@ console.log("Passport-Setup: OK.")
 app.set('view engine', 'ejs');
 console.log("EJS engine view: OK.")
 
+// Definição das variáveis para criar a DOM para o JQuery funcionar com o EJS
+var jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = (new JSDOM('')).window;
+global.document = document;
+var $ = require("jquery")(window);
+
+
 //Criar a rota principal
 app.get('/', (req, res) => {
     res.render('home', { user: req.user });
@@ -131,7 +140,7 @@ var dbModelObj = mongoose.model('collobjs', {
 })
 
 //Rotas CRUD -> PBSC OLD
-var ordemAtiv = { ativDataFim: 1, ativStat: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
+var ordemAtiv = { ativStat: 1, ativDataFim: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
 var ordemIni = { iniDataFim: 1, iniStat: 1,  iniObj: -1, iniDataCria: 1, iniNome: 1 }
 var ordemObj = { objDataFim: 1, objStat: 1, objTema: 1, objDataCria: 1, objNome: 1 }
 

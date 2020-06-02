@@ -8,10 +8,10 @@
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <title>PBSC: Planejamento</title>
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <script src="../src/listaAtiv.js"></script>
+        <script src="../src/listaAtiv.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="shortcut icon" href="../img/ico_wh2x2.png">
@@ -30,9 +30,13 @@
         <main class="container">
             <h2>Lista de Atividades</h2>
 
-            <%= user._id %>!
+            <section>
+            
+                <div class="row" id="Ativ">
 
-            <%- include('cardatividades'); %>
+                </div>
+            
+            </section>
             
         </main>
         

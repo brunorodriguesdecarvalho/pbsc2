@@ -19,10 +19,10 @@
 
         <header class="container">
             <hr>
-            <h1>Bem Vindo, <%= user.username %>!</h1>
+            <h1>Bem Vindo <%= user.username %>!</h1>
         </header>
         <main class="container">
-            <h2>Perfil Pós Login</h2>
+            <%- include('dashboard'); %>
         </main>
     
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
