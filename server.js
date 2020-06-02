@@ -9,9 +9,11 @@ console.log("Express: OK");
 //Definição da porta do servidor
 //const http = require('http').Server(app);
 const porta = process.env.PORT || 5500;
+console.log("Servidor - Porta: " + porta)
 
-//Cria um arquivo com atalhos
+//Link para URI MongoDB
 const chaves = require('./config/chaves');
+console.log("Leitura de Chaves: OK.")
 
 //Importa o mongoose para criar os modelos de dados (Schemas) e conectar ao banco
 const mongoose = require('mongoose')
@@ -32,17 +34,20 @@ const ObjectID = require('mongodb').ObjectID
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
+console.log("BodyParser: OK.")
 
 //Ativar o CORS
 const cors = require('cors')
 app.use(cors())
+console.log("CORS: OK.")
 
 //Prepara a sessão de cookies
 const sessaoCookie = require('cookie-session');
 app.use(sessaoCookie({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [chaves.sessao.chaveCookie]
+    keys: [process.env.chaveCookie]
 }));
+console.log("Sessão de Cookies: OK: ", process.env.chaveCookie);
 
 //Importar o PassportJS para auxiliar no processo de login
 const passport = require('passport');
@@ -50,10 +55,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 //Importar as configurações do PassportJS
 const passportSetup = require('./config/passport-setup');
-
+console.log("Passport-Setup: OK.")
 
 // Define a View Engine como EJS
 app.set('view engine', 'ejs');
+console.log("EJS engine view: OK.")
 
 //Criar a rota principal
 app.get('/', (req, res) => {
@@ -64,12 +70,30 @@ app.get('/', (req, res) => {
 const authRoutes = require('./routes/auth-routes');
 app.use('/auth', authRoutes);
 
-//Define a rota de retorno após o login
+//Define a rota para realizar a operação de autenticação
 const profileRoutes = require('./routes/profile-routes');
 app.use('/profile', profileRoutes);
 
+// Carrega arquivos estáticos
+app.use("/img", express.static('img')); 
+app.use("/styles", express.static('styles')); 
+app.use("/src", express.static('src'));
 
+// Define rotas genéricas
+app.get('/plan/', (req, res) => {
+    res.render('planHome', { user: req.user })
+});
+app.get('/alim/', (req, res) => {
+    res.render('alimHome', { user: req.user })
+});
+app.get('/run/', (req, res) => {
+    res.render('runHome', { user: req.user })
+});
+app.get('/gym/', (req, res) => {
+    res.render('gymHome', { user: req.user })
+});
 
+//Começo das rotas
 
 //Backup -> PBSC OLD
 //Define os modelos de objetos para o mongoose -> PBSC OLD
@@ -111,8 +135,10 @@ var ordemAtiv = { ativDataFim: 1, ativStat: 1, ativIni: 1, ativDataCria: 1, ativ
 var ordemIni = { iniDataFim: 1, iniStat: 1,  iniObj: -1, iniDataCria: 1, iniNome: 1 }
 var ordemObj = { objDataFim: 1, objStat: 1, objTema: 1, objDataCria: 1, objNome: 1 }
 
+var chaveUser = "5ea312f70fc2c924787c0ab6";
+
 app.get('/atividades', (req, res) => {
-    var busca = { ativStat: {'$regex' : '^((?!3 - Concluído).)*$', '$options' : 'i'} }
+    var busca = { userID: ObjectID(chaveUser) }
     dbModelAtiv.find(busca, (err, atividades) => {
         if (err) throw err
         res.send(atividades)    

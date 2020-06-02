@@ -1,0 +1,42 @@
+* { margin-block-start: 0; margin-block-end: 0;}
+body { margin: 0; font-family: Arial;  font-size: 1em;}
+#esq, #dir {position: absolute; width: 50%; height: 100vh; display: inline-block; }
+
+#esq { left: 0px; background-color: #000; color: #fff }
+    .logo {
+        background-image: url(../img/ico_bk.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        width: 40%;
+        height: 100%;
+        margin: 0 auto;
+    }
+    
+#dir {
+    right: 0px;
+    background-color: #fff;
+    color: #000;
+}
+
+    .menu { position: relative; top: 35%;}
+
+    .tit { font-weight: bold; font-size: 150%;}
+
+    .ico { 
+        text-align: center;
+        display: block;
+    }
+    
+
+@media (max-width: 725px) {
+    #esq, #dir {
+        width: 100%;
+        position: relative;
+    }
+    #esq {height: 30vh;}
+    #dir {height: 60vh;}
+    .menu { top: 15%; }
+}
+
+

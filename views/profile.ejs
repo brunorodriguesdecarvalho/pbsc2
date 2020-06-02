@@ -1,65 +1,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>Homepage</title>
-        <style>
-            body{
-                font-family: arial;
-                margin: 0;
-            }
-            nav{
-                background: #000;
-                padding: 20px 10px;
-            }
-            nav ul{
-                max-width: 960px;
-                margin: 0 auto;
-                padding: 0;
-            }
-            nav li{
-                list-style-type: none;
-                display: inline-block;
-                margin: 0 10px 0 0;
-            }
-            nav a{
-                color: #fff;
-                font-size: 18px;
-                background: rgba(255,255,255,0.2);
-                text-decoration: none;
-                padding: 10px;
-                display: block;
-            }
-            main, header{
-                max-width: 960px;
-                margin: 30px auto;
-                padding: 0 10px;
-                color: #333;
-            }
-            main img{
-                width: 50px;
-                margin-right: 10px;
-                position: relative;
-                top: 12px;
-                border-radius: 50px;
-            }
-            main p{
-                display: inline-block;
-            }
-        </style>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Página Principal</title>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="shortcut icon" href="../img/ico_wh2x2.png">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../styles/main.css">
+        <link rel="stylesheet" type="text/css" href="../styles/hr.css">
     </head>
     <body>
-        <nav>
-            <ul>
-                <li><a href="/auth/logout">Log out</a></li>
-            </ul>
-        </nav>
-        <header>
-            <h1>Welcome to your profile, <%= user.username %></h1>
+        <%- include('nav'); %>
+
+        <header class="container">
+            <hr>
+            <h1>Bem Vindo, <%= user.username %>!</h1>
         </header>
-        <main>
-            <p>This is your profile thumbnail:</p>
-            <img src="<%= user.thumbnail %>" />
+        <main class="container">
+            <h2>Perfil Pós Login</h2>
         </main>
+    
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </body>
 </html>

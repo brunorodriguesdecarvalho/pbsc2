@@ -18,8 +18,8 @@ passport.deserializeUser((id, done) => {
 passport.use(
     new GoogleStrategy({
         // options for google strategy
-        clientID: chaves.google.clientID,
-        clientSecret: chaves.google.clientSecret,
+        clientID: process.env.googleClientID,
+        clientSecret: process.env.googleClientSecret,
         callbackURL: '/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done) => {
         // check if user already exists in our own db
@@ -46,8 +46,8 @@ passport.use(
 passport.use(
     new LinkedinStrategy({
         // options for linkedin strategy
-        clientID: chaves.linkedin.clientID,
-        clientSecret: chaves.linkedin.clientSecret,
+        clientID: process.env.linkedinClientID,
+        clientSecret: process.env.linkedinClientSecret,
         callbackURL: '/auth/linkedin/redirect',
         scope: ['r_emailaddress', 'r_liteprofile'],
         state: true
@@ -57,7 +57,7 @@ passport.use(
             if(currentUser){
                 // already have this user
                 console.log('user is: ', currentUser);
-                done(null, currentUser);
+                done(null, currentUser); 
             } else {
                 // if not, create user in our db
                 console.log(profile);
@@ -77,8 +77,8 @@ passport.use(
 passport.use(
     new FacebookStrategy({
         // options for facebook strategy
-        clientID: chaves.facebook.clientID,
-        clientSecret: chaves.facebook.clientSecret,
+        clientID: process.env.facebookClientID,
+        clientSecret: process.env.facebookClientSecret,
         callbackURL: '/auth/facebook/redirect',
         profileFields: ['id', 'displayName', 'photos', 'email']
     }, (accessToken, refreshToken, profile, done) => {

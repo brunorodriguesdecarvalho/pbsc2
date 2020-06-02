@@ -1,0 +1,34 @@
+hr { 
+    height: 2px;
+    background-image: 
+        linear-gradient(90deg, #ff0000, #ffee00, #00ce11, #0000ff);
+    background-size: 100% 5px, 100% 5px;
+    border: none;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+h3 {
+    display: inline;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-block-start: 0; 
+    margin-block-end: 0;
+}
+.bola {
+    font-size: 1.25em;
+    display: flexbox;
+    text-align: center;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border-radius: 100%;
+}
+
+.icobola {
+    font-size: 1.25em;
+    vertical-align: middle;
+}

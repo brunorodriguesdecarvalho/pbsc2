@@ -1,59 +1,56 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>OAuth Tutorials</title>
-        <style>
-            body{
-                font-family: arial;
-                margin: 0;
-            }
-            nav{
-                background: #000;
-                padding: 20px 10px;
-            }
-            nav ul{
-                max-width: 960px;
-                margin: 0 auto;
-                padding: 0;
-            }
-            nav li{
-                list-style-type: none;
-                display: inline-block;
-                margin: 0 10px 0 0;
-            }
-            nav a{
-                color: #fff;
-                font-size: 18px;
-                background: rgba(255,255,255,0.2);
-                text-decoration: none;
-                padding: 10px;
-                display: block;
-            }
-            main, header{
-                max-width: 960px;
-                margin: 30px auto;
-                padding: 0 10px;
-                color: #333;
-            }
-        </style>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Login - PBSC</title>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="shortcut icon" href="../img/ico_wh2x2.png">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../styles/login.css">
+        <link rel="stylesheet" type="text/css" href="../styles/hr.css">
     </head>
     <body>
-        <nav>
-            <ul>
-                <% if (user) { %>
-                <li><a href="/auth/logout">Log out</a></li>
-                <% } else { %>
-                <li><a href="/auth/login">Login</a></li>
-                <% } %>
-            </ul>
-        </nav>
-        <header>
-            <h1>Bem vindo ao PBSC</h1>
-            <h2>Você já tem cadastro?</h2>
-        </header>
-        <main>
-            <p>Se já tem cadastro, clique em login</p>
-        </main>
+        <div id="esq">
+            <div class="logo"></div>
+        </div>
+        <div id="dir">
+            <div class="container menu">
+                <p class="tit">Login Simplificado</p>
+                <hr>
+                <p>Primeiro acesso? Tanto faz...escolha uma das opções</p>
+                <div>
+                    <ul class="list-group list-group-horizontal font-weight-bold">
+                        <li class="list-group-item list-group-item-action">
+                            <a href="/auth/google" class="text-danger text-decoration-none ico">
+                                <i class='fab fa-google-plus'  style="font-size: 32px"></i>
+                                <br>
+                                Google+
+                            </a>
+                        </li>
+                        <li class="list-group-item list-group-item-action">
+                            <a href="/auth/linkedin" class="text-warning text-decoration-none ico">
+                                <i class='fab fa-linkedin' style="font-size: 32px"></i>
+                                <br>
+                                LinkedIn
+                            </a>
+                        </li>
+                        <li class="list-group-item list-group-item-action">
+                            <a href="/auth/facebook" class="text-primary text-decoration-none ico">
+                                <i class='fab fa-facebook align-middle' style="font-size: 32px"></i>
+                                <br>
+                                Facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </body>
 </html>
