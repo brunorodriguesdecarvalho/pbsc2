@@ -160,7 +160,7 @@ app.get('/atividades', (req, res) => {
     dbModelAtiv.find(busca, (err, atividades) => {
         if (err) throw err
         res.send(atividades)    
-    }).sort(ordemAtiv)
+    }).sort(ordemAtiv) 
 })
 
 app.get('/iniciativas', (req, res) => {
