@@ -18,7 +18,7 @@ console.log("Leitura de Chaves: OK.")
 //Importa o mongoose para criar os modelos de dados (Schemas) e conectar ao banco
 const mongoose = require('mongoose')
 mongoose.connect(
-    chaves.mongodb.URI, 
+    process.env.mongodbURI, 
     { useNewUrlParser: true, useUnifiedTopology: true }, 
     function(err, dbpbsc) {
         console.log('MongoDB ok.')
@@ -181,35 +181,6 @@ app.get('/objetivos', (req, res) => {
 
 //Rotas CRUD -> PBSC OLD
 
-app.get('/atividades/ok', (req, res) => {
-    var busca = { ativStat: '3 - Concluído' }
-    dbModelAtiv.find(busca, (err, atividades) => {
-        if (err) throw err
-        res.send(atividades)    
-    }).sort(ordemAtiv)
-})
-
-app.get('/atividades/pbsc', (req, res) => {
-    var busca = { $and: [
-        {ativIni: "PBSCv3"},
-        {ativStat: {'$regex' : '^((?!3 - Concluído).)*$', '$options' : 'i'} }
-    ]}
-    dbModelAtiv.find(busca, (err, atividades) => {
-        if (err) throw err
-        res.send(atividades)    
-    }).sort(ordemAtiv)
-})
-
-app.get('/atividades/nonpbsc', (req, res) => {
-    var busca = { $and: [
-        {ativIni: {'$regex' : '^((?!PBSCv3).)*$', '$options' : 'i'} },
-        {ativStat: {'$regex' : '^((?!3 - Concluído).)*$', '$options' : 'i'} }
-    ]}
-    dbModelAtiv.find(busca, (err, atividades) => {
-        if (err) throw err
-        res.send(atividades)    
-    }).sort(ordemAtiv)
-})
 
 app.get('/objetivos', (req, res) => {
     dbModelObj.find({}, (err, objetivos) => {
@@ -220,7 +191,7 @@ app.get('/objetivos', (req, res) => {
 
 app.get('/ragstatus', (req, res) => {
     var MongoClient = require('mongodb').MongoClient;
-    MongoClient.connect(chaves.mongodb.URI, { useUnifiedTopology: true }, function (err, dbpbsc) {
+    MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
         if (err) throw err;
         var dbo = dbpbsc.db("dbpbsc");
         var ordemStat = {ragstatus: 1}
@@ -254,7 +225,7 @@ app.post('/deletaAtiv', (req, res) => {
     var atividade = new dbModelAtiv(req.body)
     console.log("Chegou no servidor o pedidod para apagar ID " + atividade._id)
     function deletar() {
-        MongoClient.connect(chaves.mongodb.URI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(atividade._id) }
@@ -272,7 +243,7 @@ app.post('/deletaIni', (req, res) => {
     var iniciativa = new dbModelIni(req.body)
     console.log("Chegou no servidor o pedidod para apagar ID " + iniciativa._id)
     function deletar() {
-        MongoClient.connect(chaves.mongodb.URI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(iniciativa._id) }
@@ -290,7 +261,7 @@ app.post('/deletaObj', (req, res) => {
     var objetivo = new dbModelObj(req.body)
     console.log("Chegou no servidor o pedidod para apagar ID " + objetivo._id)
     function deletar() {
-        MongoClient.connect(chaves.mongodb.URI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(objetivo._id) }
@@ -308,7 +279,7 @@ app.post('/concluiAtiv', (req, res) => {
     var atividade = new dbModelAtiv(req.body)
     console.log("Chegou no servidor o pedidod para concluir ID " + atividade._id)
     function concluir() {
-        MongoClient.connect(chaves.mongodb.URI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(atividade._id) }
@@ -330,7 +301,7 @@ app.post('/concluiIni', (req, res) => {
     var iniciativa = new dbModelIni(req.body)
     console.log("Chegou no servidor o pedidod para concluir ID " + iniciativa._id)
     function concluir() {
-        MongoClient.connect(chaves.mongodb.URI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(iniciativa._id) }
@@ -349,7 +320,7 @@ app.post('/concluiObj', (req, res) => {
     var objetivo = new dbModelObj(req.body)
     console.log("Chegou no servidor o pedidod para concluir ID " + objetivo._id)
     function concluir() {
-        MongoClient.connect(chaves.mongodb.URI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(objetivo._id) }
@@ -368,7 +339,7 @@ app.post('/andarAtiv', (req, res) => {
     var atividade = new dbModelAtiv(req.body)
     console.log("Chegou no servidor o pedidod para andar ID " + atividade._id)
     function andar() {
-        MongoClient.connect(chaves.mongodb.URI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(atividade._id) }
@@ -387,7 +358,7 @@ app.post('/andarIni', (req, res) => {
     var iniciativa = new dbModelIni(req.body)
     console.log("Chegou no servidor o pedidod para andar ID " + iniciativa._id)
     function andar() {
-        MongoClient.connect(chaves.mongodb.URI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(iniciativa._id) }
@@ -406,7 +377,7 @@ app.post('/andarObj', (req, res) => {
     var objetivo = new dbModelObj(req.body)
     console.log("Chegou no servidor o pedidod para andar ID " + objetivo._id)
     function andar() {
-        MongoClient.connect(chaves.mongodb.URI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(objetivo._id) }
