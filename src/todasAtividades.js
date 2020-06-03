@@ -36,10 +36,34 @@ function listarAtividades(atividades){
                             <strong>Descrição: </strong>${atividades.ativDesc}<br>
                             <strong>Motivação: </strong>${atividades.ativMot}<br>
                             <strong>Riscos: </strong>${atividades.ativRisk}<br>
+                            
                             <i>
                                 <strong>ID Atividade: </strong>${atividades._id}<br>
-                                <strong>ID Usuário: </strong>${atividades.userID}
+                                <strong>ID Usuário: </strong>${atividades.userID}<br>
                             </i>
+
+                            <br>
+
+                            <a href="#" onclick="javascript: excluirAtividade('${atividades._id}')" class="text-danger text-capitalize">
+                                <span class="fas" style="font-size: 1.25em">
+                                &#xf12d;
+                                <strong>Excluir</strong>
+                                </span>
+                            </a>
+                            
+                            <a href="#" onclick="javascript: andarAtividade('${atividades._id}')" class="text-success p-1">
+                                <span class="fas" style="font-size: 1.25em">
+                                &#xf04b;
+                                <strong>Iniciar</strong>
+                                </span>
+                            </a>
+
+                            <a href="#" onclick="javascript: concluirAtividade('${atividades._id}')" class="text-primary p-1">
+                                <span class="fas" style="font-size: 1.25em">
+                                &#xf058;
+                                <strong>Concluir</strong>
+                                </span>
+                            </a>
                         </p>
                     </div>
                 </div>

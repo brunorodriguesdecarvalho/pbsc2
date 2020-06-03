@@ -2,7 +2,6 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LinkedinStrategy = require('passport-linkedin-oauth2').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
-const chaves = require('./chaves');
 const User = require('../models/login-model');
 
 passport.serializeUser((user, done) => {
@@ -26,7 +25,7 @@ passport.use(
         User.findOne({googleId: profile.id}).then((currentUser) => {
             if(currentUser){
                 // already have this user
-                console.log('user is: ', currentUser);
+                console.log('user is: ', currentUser._id);
                 done(null, currentUser);
             } else {
                 // if not, create user in our db
@@ -56,7 +55,7 @@ passport.use(
         User.findOne({linkedinId: profile.id}).then((currentUser) => {
             if(currentUser){
                 // already have this user
-                console.log('user is: ', currentUser);
+                console.log('user is: ', currentUser._id);
                 done(null, currentUser); 
             } else {
                 // if not, create user in our db
@@ -86,7 +85,7 @@ passport.use(
         User.findOne({facebookId: profile.id}).then((currentUser) => {
             if(currentUser){
                 // already have this user
-                console.log('user is: ', currentUser);
+                console.log('user is: ', currentUser._id);
                 done(null, currentUser);
             } else {
                 // if not, create user in our db

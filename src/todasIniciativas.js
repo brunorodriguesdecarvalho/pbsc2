@@ -37,9 +37,32 @@ function listarIniciativas(Iniciativas){
                             <strong>Motivação: </strong>${Iniciativas.iniMot}<br>
                             <strong>Riscos: </strong>${Iniciativas.iniRisk}<br>
                             <i>
-                                <strong>ID Atividade: </strong>${Iniciativas._id}<br>
+                                <strong>ID Iniciativa: </strong>${Iniciativas._id}<br>
                                 <strong>ID Usuário: </strong>${Iniciativas.userID}
                             </i>
+
+                            <br>
+
+                            <a href="#" onclick="javascript: excluirAtividade('${Iniciativas._id}')" class="text-danger text-capitalize">
+                                <span class="fas" style="font-size: 1.25em">
+                                &#xf12d;
+                                <strong>Excluir</strong>
+                                </span>
+                            </a>
+                            
+                            <a href="#" onclick="javascript: andarAtividade('${Iniciativas._id}')" class="text-success p-1">
+                                <span class="fas" style="font-size: 1.25em">
+                                &#xf04b;
+                                <strong>Iniciar</strong>
+                                </span>
+                            </a>
+
+                            <a href="#" onclick="javascript: concluirAtividade('${Iniciativas._id}')" class="text-primary p-1">
+                                <span class="fas" style="font-size: 1.25em">
+                                &#xf058;
+                                <strong>Concluir</strong>
+                                </span>
+                            </a>
                         </p>
                     </div>
                 </div>

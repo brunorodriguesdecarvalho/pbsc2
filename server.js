@@ -155,10 +155,8 @@ var ordemAtiv = { ativStat: 1, ativDataFim: 1, ativIni: 1, ativDataCria: 1, ativ
 var ordemIni = { iniStat: 1,  iniDataFim: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
 var ordemObj = { objStat: 1, objDataFim: 1, objTema: 1, objDataCria: 1, objNome: 1 }
 
-var chaveUser = "5ea312f70fc2c924787c0ab6";
-
 app.get('/atividades', (req, res) => {
-    var busca = { userID: ObjectID(chaveUser) }
+    var busca = { userID: ObjectID(req.user._id) }
     dbModelAtiv.find(busca, (err, atividades) => {
         if (err) throw err
         res.send(atividades)    
@@ -166,14 +164,16 @@ app.get('/atividades', (req, res) => {
 })
 
 app.get('/iniciativas', (req, res) => {
-    dbModelIni.find({}, (err, iniciativas) => {
+    var busca = { userID: ObjectID(req.user._id) }
+    dbModelIni.find(busca, (err, iniciativas) => {
         if (err) throw err
         res.send(iniciativas)    
     }).sort(ordemIni)
 })
 
 app.get('/objetivos', (req, res) => {
-    dbModelObj.find({}, (err, objetivos) => {
+    var busca = { userID: ObjectID(req.user._id) }
+    dbModelObj.find(busca, (err, objetivos) => {
         if (err) throw err
         res.send(objetivos)    
     }).sort(ordemObj)
