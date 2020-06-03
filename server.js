@@ -92,6 +92,16 @@ app.use("/src", express.static('src'));
 app.get('/plan/', (req, res) => {
     res.render('planHome', { user: req.user })
 });
+app.get('/ativ/', (req, res) => {
+    res.render('atividades', { user: req.user })
+});
+app.get('/ini/', (req, res) => {
+    res.render('iniciativas', { user: req.user })
+});
+app.get('/obj/', (req, res) => {
+    res.render('objetivos', { user: req.user })
+});
+
 app.get('/alim/', (req, res) => {
     res.render('alimHome', { user: req.user })
 });
@@ -101,6 +111,7 @@ app.get('/run/', (req, res) => {
 app.get('/gym/', (req, res) => {
     res.render('gymHome', { user: req.user })
 });
+
 
 //Começo das rotas
 
@@ -139,10 +150,10 @@ var dbModelObj = mongoose.model('collobjs', {
     objDataFim: Date,
 })
 
-//Rotas CRUD -> PBSC OLD
+//Rotas CRUD -> PBSC NEW
 var ordemAtiv = { ativStat: 1, ativDataFim: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
-var ordemIni = { iniDataFim: 1, iniStat: 1,  iniObj: -1, iniDataCria: 1, iniNome: 1 }
-var ordemObj = { objDataFim: 1, objStat: 1, objTema: 1, objDataCria: 1, objNome: 1 }
+var ordemIni = { iniStat: 1,  iniDataFim: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
+var ordemObj = { objStat: 1, objDataFim: 1, objTema: 1, objDataCria: 1, objNome: 1 }
 
 var chaveUser = "5ea312f70fc2c924787c0ab6";
 
@@ -153,6 +164,22 @@ app.get('/atividades', (req, res) => {
         res.send(atividades)    
     }).sort(ordemAtiv)
 })
+
+app.get('/iniciativas', (req, res) => {
+    dbModelIni.find({}, (err, iniciativas) => {
+        if (err) throw err
+        res.send(iniciativas)    
+    }).sort(ordemIni)
+})
+
+app.get('/objetivos', (req, res) => {
+    dbModelObj.find({}, (err, objetivos) => {
+        if (err) throw err
+        res.send(objetivos)    
+    }).sort(ordemObj)
+})
+
+//Rotas CRUD -> PBSC OLD
 
 app.get('/atividades/ok', (req, res) => {
     var busca = { ativStat: '3 - Concluído' }
@@ -182,13 +209,6 @@ app.get('/atividades/nonpbsc', (req, res) => {
         if (err) throw err
         res.send(atividades)    
     }).sort(ordemAtiv)
-})
-
-app.get('/iniciativas', (req, res) => {
-    dbModelIni.find({}, (err, iniciativas) => {
-        if (err) throw err
-        res.send(iniciativas)    
-    }).sort(ordemIni)
 })
 
 app.get('/objetivos', (req, res) => {
