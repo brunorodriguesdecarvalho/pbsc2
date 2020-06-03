@@ -11,10 +11,6 @@ console.log("Express: OK");
 const porta = process.env.PORT || 5500;
 console.log("Servidor - Porta: " + porta)
 
-//Link para URI MongoDB
-const chaves = require('./config/chaves');
-console.log("Leitura de Chaves: OK.")
-
 //Importa o mongoose para criar os modelos de dados (Schemas) e conectar ao banco
 const mongoose = require('mongoose')
 mongoose.connect(
