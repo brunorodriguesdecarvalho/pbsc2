@@ -8,7 +8,7 @@ function getObjetivos() {
 getObjetivos()
 
 function listarObjetivos(Objetivos){
-    $("#Obj").append(`
+    $("#Obj").append(` 
 
             <div class="col-sm col-md-6 col-xl-4 align-content-stretch">
 
@@ -30,15 +30,39 @@ function listarObjetivos(Objetivos){
                     <div class="card-body">
                         <p id="Stat-${Objetivos.objStat}" data-value="${Objetivos.objStat}">
                             <strong>Status: </strong>${Objetivos.objStat}<br>
+                            
                             <strong>Prazo: </strong>${Objetivos.objDataFim}<br>
-                            <strong>Criação: </strong>${Objetivos.objDataIni}<br>
+                            <strong>Criação: </strong>${Objetivos.objDataCria}<br>
                             <strong>Descrição: </strong>${Objetivos.objDesc}<br>
                             <strong>Motivação: </strong>${Objetivos.objMot}<br>
                             <strong>Riscos: </strong>${Objetivos.objRisk}<br>
                             <i>
-                                <strong>ID Atividade: </strong>${Objetivos._id}<br>
+                                <strong>ID Iniciativa: </strong>${Objetivos._id}<br>
                                 <strong>ID Usuário: </strong>${Objetivos.userID}
                             </i>
+
+                            <br>
+
+                            <a href="#" onclick="javascript: excluirAtividade('${Objetivos._id}')" class="text-danger text-capitalize">
+                                <span class="fas" style="font-size: 1.25em">
+                                &#xf12d;
+                                <strong>Excluir</strong>
+                                </span>
+                            </a>
+                            
+                            <a href="#" onclick="javascript: andarAtividade('${Objetivos._id}')" class="text-success p-1">
+                                <span class="fas" style="font-size: 1.25em">
+                                &#xf04b;
+                                <strong>Iniciar</strong>
+                                </span>
+                            </a>
+
+                            <a href="#" onclick="javascript: concluirAtividade('${Objetivos._id}')" class="text-primary p-1">
+                                <span class="fas" style="font-size: 1.25em">
+                                &#xf058;
+                                <strong>Concluir</strong>
+                                </span>
+                            </a>
                         </p>
                     </div>
                 </div>

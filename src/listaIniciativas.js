@@ -11,14 +11,15 @@ requestIni.open('GET', urlIni, true);
 fetch(urlIni)
     .then(
         function(responseIni) {                    
+            optionIni = document.createElement('option');
+            optionIni.text = 'Nenhuma';
+            optionIni.value = 'Nenhuma';
+            optionIni.id = 'Nenhuma';
+            dropdownIni.add(optionIni);
+            document.getElementById("Nenhuma").selected = true;
+            
             if (responseIni.status !== 200) {
                 console.warn('Erro, código: ' + responseIni.status)
-                optionIni = document.createElement('option');
-                optionIni.text = 'Não atribuído';
-                optionIni.value = 'Não atribuído';
-                optionIni.id = 'iniNaoAtribuida';
-                dropdownIni.add(optionIni);
-                document.getElementById("iniNaoAtribuida").selected = true;
                 return
             }
 

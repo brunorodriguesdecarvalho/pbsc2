@@ -100,8 +100,16 @@ app.get('/ini/', (req, res) => {
     res.render('iniciativas', { user: req.user })
 });
 
+app.get('/ini/nova', (req, res) => {
+    res.render('novaIniciativa', { user: req.user })
+});
+
 app.get('/obj/', (req, res) => {
     res.render('objetivos', { user: req.user })
+});
+
+app.get('/obj/nova', (req, res) => {
+    res.render('novoObjetivo', { user: req.user })
 });
 
 app.get('/alim/', (req, res) => {
@@ -191,8 +199,20 @@ app.post('/atividades', (req, res) => {
     console.log('Nova atividade salva no MongoDB.')
 })
 
-//Rotas CRUD -> PBSC OLD
+app.post('/iniciativas', (req, res) => {
+    var iniciativas = new dbModelIni(req.body)
+    var ativSalvo = atividades.save()
+    console.log('Nova iniciativa salva no MongoDB.')
+})
 
+app.post('/objetivos', (req, res) => {
+    var objetivos = new dbModelObj(req.body)
+    var objSalvo = objetivos.save()
+    console.log('Novo objetivo salvo no MongoDB.')
+})
+
+
+//Rota para menu suspendo com o status - PBSC New
 app.get('/ragstatus', (req, res) => {
     var MongoClient = require('mongodb').MongoClient;
     MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
@@ -207,19 +227,41 @@ app.get('/ragstatus', (req, res) => {
     })
 })
 
-
-
-app.post('/iniciativas', (req, res) => {
-    var iniciativas = new dbModelIni(req.body)
-    var iniSalvo = iniciativas.save()
-    console.log('Nova iniciativa salva no MongoDB.')
+app.get('/listIni', (req, res) => {
+    var busca = { userID: ObjectID(req.user._id) }
+    var MongoClient = require('mongodb').MongoClient;
+    MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
+        if (err) throw err;
+        var dbo = dbpbsc.db("dbpbsc");
+        var ordem = {iniNome: 1}
+        dbo.collection("collinis").find(busca, { projection: {_id: 0, iniNome: 1 } }).sort(ordem).toArray(function (err, info) {
+            if (err) throw err;
+            res.send(info)
+            dbpbsc.close();
+        })
+    })
 })
 
-app.post('/objetivos', (req, res) => {
-    var objetivos = new dbModelObj(req.body)
-    var objSalvo = objetivos.save()
-    console.log('Novo objetivo salvo no MongoDB.')
+app.get('/listObj', (req, res) => {
+    var busca = { userID: ObjectID(req.user._id) }
+    var MongoClient = require('mongodb').MongoClient;
+    MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
+        if (err) throw err;
+        var dbo = dbpbsc.db("dbpbsc");
+        var ordem = {objNome: 1}
+        dbo.collection("collobjs").find(busca, { projection: {_id: 0, objNome: 1 } }).sort(ordem).toArray(function (err, info) {
+            if (err) throw err;
+            res.send(info)
+            dbpbsc.close();
+        })
+    })
 })
+
+
+//Rotas CRUD -> PBSC OLD
+
+
+
 
 app.post('/deletaAtiv', (req, res) => {
     var atividade = new dbModelAtiv(req.body)
