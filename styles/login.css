@@ -26,6 +26,7 @@ body { margin: 0; font-family: Arial;  font-size: 1em;}
     .ico { 
         text-align: center;
         display: block;
+        font-size: 0.75em;
     }
     
 
@@ -34,7 +35,7 @@ body { margin: 0; font-family: Arial;  font-size: 1em;}
         width: 100%;
         position: relative;
     }
-    #esq {height: 30vh;}
+    #esq {height: 40vh;}
     #dir {height: 60vh;}
     .menu { top: 15%; }
 }

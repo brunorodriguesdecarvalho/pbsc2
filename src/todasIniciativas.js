@@ -15,7 +15,7 @@ function listarIniciativas(Iniciativas){
                 <div class="card mt-2">
 
                     <div class="card-header pl-2 pr-0">
-                        <div class="d-flex flex-row">
+                        <div class="d-flex flex-row align-items-center">
                             <div class="align-middle">
                                 <div class="bola text-white font-weight-bold" id="bola-${Iniciativas._id}">
                                     <i class='fas'>&#xf134;</i>

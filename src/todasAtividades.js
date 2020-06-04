@@ -15,7 +15,7 @@ function listarAtividades(atividades){
                 <div class="card mt-2">
 
                     <div class="card-header pl-2 pr-0">
-                        <div class="d-flex flex-row">
+                        <div class="d-flex flex-row align-items-center">
                             <div class="align-middle">
                                 <div class="bola text-white font-weight-bold" id="bola-${atividades._id}">
                                     <i class='fas'>&#xf134;</i>
@@ -24,7 +24,7 @@ function listarAtividades(atividades){
                             <div class="pl-2 pr-2">
                                 <h3><div id="tituloAtividade">${atividades.ativNome}</div></h3>
                             </div>
-                            </div>
+                        </div>
                     </div>
                     
                     <div class="card-body">

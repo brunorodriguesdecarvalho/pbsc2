@@ -84,16 +84,22 @@ app.use("/img", express.static('img'));
 app.use("/styles", express.static('styles')); 
 app.use("/src", express.static('src'));
 
-// Define rotas genéricas
+// Define rotas de renderização de tela
 app.get('/plan/', (req, res) => {
     res.render('planHome', { user: req.user })
 });
+
 app.get('/ativ/', (req, res) => {
     res.render('atividades', { user: req.user })
 });
+app.get('/ativ/nova', (req, res) => {
+    res.render('novaAtividade', { user: req.user })
+});
+
 app.get('/ini/', (req, res) => {
     res.render('iniciativas', { user: req.user })
 });
+
 app.get('/obj/', (req, res) => {
     res.render('objetivos', { user: req.user })
 });
@@ -122,6 +128,7 @@ var dbModelAtiv = mongoose.model('collativs', {
     ativRisk: String,
     ativDataCria: Date,
     ativDataFim: Date,
+    userID: ObjectID,
 })
 
 var dbModelIni = mongoose.model('collinis', {
@@ -133,6 +140,7 @@ var dbModelIni = mongoose.model('collinis', {
     iniRisk: String,
     iniDataCria: Date,
     iniDataFim: Date,
+    userID: ObjectID,
 })
 
 var dbModelObj = mongoose.model('collobjs', {
@@ -144,6 +152,7 @@ var dbModelObj = mongoose.model('collobjs', {
     objRisk: String,
     objDataCria: Date,
     objDataFim: Date,
+    userID: ObjectID,
 })
 
 //Rotas CRUD -> PBSC NEW
@@ -175,15 +184,14 @@ app.get('/objetivos', (req, res) => {
     }).sort(ordemObj)
 })
 
-//Rotas CRUD -> PBSC OLD
-
-
-app.get('/objetivos', (req, res) => {
-    dbModelObj.find({}, (err, objetivos) => {
-        if (err) throw err
-        res.send(objetivos)    
-    }).sort(ordemObj)
+//Rotas de gravação - PSBC NEW
+app.post('/atividades', (req, res) => {
+    var atividades = new dbModelAtiv(req.body)
+    var ativSalvo = atividades.save()
+    console.log('Nova atividade salva no MongoDB.')
 })
+
+//Rotas CRUD -> PBSC OLD
 
 app.get('/ragstatus', (req, res) => {
     var MongoClient = require('mongodb').MongoClient;
@@ -199,11 +207,7 @@ app.get('/ragstatus', (req, res) => {
     })
 })
 
-app.post('/atividades', (req, res) => {
-    var atividades = new dbModelAtiv(req.body)
-    var ativSalvo = atividades.save()
-    console.log('Nova atividade salva no MongoDB.')
-})
+
 
 app.post('/iniciativas', (req, res) => {
     var iniciativas = new dbModelIni(req.body)
