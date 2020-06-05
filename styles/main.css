@@ -8,3 +8,7 @@ body{
     vertical-align: middle;
     margin: auto;
 }
+
+#cartao{
+    transition: all 300ms ease-in-out;
+}

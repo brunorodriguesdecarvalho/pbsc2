@@ -15,7 +15,7 @@ function listarIniciativas(Iniciativas){
                 <div class="card mt-2">
 
                     <div class="card-header pl-2 pr-0">
-                        <div class="d-flex flex-row align-items-center">
+                        <div class="d-flex align-items-center">
                             <div class="align-middle">
                                 <div class="bola text-white font-weight-bold" id="bola-${Iniciativas._id}">
                                     <i class='fas'>&#xf134;</i>
@@ -24,10 +24,28 @@ function listarIniciativas(Iniciativas){
                             <div class="pl-2 pr-2">
                                 <h3><div id="tituloAtividade">${Iniciativas.iniNome}</div></h3>
                             </div>
+                            <div class="px-2 d-flex" id="mostrador-${Iniciativas._id}">
+                                <a 
+                                    href="#" 
+                                    onclick="expandir('cardBody${Iniciativas._id}', 'encolhemais${Iniciativas._id}', 'encolhemenos${Iniciativas._id}')" 
+                                    id="encolhemenos${Iniciativas._id}" 
+                                    style="display:none"
+                                >
+                                    <i class='fas text-dark'>&#xf068;</i>
+                                </a>
+                                <a 
+                                    href="#" 
+                                    onclick="expandir('cardBody${Iniciativas._id}', 'encolhemais${Iniciativas._id}', 'encolhemenos${Iniciativas._id}')"
+                                    id="encolhemais${Iniciativas._id}" 
+                                    style="display:block"
+                                >
+                                    <i class='fas text-dark'>&#xf067;</i>
+                                </a>
                             </div>
+                        </div>
                     </div>
                     
-                    <div class="card-body">
+                    <div class="card-body cartao" style="display:none" id="cardBody${Iniciativas._id}">
                         <p id="Stat-${Iniciativas.iniStat}" data-value="${Iniciativas.iniStat}">
                             <strong>Status: </strong>${Iniciativas.iniStat}<br>
                             <strong>Objetivo Associado: </strong>${Iniciativas.iniObj}<br>
@@ -37,7 +55,8 @@ function listarIniciativas(Iniciativas){
                             <strong>Motivação: </strong>${Iniciativas.iniMot}<br>
                             <strong>Riscos: </strong>${Iniciativas.iniRisk}<br>
                             <i>
-                                <strong>ID Iniciativa: </strong>${Iniciativas._id}<br>
+                                <strong>ID Iniciativa: </strong>${Iniciativas._id}
+                                <br>
                                 <strong>ID Usuário: </strong>${Iniciativas.userID}
                             </i>
 
@@ -93,6 +112,23 @@ function listarIniciativas(Iniciativas){
             }
         };
         hello()
+
+        function expandir(cartao, mais, menos) {
+            var cartao = document.getElementById(cartao);
+            var mais = document.getElementById(mais);
+            var menos = document.getElementById(menos);
+            if (cartao.style.display === "none") {
+                cartao.style.display = "block"
+                menos.style.display = "block"
+                mais.style.display = "none"
+            }
+            else {
+                cartao.style.display = "none"
+                menos.style.display = "none"
+                mais.style.display = "block"
+            }
+        };
+
     </script>
    
     `)
