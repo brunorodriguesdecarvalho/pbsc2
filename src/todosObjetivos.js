@@ -24,10 +24,28 @@ function listarObjetivos(Objetivos){
                             <div class="pl-2 pr-2">
                                 <h3><div id="tituloAtividade">${Objetivos.objNome}</div></h3>
                             </div>
+                            <div class="px-2 d-flex" id="mostrador-${Objetivos._id}">
+                                <a 
+                                    href="#!" 
+                                    onclick="expandir('cardBody${Objetivos._id}', 'encolhemais${Objetivos._id}', 'encolhemenos${Objetivos._id}')" 
+                                    id="encolhemenos${Objetivos._id}" 
+                                    style="display:none"
+                                >
+                                    <i class='fas text-dark'>&#xf068;</i>
+                                </a>
+                                <a 
+                                    href="#!" 
+                                    onclick="expandir('cardBody${Objetivos._id}', 'encolhemais${Objetivos._id}', 'encolhemenos${Objetivos._id}')"
+                                    id="encolhemais${Objetivos._id}" 
+                                    style="display:block"
+                                >
+                                    <i class='fas text-dark'>&#xf067;</i>
+                                </a>
                             </div>
+                        </div>
                     </div>
                     
-                    <div class="card-body">
+                    <div class="card-body cartao" style="display:none" id="cardBody${Objetivos._id}">
                         <p id="Stat-${Objetivos.objStat}" data-value="${Objetivos.objStat}">
                             <strong>Status: </strong>${Objetivos.objStat}<br>
                             
@@ -43,21 +61,21 @@ function listarObjetivos(Objetivos){
 
                             <br>
 
-                            <a href="#" onclick="javascript: excluirAtividade('${Objetivos._id}')" class="text-danger text-capitalize">
+                            <a href="#!" onclick="javascript: excluirObjetivo('${Objetivos._id}')" class="text-danger text-capitalize">
                                 <span class="fas" style="font-size: 1.25em">
                                 &#xf12d;
                                 <strong>Excluir</strong>
                                 </span>
                             </a>
                             
-                            <a href="#" onclick="javascript: andarAtividade('${Objetivos._id}')" class="text-success p-1">
+                            <a href="#!" onclick="javascript: andarObjetivo('${Objetivos._id}')" class="text-success p-1">
                                 <span class="fas" style="font-size: 1.25em">
                                 &#xf04b;
                                 <strong>Iniciar</strong>
                                 </span>
                             </a>
 
-                            <a href="#" onclick="javascript: concluirAtividade('${Objetivos._id}')" class="text-primary p-1">
+                            <a href="#!" onclick="javascript: concluirObjetivo('${Objetivos._id}')" class="text-primary p-1">
                                 <span class="fas" style="font-size: 1.25em">
                                 &#xf058;
                                 <strong>Concluir</strong>
@@ -93,6 +111,22 @@ function listarObjetivos(Objetivos){
             }
         };
         hello()
+
+        function expandir(cartao, mais, menos) {
+            var cartao = document.getElementById(cartao);
+            var mais = document.getElementById(mais);
+            var menos = document.getElementById(menos);
+            if (cartao.style.display === "none") {
+                cartao.style.display = "block"
+                menos.style.display = "block"
+                mais.style.display = "none"
+            }
+            else {
+                cartao.style.display = "none"
+                menos.style.display = "none"
+                mais.style.display = "block"
+            }
+        };
     </script>
    
     `)

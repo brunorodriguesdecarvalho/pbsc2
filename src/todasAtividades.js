@@ -14,7 +14,7 @@ function listarAtividades(atividades){
 
                 <div class="card mt-2">
 
-                    <div class="card-header pl-2 pr-0">
+                    <div class="card-header pl-2 pr-0 text-dark">
                         <div class="d-flex flex-row align-items-center">
                             <div class="align-middle">
                                 <div class="bola text-white font-weight-bold" id="bola-${atividades._id}">
@@ -24,10 +24,28 @@ function listarAtividades(atividades){
                             <div class="pl-2 pr-2">
                                 <h3><div id="tituloAtividade">${atividades.ativNome}</div></h3>
                             </div>
+                            <div class="px-2 d-flex" id="mostrador-${atividades._id}">
+                                <a 
+                                    href="#!" 
+                                    onclick="expandir('cardBody${atividades._id}', 'encolhemais${atividades._id}', 'encolhemenos${atividades._id}')" 
+                                    id="encolhemenos${atividades._id}" 
+                                    style="display:none"
+                                >
+                                    <i class='fas text-dark'>&#xf068;</i>
+                                </a>
+                                <a 
+                                    href="#!" 
+                                    onclick="expandir('cardBody${atividades._id}', 'encolhemais${atividades._id}', 'encolhemenos${atividades._id}')"
+                                    id="encolhemais${atividades._id}" 
+                                    style="display:block"
+                                >
+                                    <i class='fas text-dark'>&#xf067;</i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="card-body">
+                    <div class="card-body cartao" style="display:none" id="cardBody${atividades._id}">
                         <p id="Stat-${atividades.ativStat}" data-value="${atividades.ativStat}">
                             <strong>Status: </strong>${atividades.ativStat}<br>
                             <strong>Iniciativa Associada: </strong>${atividades.ativIni}<br>
@@ -44,21 +62,21 @@ function listarAtividades(atividades){
 
                             <br>
 
-                            <a href="#" onclick="javascript: excluirAtividade('${atividades._id}')" class="text-danger text-capitalize">
+                            <a href="#!" onclick="javascript: excluirAtividade('${atividades._id}')" class="text-danger text-capitalize">
                                 <span class="fas" style="font-size: 1.25em">
                                 &#xf12d;
                                 <strong>Excluir</strong>
                                 </span>
                             </a>
                             
-                            <a href="#" onclick="javascript: andarAtividade('${atividades._id}')" class="text-success p-1">
+                            <a href="#!" onclick="javascript: andarAtividade('${atividades._id}')" class="text-success p-1">
                                 <span class="fas" style="font-size: 1.25em">
                                 &#xf04b;
                                 <strong>Iniciar</strong>
                                 </span>
                             </a>
 
-                            <a href="#" onclick="javascript: concluirAtividade('${atividades._id}')" class="text-primary p-1">
+                            <a href="#!" onclick="javascript: concluirAtividade('${atividades._id}')" class="text-primary p-1">
                                 <span class="fas" style="font-size: 1.25em">
                                 &#xf058;
                                 <strong>Concluir</strong>
@@ -94,6 +112,22 @@ function listarAtividades(atividades){
             }
         };
         hello()
+
+        function expandir(cartao, mais, menos) {
+            var cartao = document.getElementById(cartao);
+            var mais = document.getElementById(mais);
+            var menos = document.getElementById(menos);
+            if (cartao.style.display === "none") {
+                cartao.style.display = "block"
+                menos.style.display = "block"
+                mais.style.display = "none"
+            }
+            else {
+                cartao.style.display = "none"
+                menos.style.display = "none"
+                mais.style.display = "block"
+            }
+        };
     </script>
    
     `)

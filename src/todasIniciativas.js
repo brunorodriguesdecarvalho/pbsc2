@@ -26,7 +26,7 @@ function listarIniciativas(Iniciativas){
                             </div>
                             <div class="px-2 d-flex" id="mostrador-${Iniciativas._id}">
                                 <a 
-                                    href="#" 
+                                    href="#!" 
                                     onclick="expandir('cardBody${Iniciativas._id}', 'encolhemais${Iniciativas._id}', 'encolhemenos${Iniciativas._id}')" 
                                     id="encolhemenos${Iniciativas._id}" 
                                     style="display:none"
@@ -34,7 +34,7 @@ function listarIniciativas(Iniciativas){
                                     <i class='fas text-dark'>&#xf068;</i>
                                 </a>
                                 <a 
-                                    href="#" 
+                                    href="#!" 
                                     onclick="expandir('cardBody${Iniciativas._id}', 'encolhemais${Iniciativas._id}', 'encolhemenos${Iniciativas._id}')"
                                     id="encolhemais${Iniciativas._id}" 
                                     style="display:block"
@@ -62,21 +62,21 @@ function listarIniciativas(Iniciativas){
 
                             <br>
 
-                            <a href="#" onclick="javascript: excluirAtividade('${Iniciativas._id}')" class="text-danger text-capitalize">
+                            <a href="#!" onclick="javascript: excluirIniciativa('${Iniciativas._id}')" class="text-danger text-capitalize">
                                 <span class="fas" style="font-size: 1.25em">
                                 &#xf12d;
                                 <strong>Excluir</strong>
                                 </span>
                             </a>
                             
-                            <a href="#" onclick="javascript: andarAtividade('${Iniciativas._id}')" class="text-success p-1">
+                            <a href="#!" onclick="javascript: andarIniciativa('${Iniciativas._id}')" class="text-success p-1">
                                 <span class="fas" style="font-size: 1.25em">
                                 &#xf04b;
                                 <strong>Iniciar</strong>
                                 </span>
                             </a>
 
-                            <a href="#" onclick="javascript: concluirAtividade('${Iniciativas._id}')" class="text-primary p-1">
+                            <a href="#!" onclick="javascript: concluirIniciativa('${Iniciativas._id}')" class="text-primary p-1">
                                 <span class="fas" style="font-size: 1.25em">
                                 &#xf058;
                                 <strong>Concluir</strong>
