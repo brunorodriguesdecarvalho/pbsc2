@@ -1,12 +1,12 @@
-<nav class="navbar navbar-brand-centered navbar-expand-sm navbar-light bg-white container" id="navbar">
+<nav class="navbar navbar-brand-centered navbar-expand-sm navbar-light bg-white fixed-top" id="navbar">
     <div class="d-block-sm">
-        <div>
-            <a class="navbar-brand" href="/profile">
-                <img src="../img/ico_wh.png" width="75px">
+        <div class="navbar-brand">
+            <a href="/profile">
+                <img src="../img/ico_wh.png" width="75px" class="navlogo">
             </a>
         </div>
     </div>
-    <div></div>
+    
     <button 
         class="navbar-toggler order-first" 
         type="button" data-toggle="collapse" 
@@ -16,6 +16,7 @@
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="btn-group mr-2 mb-2 mt-2">
             <button type="button" class="btn btn-dark">
@@ -31,19 +32,17 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <div class="dropdown-header">
                     <p class="font-weight-bold">
-                        <img src="<%= user.thumbnail %>" width="50px" height="50px" class="rounded-circle nav-item">
-                        <%= user.username %>
-                        
+                        <img src="<%=user.thumbnail%>" width="50px" height="50px" class="rounded-circle nav-item">
+                        <%=user.username%>
                     </p>
                 </div>
                 <a class="dropdown-item" href="/plan/">Planejamento</a>
-                <a class="dropdown-item" href="/alim/">Alimentação</a>
-                <a class="dropdown-item" href="/run/">Corrida</a>
-                <a class="dropdown-item" href="/gym/">Musculação</a>
+                <a class="dropdown-item disabled" href="/alim/">Alimentação</a>
+                <a class="dropdown-item disabled" href="/run/">Corrida</a>
+                <a class="dropdown-item disabled" href="/gym/">Musculação</a>
                 <a class="dropdown-item disabled" href="#!">Sobre</a>
                 <a class="dropdown-item" href="/auth/logout">Sair</a>
             </div>
         </div>
     </div>
-    <hr>
 </nav>
