@@ -21,7 +21,7 @@
         </header>
 
         <main class="container">
-            <h2>Nova Atividade</h2>
+            <h2><%= user.username ? 'Editar ' : 'Nova ' %>Atividade: <%= user.username ? user.username : '' %></h2>
 
             <section>
                 <form id="form_ativ">
@@ -47,7 +47,7 @@
                         <div class="col-1 bg-white font-weight-bold text-right">Iniciativa Associada</div>
                         <div class="col-sm col-lg-2">
                             <select id="ativIni" required style="width: 150px; height: 5vh;"></select>
-                        </div> 
+                        </div>  
                     </div>
                     <div class="row">
                         <div class="col-sm">
@@ -103,6 +103,7 @@
     <script src="../src/statusAtividade.js"></script>
     <script src="../src/listaIniciativas.js"></script>
     <script src="../src/dataAtividade.js"></script>
+    <script src="../src/editarAtividade.js"></script>
     
 </html>
 

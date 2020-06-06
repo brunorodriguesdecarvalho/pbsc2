@@ -1,6 +1,7 @@
 body{
     font-family: arial;
     margin: 0;
+    text-decoration: none;
 }
 
 .logo{
@@ -11,4 +12,31 @@ body{
 
 .cartao{
     transition: all 300ms ease-in-out;
+}
+
+.botao{
+    margin: 1vh 0vh;
+    padding: 1.5vh;
+    width: 45%;
+    height: 100%;
+    display: inline-block;
+    line-height: 100%;
+    font-size: 1em;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.gruda1{
+    margin-top: 4.0em;
+}
+.gruda2{
+    margin-top: 4.0em;
+    padding: 0.1em 0em;
+}
+.gruda3{
+    margin-top: 1em;
+}
+.navlogo{
+    display: inline;
+    align-items: center;
 }

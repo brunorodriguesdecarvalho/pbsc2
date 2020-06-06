@@ -65,7 +65,6 @@ const { document } = (new JSDOM('')).window;
 global.document = document;
 var $ = require("jquery")(window);
 
-
 //Criar a rota principal
 app.get('/', (req, res) => {
     res.render('home', { user: req.user });
@@ -96,6 +95,28 @@ app.get('/ativ/nova', (req, res) => {
     res.render('novaAtividade', { user: req.user })
 });
 
+/*
+app.post('/ativ/edit', (req, res) => {
+    var atividade = new dbModelAtiv(req.body)
+    var auth = req.user
+    console.log("post - ativID: " + atividade._id )
+    console.log("post - user ID : " + atividade.userID)
+    //var ativID = '5edb0725562d64597c355c5f'
+    var busca = { $and: [ { userID : atividade.userID } , { _id : atividade._id } ] }
+    dbModelAtiv.find(busca, (err, resp) => {
+        if (err) throw err
+        console.log("Resposta do post: " + resp)
+        res.send(resp)    
+    }).sort(ordemAtiv)
+    res.render('novaAtividade', {user: req.user})
+});
+
+app.get('/ativ/edit', (req, res) => {
+    console.log("Resposta do GET: " + req.body)
+})
+
+*/
+
 app.get('/ini/', (req, res) => {
     res.render('iniciativas', { user: req.user })
 });
@@ -115,9 +136,11 @@ app.get('/obj/nova', (req, res) => {
 app.get('/alim/', (req, res) => {
     res.render('alimHome', { user: req.user })
 });
+
 app.get('/run/', (req, res) => {
     res.render('runHome', { user: req.user })
 });
+
 app.get('/gym/', (req, res) => {
     res.render('gymHome', { user: req.user })
 });
@@ -259,9 +282,6 @@ app.get('/listObj', (req, res) => {
 
 
 //Rotas CRUD -> PBSC OLD
-
-
-
 
 app.post('/deletaAtiv', (req, res) => {
     var atividade = new dbModelAtiv(req.body)

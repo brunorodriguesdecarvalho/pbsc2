@@ -9,8 +9,8 @@ getAtividades()
 
 function listarAtividades(atividades){
     $("#Ativ").append(`
-
-            <div class="col-sm col-md-6 col-xl-4 align-content-stretch">
+    
+            <div class="col-sm col-md-6 col-xl-4 align-content-stretch" id="${atividades._id}" data-value="id="${atividades._id}">
 
                 <div class="card mt-2">
 
@@ -45,7 +45,7 @@ function listarAtividades(atividades){
                         </div>
                     </div>
                     
-                    <div class="card-body cartao" style="display:none" id="cardBody${atividades._id}">
+                    <div class="card-body cartao pb-0" style="display:none" id="cardBody${atividades._id}">
                         <p id="Stat-${atividades.ativStat}" data-value="${atividades.ativStat}">
                             <strong>Status: </strong>${atividades.ativStat}<br>
                             <strong>Iniciativa Associada: </strong>${atividades.ativIni}<br>
@@ -55,31 +55,50 @@ function listarAtividades(atividades){
                             <strong>Motivação: </strong>${atividades.ativMot}<br>
                             <strong>Riscos: </strong>${atividades.ativRisk}<br>
                             
-                            <i>
+                            <i style="display: none">
                                 <strong>ID Atividade: </strong>${atividades._id}<br>
                                 <strong>ID Usuário: </strong>${atividades.userID}<br>
                             </i>
 
-                            <br>
+                            
 
-                            <a href="#!" onclick="javascript: excluirAtividade('${atividades._id}')" class="text-danger text-capitalize">
-                                <span class="fas" style="font-size: 1.25em">
-                                &#xf12d;
-                                <strong>Excluir</strong>
+                            <a  href="#!" 
+                                onclick="javascript: excluirAtividade('${atividades._id}')" 
+                                class="bg-danger text-white botao"
+                                style="text-decoration: none;"
+                            >
+                                <span class="fas">
+                                    &#xf12d;&nbsp;<strong>Excluir</strong>
                                 </span>
                             </a>
                             
-                            <a href="#!" onclick="javascript: andarAtividade('${atividades._id}')" class="text-success p-1">
-                                <span class="fas" style="font-size: 1.25em">
-                                &#xf04b;
-                                <strong>Iniciar</strong>
+                            <a  href="#!" 
+                                onclick="javascript: andarAtividade('${atividades._id}')" 
+                                class="bg-success text-white botao"
+                                style="text-decoration: none;"
+                            >
+                                <span class="fas">
+                                    &#xf04b;&nbsp;<strong>Iniciar</strong>
                                 </span>
                             </a>
 
-                            <a href="#!" onclick="javascript: concluirAtividade('${atividades._id}')" class="text-primary p-1">
-                                <span class="fas" style="font-size: 1.25em">
-                                &#xf058;
-                                <strong>Concluir</strong>
+                            <a  href="#!" 
+                                onclick="javascript: concluirAtividade('${atividades._id}')" 
+                                class="bg-primary text-white botao"
+                                style="text-decoration: none;"
+                            >
+                                <span class="fas">
+                                    &#xf058;&nbsp;<strong>Concluir</strong>
+                                </span>
+                            </a>
+
+                            <a  href="#!" 
+                                class="bg-dark text-white botao" 
+                                onclick="javascript: editar()"
+                                style="text-decoration: none;"
+                            >
+                                <span class="fas">
+                                    &#xf044;&nbsp;<strong>Editar</strong>
                                 </span>
                             </a>
                         </p>
@@ -87,7 +106,14 @@ function listarAtividades(atividades){
                 </div>
             </div>
 
-    <script>
+    <script>  
+    
+        function editar() {
+            alert('oi')
+        }
+
+
+
         function hello() {
             var valorStat = document.getElementById("Stat-${atividades.ativStat}").getAttribute("data-value");
             if (valorStat == "-1: Urgente") {
@@ -128,7 +154,10 @@ function listarAtividades(atividades){
                 mais.style.display = "block"
             }
         };
+
     </script>
+
+    
    
     `)
 }
