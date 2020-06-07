@@ -37,10 +37,6 @@ body{
 .gruda3{
     margin-top: 1em;
 }
-.navlogo{
-    display: inline;
-    align-items: center;
-}
 
 ul {
     list-style: none;
@@ -136,27 +132,30 @@ ul {
 
 @media (max-width: 1200px) {
     .mgresp {
-        margin-top: 150px;
+        margin-top: 120px;
     }
 }
 
 @media (max-width: 765px) {
+    .btresp {
+        margin-top: 20px;
+    }    
+}
+
+@media (max-width: 530px) {
     .mgresp {
         margin-top: 200px;
     }
-    .btresp {
-        margin-top: 20px;
-    }
 }
 
-@media (max-width: 575px) {
-    .mgresp {
-        margin-top: 180px;
-    }
-}
-
-@media (max-width: 425px) {
+@media (max-width: 465px) {
     .mgresp {
         margin-top: 220px;
+    }
+}
+
+@media (max-width: 386px) {
+    .fmresp {
+        margin-top: 150px;
     }
 }

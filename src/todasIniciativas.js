@@ -9,20 +9,20 @@ getIniciativas()
 
 function listarIniciativas(Iniciativas){
     $("#Ini").append(`
-
-            <div class="col-sm col-md-6 col-xl-4 align-content-stretch">
+    
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 align-content-stretch teste" id="${Iniciativas._id}" data-value="id="${Iniciativas._id}">
 
                 <div class="card mt-2">
 
-                    <div class="card-header pl-2 pr-0">
-                        <div class="d-flex align-items-center">
+                    <div class="card-header pl-2 pr-0 text-dark">
+                        <div class="d-flex flex-row align-items-center">
                             <div class="align-middle">
                                 <div class="bola text-white font-weight-bold" id="bola-${Iniciativas._id}">
                                     <i class='fas'>&#xf134;</i>
                                 </div>
                             </div>
                             <div class="pl-2 pr-2">
-                                <h3><div id="tituloAtividade">${Iniciativas.iniNome}</div></h3>
+                                <h3><div id="tituloIniciativa">${Iniciativas.iniNome}</div></h3>
                             </div>
                             <div class="px-2 d-flex" id="mostrador-${Iniciativas._id}">
                                 <a 
@@ -45,41 +45,60 @@ function listarIniciativas(Iniciativas){
                         </div>
                     </div>
                     
-                    <div class="card-body cartao" style="display:none" id="cardBody${Iniciativas._id}">
+                    <div class="card-body cartao pb-0" style="display:none" id="cardBody${Iniciativas._id}">
                         <p id="Stat-${Iniciativas.iniStat}" data-value="${Iniciativas.iniStat}">
                             <strong>Status: </strong>${Iniciativas.iniStat}<br>
-                            <strong>Objetivo Associado: </strong>${Iniciativas.iniObj}<br>
+                            <strong>Iniciativa Associada: </strong>${Iniciativas.iniObj}<br>
                             <strong>Prazo: </strong>${Iniciativas.iniDataFim}<br>
                             <strong>Criação: </strong>${Iniciativas.iniDataCria}<br>
                             <strong>Descrição: </strong>${Iniciativas.iniDesc}<br>
                             <strong>Motivação: </strong>${Iniciativas.iniMot}<br>
                             <strong>Riscos: </strong>${Iniciativas.iniRisk}<br>
-                            <i>
-                                <strong>ID Iniciativa: </strong>${Iniciativas._id}
-                                <br>
-                                <strong>ID Usuário: </strong>${Iniciativas.userID}
+                            
+                            <i style="display: none">
+                                <strong>ID Iniciativa: </strong>${Iniciativas._id}<br>
+                                <strong>ID Usuário: </strong>${Iniciativas.userID}<br>
                             </i>
 
-                            <br>
+                            
 
-                            <a href="#!" onclick="javascript: excluirIniciativa('${Iniciativas._id}')" class="text-danger text-capitalize">
-                                <span class="fas" style="font-size: 1.25em">
-                                &#xf12d;
-                                <strong>Excluir</strong>
+                            <a  href="#!" 
+                                onclick="javascript: excluirIniciativa('${Iniciativas._id}')" 
+                                class="bg-danger text-white botao"
+                                style="text-decoration: none;"
+                            >
+                                <span class="fas">
+                                    &#xf12d;&nbsp;<strong>Excluir</strong>
                                 </span>
                             </a>
                             
-                            <a href="#!" onclick="javascript: andarIniciativa('${Iniciativas._id}')" class="text-success p-1">
-                                <span class="fas" style="font-size: 1.25em">
-                                &#xf04b;
-                                <strong>Iniciar</strong>
+                            <a  href="#!" 
+                                onclick="javascript: andarIniciativa('${Iniciativas._id}')" 
+                                class="bg-success text-white botao"
+                                style="text-decoration: none;"
+                            >
+                                <span class="fas">
+                                    &#xf04b;&nbsp;<strong>Iniciar</strong>
                                 </span>
                             </a>
 
-                            <a href="#!" onclick="javascript: concluirIniciativa('${Iniciativas._id}')" class="text-primary p-1">
-                                <span class="fas" style="font-size: 1.25em">
-                                &#xf058;
-                                <strong>Concluir</strong>
+                            <a  href="#!" 
+                                onclick="javascript: concluirIniciativa('${Iniciativas._id}')" 
+                                class="bg-primary text-white botao"
+                                style="text-decoration: none;"
+                            >
+                                <span class="fas">
+                                    &#xf058;&nbsp;<strong>Concluir</strong>
+                                </span>
+                            </a>
+
+                            <a  href="#!" 
+                                class="bg-dark text-white botao" 
+                                onclick="javascript: editar()"
+                                style="text-decoration: none;"
+                            >
+                                <span class="fas">
+                                    &#xf044;&nbsp;<strong>Editar</strong>
                                 </span>
                             </a>
                         </p>
@@ -87,7 +106,14 @@ function listarIniciativas(Iniciativas){
                 </div>
             </div>
 
-    <script>
+    <script>  
+    
+        function editar() {
+            alert('oi')
+        }
+
+
+
         function hello() {
             var valorStat = document.getElementById("Stat-${Iniciativas.iniStat}").getAttribute("data-value");
             if (valorStat == "-1: Urgente") {
@@ -130,6 +156,8 @@ function listarIniciativas(Iniciativas){
         };
 
     </script>
+
+    
    
     `)
 }
