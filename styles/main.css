@@ -150,12 +150,12 @@ ul {
 
 @media (max-width: 465px) {
     .mgresp {
-        margin-top: 220px;
+        margin-top: 160px;
     }
 }
 
 @media (max-width: 386px) {
     .fmresp {
-        margin-top: 150px;
+        margin-top: 160px;
     }
 }
