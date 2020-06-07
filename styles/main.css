@@ -1,5 +1,6 @@
 body{
     font-family: arial;
+    color: #343a40;
     margin: 0;
     text-decoration: none;
 }
@@ -39,4 +40,62 @@ body{
 .navlogo{
     display: inline;
     align-items: center;
+}
+
+ul {
+    list-style: none;
+}
+
+.link:link, .link:visited, .link:hover, .link:active {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 1vh;
+    margin: 10vh 0vh;
+    color: #000000;
+}
+
+.link:hover{
+    color: #0B00FF;
+}
+
+.bgRED {
+    background-color: #FF0002;
+}
+.txRED {
+    color: #FF0002;
+}
+
+.bgYEL {
+    background-color: #FFC500;
+}
+.txYEL {
+    color: #FFC500;
+}
+
+.bgCIN {
+    background-color: #808080;
+}
+.txCIN {
+    color: #808080;
+}
+
+.bgGRE {
+    background-color: #12A802;
+}
+.txGRE {
+    color: #12A802;
+}
+
+.bgBLU {
+    background-color: #0B00FF;
+}
+.txBLU {
+    color: #0B00FF;
+}
+
+.bgBLK {
+    background-color: #000000;
+}
+.txBLK {
+    color: #000000;
 }

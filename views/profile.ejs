@@ -11,15 +11,44 @@
         <link rel="stylesheet" type="text/css" href="../styles/hr.css">
     </head>
     <body>
-        <%- include('nav'); %>
+        
 
-        <header class="container">
+        <header class="container mt-5">
+            <%- include('nav'); %>
+            
+            <h1>Olá <%= user.username %></h1>
             <hr>
-            <h1>Bem Vindo <%= user.username %>!</h1>
+            <h2>Escolha uma das opcções</h2>
         </header>
         <main class="container">
-            <a href="/ativ">Ir para atividades</a>
+           
+            <section class="">
+                <ul class="list-group list-group-flush active">
+                    <li class="list-group-item bg-dark text-white"><strong>PLANEJAMENTO</strong></li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="/ativ" class="link">Ver Atividades</a>
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="/ini" class="link">Ver Iniciativas</a>
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="/ativ" class="link">Ver Objetivos</a>
+                    </li>
+                </ul>     
+                <ul class="list-group">
+                    <li class="list-group-item bgBLK">
+                        <a href="#!" class="text-white link">
+                            Sobre o P_BSC
+                        </a>
+                    </li>
+                </ul>            
+            </section>
+            
         </main>
+
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
     
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

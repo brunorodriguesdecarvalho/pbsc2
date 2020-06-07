@@ -1,0 +1,6 @@
+vermelho = #FF0002
+amarelo = #FFC500
+cinza = #808080
+verde = #12A802
+azul = #0B00FF
+dark-bg = #343a40
