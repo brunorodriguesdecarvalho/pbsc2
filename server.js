@@ -83,6 +83,10 @@ app.use("/img", express.static('img'));
 app.use("/styles", express.static('styles')); 
 app.use("/src", express.static('src'));
 
+app.get('/commits/', (req, res) => {
+    res.render('commits', { user: req.user })
+});
+
 // Define rotas de renderização de tela
 app.get('/plan/', (req, res) => {
     res.render('planHome', { user: req.user })
