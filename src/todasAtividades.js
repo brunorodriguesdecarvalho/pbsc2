@@ -10,7 +10,7 @@ getAtividades()
 function listarAtividades(atividades){
     $("#Ativ").append(`
     
-            <div class="col-sm col-md-6 col-xl-4 align-content-stretch" id="${atividades._id}" data-value="id="${atividades._id}">
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 align-content-stretch teste" id="${atividades._id}" data-value="id="${atividades._id}">
 
                 <div class="card mt-2">
 

@@ -100,6 +100,9 @@ ul {
     color: #000000;
 }
 
+.navtxt {
+    font-size: 4vh;
+}
 
 .navico {
     font-size: 1.5em;
@@ -109,11 +112,44 @@ ul {
     font-size: 2vw;
 }
 
+.teste {
+    font-size: 2vh;
+}
+
 @media (max-width: 600px) {
     .legico {
         font-size: 4vw;
     }
     .supico {
         display: none;
+    }
+}
+
+.mgresp{
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1200px) {
+    .mgresp {
+        margin-top: 150px;
+    }
+}
+
+@media (max-width: 765px) {
+    .mgresp {
+        margin-top: 200px;
+    }
+}
+
+@media (max-width: 575px) {
+    .mgresp {
+        margin-top: 180px;
+    }
+}
+
+@media (max-width: 425px) {
+    .mgresp {
+        margin-top: 220px;
     }
 }
