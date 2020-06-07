@@ -13,14 +13,9 @@
     </head>
     <body>
         <%- include('navPlan'); %>
-        
 
-        <header class="container mb-0">
-            <hr>
-            <h1>Planejamento</h1>
-        </header>
-
-        <main class="container">
+        <main class="container mt-5">
+            <br><br><br>
             <section>
                 <form id="form_ativ">
                     <div class="row py-2 align-items-center">
@@ -36,16 +31,16 @@
                         </div> 
                     </div>
                     <div class="row py-2 align-items-center">
-                        <div class="col-1 bg-white font-weight-bold text-right">Status</div>
+                        <div class="col-2 bg-white font-weight-bold text-right">Status</div>
                         <div class="col-sm col-lg-2">
                             <select id="ativStat" required style="width: 150px; height: 5vh;"></select>
-                        </div> 
+                        </div>
                     </div>
                     <div class="row py-2 align-items-center">
-                        <div class="col-1 bg-white font-weight-bold text-right">Iniciativa Associada</div>
-                        <div class="col-sm col-lg-2">
-                            <select id="ativIni" required style="width: 150px; height: 5vh;"></select>
-                        </div>  
+                        <div class="col-2 bg-white font-weight-bold text-right">Iniciativa Associada</div>
+                        <div class="col-sm col-lg">
+                            <select id="ativIni" required style="width: 75%; height: 5vh;"></select>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm">
@@ -100,8 +95,6 @@
     
     <script src="../src/statusAtividade.js"></script>
     <script src="../src/listaIniciativas.js"></script>
-    <script src="../src/dataAtividade.js"></script>
-    <script src="../src/editarAtividade.js"></script>
-    
+    <script src="../src/dataAtividade.js"></script>    
 </html>
 

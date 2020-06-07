@@ -4,6 +4,13 @@ hr {
         linear-gradient(90deg, #ff0000, #ffee00, #00ce11, #0000ff);
     background-size: 100% 5px, 100% 5px;
     border: none;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h1, h2, h3, h4, h5 {
+    margin-block-start: 0; 
+    margin-block-end: 0.5rem;
 }
 
 h1 {
