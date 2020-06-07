@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>PBSC: Novo Objetivo</title>
+        <title>Planejamento: Novo Objetivo</title>
         <%- include('meta'); %>
 
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -15,9 +15,8 @@
         <%- include('navPlan'); %>
 
         <main class="container mt-5">
-            <br><br>
 
-            <section>
+            <section class="mgresp">
                 <form>
                     <div class="row py-2 align-items-center">
                         <div class="col-1 bg-white font-weight-bold text-right">Título</div>
@@ -32,8 +31,8 @@
                         </div> 
                     </div>
                     <div class="row py-2 align-items-center">
-                        <div class="col-1 bg-white font-weight-bold text-right">Status</div>
-                        <div class="col-sm col-lg-2">
+                        <div class="col-2 bg-white font-weight-bold text-right">Status</div>
+                        <div class="col-sm col-lg">
                             <select id="objStat" required style="width: 150px; height: 5vh;"></select>
                         </div> 
                     </div>
@@ -85,7 +84,7 @@
             </section>
         </main>
     </body>
-    
+    <script src="../src/titulo.js" type="text/javascript"></script>
     <script src="../src/statusObjetivo.js"></script>
     <script src="../src/dataObjetivo.js"></script>
     
