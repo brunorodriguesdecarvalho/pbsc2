@@ -130,6 +130,10 @@ ul {
     margin-bottom: 20px;
 }
 
+.fmresp{
+    margin-top: 100px;;
+}
+
 @media (max-width: 1200px) {
     .mgresp {
         margin-top: 150px;
@@ -139,6 +143,9 @@ ul {
 @media (max-width: 765px) {
     .mgresp {
         margin-top: 200px;
+    }
+    .btresp {
+        margin-top: 20px;
     }
 }
 
