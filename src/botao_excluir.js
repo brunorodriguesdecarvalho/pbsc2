@@ -1,23 +1,49 @@
+var reloadTempo = 4000
+
 function excluirAtividade(idparaApagar) {
-    console.log('Init to delete: ', idparaApagar)
+    console.log('Pedido para apagar este item: ', idparaApagar)
     var atividade = { _id: idparaApagar }
-    $.post('/deletaAtiv', atividade)
-    console.log('Trying to delete: ', atividade)
-    setTimeout(function() {location.reload()}, 1000)
+    function check() {
+        if (confirm("Tem certeza que deseja apagar?!")) {
+          $.post('/deletaAtiv', atividade)
+          console.log('Confirmação para apagar recebida com sucesso para o item:  ', atividade)
+          window.alert('Apagando item. Por favor aguarde.')
+          setTimeout(function() {location.reload()}, reloadTempo)
+        } else {
+          next;
+        }
+      }
+    check()
 }
 
 function excluirIniciativa(idparaApagar) {
-    console.log('Init to delete: ', idparaApagar)
-    var iniciativa = { _id: idparaApagar }
-    $.post('/deletaIni', iniciativa)
-    console.log('Trying to delete: ', iniciativa)
-    setTimeout(function() {location.reload()}, 1000)
-} 
+    console.log('Pedido para apagar este item: ', idparaApagar)
+    var atividade = { _id: idparaApagar }
+    function check() {
+        if (confirm("Tem certeza que deseja apagar?!")) {
+          $.post('/deletaIni', iniciativa)
+          console.log('Confirmação para apagar recebida com sucesso para o item:  ', iniciativa)
+          window.alert('Apagando item. Por favor aguarde.')
+          setTimeout(function() {location.reload()}, reloadTempo)
+        } else {
+          next;
+        }
+      }
+    check()
+}
 
 function excluirObjetivo(idparaApagar) {
-    console.log('Init to delete: ', idparaApagar)
-    var objetivo = { _id: idparaApagar }
-    $.post('/deletaObj', objetivo)
-    console.log('Trying to delete: ', objetivo)
-    setTimeout(function() {location.reload()}, 1000)
+    console.log('Pedido para apagar este item: ', idparaApagar)
+    var atividade = { _id: idparaApagar }
+    function check() {
+        if (confirm("Tem certeza que deseja apagar?!")) {
+          $.post('/deletaObj', objetivo)
+          console.log('Confirmação para apagar recebida com sucesso para o item:  ', objetivo)
+          window.alert('Apagando item. Por favor aguarde.')
+          setTimeout(function() {location.reload()}, reloadTempo)
+        } else {
+          next;
+        }
+      }
+    check()
 }
