@@ -1,7 +1,27 @@
 function getIniciativas() {
     $.get(
         '/iniciativas',
-        (iniciativas) => { iniciativas.forEach(listarIniciativas) }
+        (iniciativas) => { 
+            var qtd = Object.keys(iniciativas).length
+            if (qtd == 0) {
+                console.log("sem registros")
+                $("#Ini").append(`
+                    <div class="mx-auto">
+                    <br>
+                    <p style="font-weight:bold">Você ainda não criou nenhuma iniciativa...</p>
+                        <img 
+                            src="../img/startup-vector-free-icon-set-14.png" 
+                            style="width:200px;"
+                            class="m-auto d-block"
+                        >
+                        <br>
+                        <div class="text-center my-4">
+                            <a href="/ini/nova" class="botao p-3 bg-primary rounded text-white">Criar Iniciativa</a>
+                        </div>
+                    </div>
+                `)
+            } else { console.log("Qtd de registros: ", qtd)}
+            iniciativas.forEach(listarIniciativas) }
     )
 }
 

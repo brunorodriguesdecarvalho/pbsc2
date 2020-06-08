@@ -1,7 +1,27 @@
 function getObjetivos() {
     $.get(
         '/objetivos',
-        (objetivos) => { objetivos.forEach(listarObjetivos) }
+        (objetivos) => { 
+            var qtd = Object.keys(objetivos).length
+            if (qtd == 0) {
+                console.log("sem registros")
+                $("#Obj").append(`
+                    <div class="mx-auto">
+                    <br>
+                    <p style="font-weight:bold">Você ainda não criou nenhum objetivo...</p>
+                        <img 
+                            src="../img/startup-vector-free-icon-set-14.png" 
+                            style="width:200px;"
+                            class="m-auto d-block"
+                        >
+                        <br>
+                        <div class="text-center my-4">
+                            <a href="/obj/nova" class="botao p-3 bg-primary rounded text-white">Criar Objetivo</a>
+                        </div>
+                    </div>
+                `)
+            } else { console.log("Qtd de registros: ", qtd)}
+            objetivos.forEach(listarObjetivos) }
     )
 }
 

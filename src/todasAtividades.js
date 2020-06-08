@@ -1,15 +1,33 @@
 function getAtividades() {
     $.get(
         '/atividades',
-        (atividades) => { atividades.forEach(listarAtividades) }
+        (atividades) => { 
+            var qtd = Object.keys(atividades).length
+            if (qtd == 0) {
+                console.log("sem registros")
+                $("#Ativ").append(`
+                    <div class="mx-auto">
+                    <br>
+                    <p style="font-weight:bold">Você ainda não criou nenhuma atividade...</p>
+                        <img 
+                            src="../img/startup-vector-free-icon-set-14.png" 
+                            style="width:200px;"
+                            class="m-auto d-block"
+                        >
+                        <br>
+                        <div class="text-center my-4">
+                            <a href="/ativ/nova" class="botao p-3 bg-primary rounded text-white">Criar Atividade</a>
+                        </div>
+                    </div>
+                `)
+            } else { console.log("Qtd de registros: ", qtd)}
+            atividades.forEach(listarAtividades) }
     )
 }
 
 getAtividades()
 
-function listarAtividades(atividades){
-    var id = `${atividades._id}`;
-    
+function listarAtividades(atividades){  
 
     $("#Ativ").append(`
     
