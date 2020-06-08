@@ -228,7 +228,7 @@ app.post('/atividades', (req, res) => {
 
 app.post('/iniciativas', (req, res) => {
     var iniciativas = new dbModelIni(req.body)
-    var ativSalvo = atividades.save()
+    var ativSalvo = iniciativas.save()
     console.log('Nova iniciativa salva no MongoDB.')
 })
 
