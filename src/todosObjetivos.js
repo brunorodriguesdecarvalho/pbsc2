@@ -1,68 +1,88 @@
 function getObjetivos() {
     $.get(
-        '/Objetivos',
-        (Objetivos) => { Objetivos.forEach(listarObjetivos) }
+        '/objetivos',
+        (objetivos) => { objetivos.forEach(listarObjetivos) }
     )
 }
 
 getObjetivos()
 
-function listarObjetivos(Objetivos){
+function listarObjetivos(objetivos){
+    var id = `${objetivos._id}`;
+    
+
     $("#Obj").append(`
     
-            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 align-content-stretch teste" id="${Objetivos._id}" data-value="id="${Objetivos._id}">
-
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 align-content-stretch teste" id="${objetivos._id}" data-value="id="${objetivos._id}">
+                
+                <!-- início do cartão -->
                 <div class="card mt-2">
 
-                    <div class="card-header pl-2 pr-0 text-dark">
-                        <div class="d-flex flex-row align-items-center">
-                            <div class="align-middle">
-                                <div class="bola text-white font-weight-bold" id="bola-${Objetivos._id}">
-                                    <i class='fas'>&#xf134;</i>
+                <!-- início do header do cartão -->
+                    <div class="card-header px-2 ">
+                        
+                        <!-- início do grupo do título do cartão -->
+
+                        <div>
+
+                            <!-- início do grupo do título do cartão -->
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex">
+                                    <div class="d-flex>
+                                        <!-- início da bola do status do título do cartão -->
+                                        <div class="bola font-weight-bold" id="bola-${objetivos._id}">
+                                            <span class='fas text-white'>&#xf134;</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- título principal do cartão -->
+                                    <div class="pl-2 pr-2">
+                                        <h3>
+                                            <div class="d-flex pr-1 align-items-center" id="tituloObjetivo">
+                                                <span class="pr-3">${objetivos.objNome}</span>
+                                                <div class="d-flex" id="mostrador-${objetivos._id}">
+                                                    <a 
+                                                        href="#!" 
+                                                        onclick="expandir('cardBody${objetivos._id}', 'encolhemais${objetivos._id}', 'encolhemenos${objetivos._id}')" 
+                                                        id="encolhemenos${objetivos._id}" 
+                                                        style="display:none"
+                                                    >
+                                                        <span class='fas text-dark'>&#xf056;</span>
+                                                    </a> 
+                                                    <a 
+                                                        href="#!" 
+                                                        onclick="expandir('cardBody${objetivos._id}', 'encolhemais${objetivos._id}', 'encolhemenos${objetivos._id}')"
+                                                        id="encolhemais${objetivos._id}" 
+                                                        style="display:block"
+                                                    >
+                                                        <span class='fas text-dark'>&#xf055;</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </h3>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="pl-2 pr-2">
-                                <h3><div id="tituloObjetivo">${Objetivos.objNome}</div></h3>
-                            </div>
-                            <div class="px-2 d-flex" id="mostrador-${Objetivos._id}">
-                                <a 
-                                    href="#!" 
-                                    onclick="expandir('cardBody${Objetivos._id}', 'encolhemais${Objetivos._id}', 'encolhemenos${Objetivos._id}')" 
-                                    id="encolhemenos${Objetivos._id}" 
-                                    style="display:none"
-                                >
-                                    <i class='fas text-dark'>&#xf068;</i>
-                                </a>
-                                <a 
-                                    href="#!" 
-                                    onclick="expandir('cardBody${Objetivos._id}', 'encolhemais${Objetivos._id}', 'encolhemenos${Objetivos._id}')"
-                                    id="encolhemais${Objetivos._id}" 
-                                    style="display:block"
-                                >
-                                    <i class='fas text-dark'>&#xf067;</i>
-                                </a>
-                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="card-body cartao pb-0" style="display:none" id="cardBody${Objetivos._id}">
-                        <p id="Stat-${Objetivos.objStat}" data-value="${Objetivos.objStat}">
-                            <strong>Status: </strong>${Objetivos.objStat}<br>
-                            <strong>Prazo: </strong>${Objetivos.objDataFim}<br>
-                            <strong>Criação: </strong>${Objetivos.objDataCria}<br>
-                            <strong>Descrição: </strong>${Objetivos.objDesc}<br>
-                            <strong>Motivação: </strong>${Objetivos.objMot}<br>
-                            <strong>Riscos: </strong>${Objetivos.objRisk}<br>
+
+                        <div class="card-body cartao pb-0" style="display:none" id="cardBody${objetivos._id}">
+                        <p id="Stat-${objetivos.objStat}" data-value="${objetivos.objStat}">
+                            <strong>Status: </strong>${objetivos.objStat}<br>
+                            <strong>Prazo: </strong>${objetivos.objDataFim}<br>
+                            <strong>Criação: </strong>${objetivos.objDataCria}<br>
+                            <strong>Descrição: </strong>${objetivos.objDesc}<br>
+                            <strong>Motivação: </strong>${objetivos.objMot}<br>
+                            <strong>Riscos: </strong>${objetivos.objRisk}<br>
                             
                             <i style="display: none">
-                                <strong>ID Objetivo: </strong>${Objetivos._id}<br>
-                                <strong>ID Usuário: </strong>${Objetivos.userID}<br>
+                                <strong>ID Objetivo: </strong>${objetivos._id}<br>
+                                <strong>ID Usuário: </strong>${objetivos.userID}<br>
                             </i>
 
                             
 
                             <a  href="#!" 
-                                onclick="javascript: excluirObjetivo('${Objetivos._id}')" 
+                                onclick="javascript: excluirObjetivo('${objetivos._id}')" 
                                 class="bg-danger text-white botao"
                                 style="text-decoration: none;"
                             >
@@ -72,7 +92,7 @@ function listarObjetivos(Objetivos){
                             </a>
                             
                             <a  href="#!" 
-                                onclick="javascript: andarObjetivo('${Objetivos._id}')" 
+                                onclick="javascript: andarObjetivo('${objetivos._id}')" 
                                 class="bg-success text-white botao"
                                 style="text-decoration: none;"
                             >
@@ -82,7 +102,7 @@ function listarObjetivos(Objetivos){
                             </a>
 
                             <a  href="#!" 
-                                onclick="javascript: concluirObjetivo('${Objetivos._id}')" 
+                                onclick="javascript: concluirObjetivo('${objetivos._id}')" 
                                 class="bg-primary text-white botao"
                                 style="text-decoration: none;"
                             >
@@ -102,41 +122,43 @@ function listarObjetivos(Objetivos){
                             </a>
                         </p>
                     </div>
+
+                    </div>
+                    
+                    
                 </div>
             </div>
 
     <script>  
     
         function editar() {
-            alert('oi')
+            alert('Função em desenvolvimento. Por enquanto você precisa excluir a objetivo e digitar tudo de novo.')
         }
 
-
-
-        function hello() {
-            var valorStat = document.getElementById("Stat-${Objetivos.objStat}").getAttribute("data-value");
+        function colorirStatus() {
+            var valorStat = document.getElementById("Stat-${objetivos.objStat}").getAttribute("data-value");
             if (valorStat == "-1: Urgente") {
-                document.getElementById('bola-${Objetivos._id}').style.backgroundColor='#FF0002';
-                document.getElementById('bola-${Objetivos._id}').innerHTML="<i class='fas'>&#xf794;</i>";
+                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#FF0002';
+                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-white'>&#xf794;</i>";
             }
             else if (valorStat == "0 - Atrasado") {
-                document.getElementById('bola-${Objetivos._id}').style.backgroundColor='#FFC500';
-                document.getElementById('bola-${Objetivos._id}').innerHTML="<i class='fas text-dark'>&#xf4be;</i>";
+                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#FFC500';
+                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-dark'>&#xf4be;</i>";
             }
             else if (valorStat == "1 - Não Iniciado") {
-                document.getElementById('bola-${Objetivos._id}').style.backgroundColor='#808080';
-                document.getElementById('bola-${Objetivos._id}').innerHTML="<i class='fas'>&#xf251;</i>";
+                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#808080';
+                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-white'>&#xf251;</i>";
             }
             else if (valorStat == "2 - Em Andamento") {
-                document.getElementById('bola-${Objetivos._id}').style.backgroundColor='#12A802';
-                document.getElementById('bola-${Objetivos._id}').innerHTML="<i class='fas'>&#xf252;</i>";
+                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#12A802';
+                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-white'>&#xf252;</i>";
             }
             else if(valorStat == "3 - Concluído") {
-                document.getElementById('bola-${Objetivos._id}').style.backgroundColor='#0B00FF';
-                document.getElementById('bola-${Objetivos._id}').innerHTML="<i class='fas'>&#xf253;</i>";
+                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#0B00FF';
+                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-white'>&#xf253;</i>";
             }
         };
-        hello()
+        colorirStatus()
 
         function expandir(cartao, mais, menos) {
             var cartao = document.getElementById(cartao);
