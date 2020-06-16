@@ -196,7 +196,7 @@ var ordemIni = { iniDataFim: 1, iniStat: 1,  iniObj: -1, iniDataCria: 1, iniNome
 var ordemObj = { objDataFim: 1, objStat: 1, objDataCria: 1, objNome: 1 }
 
 app.get('/atividades', (req, res) => {
-    var busca = { $and: [ {userID: ObjectID(req.user._id)}, { $ne: { ativStat: "3 - Concluído" } } ] }
+    var busca = { $and: [ {userID: ObjectID(req.user._id)}, { ativStat: "3 - Concluído" } ] }
     dbModelAtiv.find(busca, (err, atividades) => {
         if (err) throw err
         res.send(atividades)    
