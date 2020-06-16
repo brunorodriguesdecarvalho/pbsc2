@@ -191,9 +191,9 @@ var dbModelObj = mongoose.model('collobjs', {
 })
 
 //Rotas CRUD -> PBSC NEW
-var ordemAtiv = { ativStat: 1, ativDataFim: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
-var ordemIni = { iniStat: 1,  iniDataFim: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
-var ordemObj = { objStat: 1, objDataFim: 1, objTema: 1, objDataCria: 1, objNome: 1 }
+var ordemAtiv = { ativDataFim: 1, ativStat: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
+var ordemIni = { iniDataFim: 1, iniStat: 1,  iniObj: -1, iniDataCria: 1, iniNome: 1 }
+var ordemObj = { objDataFim: 1, objStat: 1, objDataCria: 1, objNome: 1 }
 
 app.get('/atividades', (req, res) => {
     var busca = { userID: ObjectID(req.user._id) }
