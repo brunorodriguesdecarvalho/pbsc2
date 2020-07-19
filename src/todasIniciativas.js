@@ -178,6 +178,10 @@ function listarIniciativas(iniciativas){
                 document.getElementById('bola-${iniciativas._id}').style.backgroundColor='#0B00FF';
                 document.getElementById('bola-${iniciativas._id}').innerHTML="<i class='fas text-white'>&#xf253;</i>";
             }
+            else if(valorStat == "4 - Cancelado") {
+                document.getElementById('bola-${iniciativas._id}').style.backgroundColor='#1f1f14';
+                document.getElementById('bola-${iniciativas._id}').innerHTML="<i class='fas text-white'>&#xf05e;</i>";
+            }
         };
         colorirStatus()
 
