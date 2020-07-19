@@ -18,7 +18,7 @@ function excluirAtividade(idparaApagar) {
 
 function excluirIniciativa(idparaApagar) {
     console.log('Pedido para apagar este item: ', idparaApagar)
-    var atividade = { _id: idparaApagar }
+    var iniciativa = { _id: idparaApagar }
     function check() {
         if (confirm("Tem certeza que deseja apagar?!")) {
           $.post('/deletaIni', iniciativa)
@@ -34,7 +34,7 @@ function excluirIniciativa(idparaApagar) {
 
 function excluirObjetivo(idparaApagar) {
     console.log('Pedido para apagar este item: ', idparaApagar)
-    var atividade = { _id: idparaApagar }
+    var objetivo = { _id: idparaApagar }
     function check() {
         if (confirm("Tem certeza que deseja apagar?!")) {
           $.post('/deletaObj', objetivo)
