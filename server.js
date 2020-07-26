@@ -76,6 +76,7 @@ app.use('/auth', authRoutes);
 
 //Define a rota para realizar a operação de autenticação
 const profileRoutes = require('./routes/profile-routes');
+const { data } = require('jquery');
 app.use('/profile', profileRoutes);
 
 // Carrega arquivos estáticos
@@ -191,11 +192,14 @@ var dbModelObj = mongoose.model('collobjs', {
 })
 
 //Rotas CRUD -> PBSC NEW
-var ordemAtiv = { ativStat: 1, ativDataFim: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
-var ordemIni = { iniStat: 1,  iniDataFim: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
-var ordemObj = { objStat: 1, objDataFim: 1, objDataCria: 1, objNome: 1 }
+var ordemAtiv = { ativDataFim: 1, ativStat: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
+var ordemIni = { iniDataFim: 1, iniStat: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
+var ordemObj = { objDataFim: 1, objStat: 1, objDataCria: 1, objNome: 1 }
 
 var dataagora = new Date()
+var dataBR = ajustaDataHoraParaBrasil();
+
+console.log("Data Agora(Brasil): ", dataBR)
 
 app.get('/atividades', (req, res) => {
     var busca = { $and: [ {userID: ObjectID(req.user._id)} /*, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }*/ ] }
@@ -351,10 +355,7 @@ app.post('/concluiAtiv', (req, res) => {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(atividade._id) }
-            var atualizar = {
-                $set: { ativStat: '3 - Concluído', ativDataFim: dataagora }/*,
-                $currentDate: { ativDataFim: true }*/
-            }
+            var atualizar = { $set: { ativStat: '3 - Concluído', ativDataFim: dataBR } }
             dbo.collection("collativs").findOneAndUpdate(busca, atualizar, function(err, res) {
                 if (err) throw err
                 console.log("ID " + atividade._id + " marcado como concluído! ", res)
@@ -373,7 +374,7 @@ app.post('/concluiIni', (req, res) => {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(iniciativa._id) }
-            var atualizar = { $set: { iniStat: '3 - Concluído' }, $currentDate: { iniDataFim: true } }
+            var atualizar = { $set: { iniStat: '3 - Concluído', iniDataFim: dataBR } }
             dbo.collection("collinis").findOneAndUpdate(busca, atualizar, function(err, res) {
                 if (err) throw err
                 console.log("ID " + iniciativa._id + " marcado como concluído! ", res)
@@ -392,7 +393,7 @@ app.post('/concluiObj', (req, res) => {
             if (err) throw err
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(objetivo._id) }
-            var atualizar = { $set: { objStat: '3 - Concluído' }, $currentDate: { objDataFim: true } }
+            var atualizar = { $set: { objStat: '3 - Concluído', objDataFim: dataBR } }
             dbo.collection("collobjs").findOneAndUpdate(busca, atualizar, function(err, res) {
                 if (err) throw err
                 console.log("ID " + objetivo._id + " marcado como concluído! ", res)
@@ -486,3 +487,15 @@ app.post('/atrasarAtiv', (req, res) => {
 app.listen(porta, () => console.log(`App ok na porta ${porta}!`))
 
 console.log("Finalizando leitura de server.js");
+
+function ajustaDataHoraParaBrasil() {
+    var dataISO = dataagora.toISOString();
+    var dataAno = dataISO.substr(0, 4);
+    var dataMes = dataISO.substr(5, 2) - 1;
+    var dataDia = dataISO.substr(8, 2);
+    var dataHoraBR = dataISO.substr(11, 2) - 6;
+    var dataMinBR = dataISO.substr(14, 2);
+    var dataBR = new Date(dataAno, dataMes, dataDia, dataHoraBR, dataMinBR, 0, 0);
+    return dataBR;
+}
+

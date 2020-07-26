@@ -29,6 +29,8 @@ getObjetivos()
 
 function listarObjetivos(objetivos){
     var id = `${objetivos._id}`;
+    var dataPrazoAjustada = transformarDataString(objetivos.objDataFim)
+    var dataCriacaoAjustada = transformarDataString(objetivos.objDataCria) 
     
 
     $("#Obj").append(`
@@ -37,14 +39,11 @@ function listarObjetivos(objetivos){
                 
                 <!-- início do cartão -->
                 <div class="card mt-2">
-
                 <!-- início do header do cartão -->
                     <div class="card-header px-2 ">
                         
                         <!-- início do grupo do título do cartão -->
-
                         <div>
-
                             <!-- início do grupo do título do cartão -->
                             <div class="d-flex align-items-center">
                                 <div class="d-flex">
@@ -84,12 +83,11 @@ function listarObjetivos(objetivos){
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-body cartao pb-0" style="display:none" id="cardBody${objetivos._id}">
                         <p id="Stat-${objetivos.objStat}" data-value="${objetivos.objStat}">
                             <strong>Status: </strong>${objetivos.objStat}<br>
-                            <strong>Prazo: </strong>${objetivos.objDataFim}<br>
-                            <strong>Criação: </strong>${objetivos.objDataCria}<br>
+                            <strong>Prazo: </strong>${dataPrazoAjustada}<br>
+                            <strong>Criação: </strong>${dataCriacaoAjustada}<br>
                             <strong>Descrição: </strong>${objetivos.objDesc}<br>
                             <strong>Motivação: </strong>${objetivos.objMot}<br>
                             <strong>Riscos: </strong>${objetivos.objRisk}<br>
@@ -98,9 +96,7 @@ function listarObjetivos(objetivos){
                                 <strong>ID Objetivo: </strong>${objetivos._id}<br>
                                 <strong>ID Usuário: </strong>${objetivos.userID}<br>
                             </i>
-
                             
-
                             <a  href="#!" 
                                 onclick="javascript: excluirObjetivo('${objetivos._id}')" 
                                 class="bg-danger text-white botao"
@@ -120,7 +116,6 @@ function listarObjetivos(objetivos){
                                     &#xf04b;&nbsp;<strong>Iniciar</strong>
                                 </span>
                             </a>
-
                             <a  href="#!" 
                                 onclick="javascript: concluirObjetivo('${objetivos._id}')" 
                                 class="bg-primary text-white botao"
@@ -130,7 +125,6 @@ function listarObjetivos(objetivos){
                                     &#xf058;&nbsp;<strong>Concluir</strong>
                                 </span>
                             </a>
-
                             <a  href="#!" 
                                 class="bg-dark text-white botao" 
                                 onclick="javascript: editar()"
@@ -142,18 +136,15 @@ function listarObjetivos(objetivos){
                             </a>
                         </p>
                     </div>
-
                     </div>
                     
                     
                 </div>
             </div>
         <script>  
-
             var valorStat = document.getElementById("Stat-${objetivos.objStat}").getAttribute("data-value");
             var id = document.getElementById('bola-${objetivos._id}')
             colorirStatus(valorStat, id)
-
         </script>
    
     `)

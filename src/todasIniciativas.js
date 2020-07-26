@@ -28,7 +28,9 @@ function getIniciativas() {
 getIniciativas()
 
 function listarIniciativas(iniciativas){
-    var id = `${iniciativas._id}`;
+
+    var dataPrazoAjustada = transformarDataString(iniciativas.iniDataFim)
+    var dataCriacaoAjustada = transformarDataString(iniciativas.iniDataCria) 
     
 
     $("#Ini").append(`
@@ -89,8 +91,8 @@ function listarIniciativas(iniciativas){
                         <p id="Stat-${iniciativas.iniStat}" data-value="${iniciativas.iniStat}">
                             <strong>Status: </strong>${iniciativas.iniStat}<br>
                             <strong>Objetivo Associado: </strong>${iniciativas.iniObj}<br>
-                            <strong>Prazo: </strong>${iniciativas.iniDataFim}<br>
-                            <strong>Criação: </strong>${iniciativas.iniDataCria}<br>
+                            <strong>Prazo: </strong>${dataPrazoAjustada}<br>
+                            <strong>Criação: </strong>${dataCriacaoAjustada}<br>
                             <strong>Descrição: </strong>${iniciativas.iniDesc}<br>
                             <strong>Motivação: </strong>${iniciativas.iniMot}<br>
                             <strong>Riscos: </strong>${iniciativas.iniRisk}<br>

@@ -32,6 +32,9 @@ getAtividades()
 
 function listarAtividades(atividades){  
 
+    var dataPrazoAjustada = transformarDataString(atividades.ativDataFim)
+    var dataCriacaoAjustada = transformarDataString(atividades.ativDataCria)    
+
     $("#Ativ").append(`
     
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 align-content-stretch teste" id="${atividades._id}" data-value="id="${atividades._id}">
@@ -90,8 +93,8 @@ function listarAtividades(atividades){
                         <p id="Stat-${atividades.ativStat}" data-value="${atividades.ativStat}">
                             <strong>Status: </strong>${atividades.ativStat}<br>
                             <strong>Iniciativa Associada: </strong>${atividades.ativIni}<br>
-                            <strong>Prazo: </strong>${atividades.ativDataFim}<br>
-                            <strong>Criação: </strong>${atividades.ativDataCria}<br>
+                            <strong>Prazo: </strong>${dataPrazoAjustada}<br>
+                            <strong>Criação: </strong>${dataCriacaoAjustada}<br>
                             <strong>Descrição: </strong>${atividades.ativDesc}<br>
                             <strong>Motivação: </strong>${atividades.ativMot}<br>
                             <strong>Riscos: </strong>${atividades.ativRisk}<br>
@@ -161,4 +164,6 @@ function listarAtividades(atividades){
     
             </script>
     `)
+
+
 }
