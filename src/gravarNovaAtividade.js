@@ -1,5 +1,10 @@
 $(() => {
     $('#enviar').click(() => {
+        var dataCriaOrigem = $("#ativDataCria").val()
+        var dataCriaBR = ajustaDataBr(dataCriaOrigem)
+        var dataFimOrigem = $("#ativDataFim").val()
+        var dataFimBR = ajustaDataBr(dataFimOrigem)
+
         var atividades = { 
             ativNome: $("#ativNome").val(), 
             ativIni: $("#ativIni").val(),
@@ -7,8 +12,8 @@ $(() => {
             ativDesc: $("#ativDesc").val(),
             ativMot: $("#ativMot").val(),
             ativRisk: $("#ativRisk").val(),
-            ativDataCria: $("#ativDataCria").val(),
-            ativDataFim: $("#ativDataFim").val(),
+            ativDataCria: dataCriaBR,
+            ativDataFim: dataFimBR,
             userID: $("#userID").val()
         }
         novoAtividade(atividades)

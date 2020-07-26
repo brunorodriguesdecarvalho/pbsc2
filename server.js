@@ -191,12 +191,14 @@ var dbModelObj = mongoose.model('collobjs', {
 })
 
 //Rotas CRUD -> PBSC NEW
-var ordemAtiv = { ativDataFim: 1, ativStat: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
-var ordemIni = { iniDataFim: 1, iniStat: 1,  iniObj: -1, iniDataCria: 1, iniNome: 1 }
-var ordemObj = { objDataFim: 1, objStat: 1, objDataCria: 1, objNome: 1 }
+var ordemAtiv = { ativStat: 1, ativDataFim: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
+var ordemIni = { iniStat: 1,  iniDataFim: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
+var ordemObj = { objStat: 1, objDataFim: 1, objDataCria: 1, objNome: 1 }
+
+var dataagora = new Date()
 
 app.get('/atividades', (req, res) => {
-    var busca = { $and: [ {userID: ObjectID(req.user._id)}, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } } ] }
+    var busca = { $and: [ {userID: ObjectID(req.user._id)} /*, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }*/ ] }
     dbModelAtiv.find(busca, (err, atividades) => {
         if (err) throw err
         res.send(atividades)    
@@ -350,8 +352,8 @@ app.post('/concluiAtiv', (req, res) => {
             var dbo = dbpbsc.db("dbpbsc")
             var busca = { _id: ObjectID(atividade._id) }
             var atualizar = {
-                $set: { ativStat: '3 - Concluído' },
-                $currentDate: { ativDataFim: true }
+                $set: { ativStat: '3 - Concluído', ativDataFim: dataagora }/*,
+                $currentDate: { ativDataFim: true }*/
             }
             dbo.collection("collativs").findOneAndUpdate(busca, atualizar, function(err, res) {
                 if (err) throw err
