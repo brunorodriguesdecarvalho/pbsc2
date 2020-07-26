@@ -148,61 +148,13 @@ function listarObjetivos(objetivos){
                     
                 </div>
             </div>
+        <script>  
 
-    <script>  
-    
-        function editar() {
-            alert('Função em desenvolvimento. Por enquanto você precisa excluir a objetivo e digitar tudo de novo.')
-        }
-
-        function colorirStatus() {
             var valorStat = document.getElementById("Stat-${objetivos.objStat}").getAttribute("data-value");
-            if (valorStat == "-1: Urgente") {
-                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#FF0002';
-                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-white'>&#xf794;</i>";
-            }
-            else if (valorStat == "0 - Atrasado") {
-                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#FFC500';
-                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-dark'>&#xf4be;</i>";
-            }
-            else if (valorStat == "1 - Não Iniciado") {
-                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#808080';
-                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-white'>&#xf251;</i>";
-            }
-            else if (valorStat == "2 - Em Andamento") {
-                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#12A802';
-                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-white'>&#xf252;</i>";
-            }
-            else if(valorStat == "3 - Concluído") {
-                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#0B00FF';
-                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-white'>&#xf253;</i>";
-            }
-            else if(valorStat == "4 - Cancelado") {
-                document.getElementById('bola-${objetivos._id}').style.backgroundColor='#1f1f14';
-                document.getElementById('bola-${objetivos._id}').innerHTML="<i class='fas text-white'>&#xf05e;</i>";
-            }
-        };
-        colorirStatus()
+            var id = document.getElementById('bola-${objetivos._id}')
+            colorirStatus(valorStat, id)
 
-        function expandir(cartao, mais, menos) {
-            var cartao = document.getElementById(cartao);
-            var mais = document.getElementById(mais);
-            var menos = document.getElementById(menos);
-            if (cartao.style.display === "none") {
-                cartao.style.display = "block"
-                menos.style.display = "block"
-                mais.style.display = "none"
-            }
-            else {
-                cartao.style.display = "none"
-                menos.style.display = "none"
-                mais.style.display = "block"
-            }
-        };
-
-    </script>
-
-    
+        </script>
    
     `)
 }
