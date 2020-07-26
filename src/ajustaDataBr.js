@@ -5,5 +5,5 @@ function ajustaDataBr(dataParaTransformar) {
     var dataHoraBR = dataParaTransformar.substr(11, 2) - 3
     var dataMinBR = dataParaTransformar.substr(14, 2)
     var dataBR = new Date(dataAno, dataMes, dataDia, dataHoraBR, dataMinBR, 0, 0)
-    return dataBR
+    return dataBR 
 }
