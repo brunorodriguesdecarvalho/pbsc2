@@ -1,8 +1,10 @@
 $(() => {
     $('#enviar').click(() => {
         var testeTitulo = $("#iniNome").val()
-        if (testeTitulo == "") {
-            window.alert("Por favor incluir pelo menos um título. Tente novamente.")
+        var testeDataCria = $("#iniDataCria").val()
+        var testeDataFim = $("#iniDataFim").val()
+        if (testeTitulo == "" || testeDataCria == "" || testeDataFim == "" ) {
+            window.alert("Por favor incluir pelo menos um título, uma data de criação e um prazo. Esses 3 dados precisam ser informados. Tente novamente, por favor.")        
         } else {
             var dataCriaOrigem = $("#iniDataCria").val()
             var dataCriaBR = ajustaDataBr(dataCriaOrigem)
