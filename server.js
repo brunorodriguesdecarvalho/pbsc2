@@ -143,7 +143,13 @@ for (let i=1 ; i <= 21 ; i++) {
     Object.defineProperty(ordemK, end, {value: 1})
     var endURI = '/corridas/best' + i 
     app.get(endURI, (req, res) => {
-        var busca = { $and: [ {userID: ObjectID(req.user._id)} /*, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }*/ ] }
+        var busca = { 
+            $and: [ 
+                {userID: ObjectID(req.user._id)},
+                {DistanciaTotal: { $gte: i}}              
+                //, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }
+            ]
+        }
         dbModelRun.find(busca, (err, corridas) => {
             if (err) throw err
             res.send(corridas)    
