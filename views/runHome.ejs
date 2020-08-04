@@ -12,15 +12,48 @@
     </head>
     <body>
         <%- include('nav'); %>
-
-        <header class="container">
+    
+        <br><br><br>
+        <header class="container mt-5">
+            <h1>Olá <%= user.username %></h1>
             <hr>
-            <h1>Bem Vindo, <%= user.username %>!</h1>
+            <h2>Escolha uma das opções</h2>
         </header>
         <main class="container">
-            <h2>Corrida HOME</h2>
+           
+            <div class="grid mx-3">
+                <div class="row">
+                    <div class="col bg-dark text-white h5 p-2 rounded">Corrida</div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-4">
+                        <a href="/run/nova" class="link">
+                            <img src="../img/newrun.jpg" style="width: 8vw;" class="my-2">
+                            <br>
+                            <span class="legico">Registrar Corrida</span>
+                        </a>                
+                    </div>
+                    <div class="col-4">
+                        <a href="/run/lista" class="link">
+                            <img src="../img/tracks.jpg" style="width: 8vw;" class="my-2">
+                            <br>
+                            <span class="legico">Ver Corridas Salvas</span>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="/run/melhores" class="link"> 
+                            <img src="../img/runrecord.jpg" style="width: 8vw;" class="my-2">
+                            <br>
+                           <span class="legico">Melhores Tempos</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+            
         </main>
-    
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

@@ -26,7 +26,7 @@ function getAtividades() {
             }
         }
     )
-}
+} 
 
 getAtividades()
 
@@ -138,7 +138,7 @@ function listarAtividades(atividades){
 
                             <a  href="#!" 
                                 class="bg-dark text-white botao" 
-                                onclick="javascript: editar()"
+                                onclick="javascript: editar('${atividades._id}')"
                                 style="text-decoration: none;"
                             >
                                 <span class="fas">

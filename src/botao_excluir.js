@@ -47,3 +47,19 @@ function excluirObjetivo(idparaApagar) {
       }
     check()
 }
+
+function excluirCorrida(idparaApagar) {
+  console.log('Pedido para apagar este item: ', idparaApagar)
+  var corrida = { _id: idparaApagar }
+  function check() {
+      if (confirm("Tem certeza que deseja apagar?!")) {
+        $.post('/deletaRun', corrida)
+        console.log('Confirmação para apagar recebida com sucesso para o item:  ', corrida)
+        window.alert('Apagando item. Por favor aguarde.')
+        setTimeout(function() {location.reload()}, reloadTempo)
+      } else {
+        next;
+      }
+    }
+  check()
+}

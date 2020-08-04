@@ -13,12 +13,8 @@ console.log("Servidor - Porta: " + porta)
 
 //Importa o mongoose para criar os modelos de dados (Schemas) e conectar ao banco
 const mongoose = require('mongoose')
-mongoose.connect(
-    process.env.mongodbURI, 
-    { useNewUrlParser: true, useUnifiedTopology: true }, 
-    function(err, dbpbsc) {
-        console.log('MongoDB ok.')
-    }
+mongoose.connect( process.env.mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
+    (err, dbpbsc) => {console.log('MongoDB ok.')}
 )
 
 //Importa o MongoClient para realizar operações CRUD
@@ -76,7 +72,8 @@ app.use('/auth', authRoutes);
 
 //Define a rota para realizar a operação de autenticação
 const profileRoutes = require('./routes/profile-routes');
-const { data } = require('jquery');
+const { data, isArray } = require('jquery');
+const { json } = require('body-parser');
 app.use('/profile', profileRoutes);
 
 // Carrega arquivos estáticos
@@ -84,77 +81,124 @@ app.use("/img", express.static('img'));
 app.use("/styles", express.static('styles')); 
 app.use("/src", express.static('src'));
 
-app.get('/commits/', (req, res) => {
-    res.render('commits', { user: req.user })
-});
+//Variáveis para operações CRUD 
+var ordemAtiv = { ativDataFim: 1, ativStat: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
+var ordemIni = { iniDataFim: 1, iniStat: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
+var ordemObj = { objDataFim: 1, objStat: 1, objDataCria: 1, objNome: 1 }
+var ordemRun = { DataCorridaOrigem: 1 }
 
-// Define rotas de renderização de tela
-app.get('/plan/', (req, res) => {
-    res.render('planHome', { user: req.user })
-});
+//Ajustes de data
+var dataagora = new Date()
+var dataBR = ajustaDataHoraParaBrasil();
+console.log("Data Agora(Brasil): ", dataBR)
 
-app.get('/ativ/', (req, res) => {
-    res.render('atividades', { user: req.user })
-});
-app.get('/ativ/nova', (req, res) => {
-    res.render('novaAtividade', { user: req.user })
-});
-
-/*
-app.post('/ativ/edit', (req, res) => {
-    var atividade = new dbModelAtiv(req.body)
-    var auth = req.user
-    console.log("post - ativID: " + atividade._id )
-    console.log("post - user ID : " + atividade.userID)
-    //var ativID = '5edb0725562d64597c355c5f'
-    var busca = { $and: [ { userID : atividade.userID } , { _id : atividade._id } ] }
-    dbModelAtiv.find(busca, (err, resp) => {
+// Definação das rotas GET
+app.get('/commits/', (req, res) => {res.render('commits', { user: req.user } ) } );
+app.get('/plan/', (req, res) => { res.render('planHome', { user: req.user } ) } );
+app.get('/ativ/', (req, res) => { res.render('atividades', { user: req.user } ) } );
+app.get('/ativ/nova', (req, res) => { res.render('novaAtividade', { user: req.user } ) } );
+app.get('/ini/', (req, res) => { res.render('iniciativas', { user: req.user } ) } );
+app.get('/ini/nova', (req, res) => { res.render('novaIniciativa', { user: req.user } ) } );
+app.get('/obj/', (req, res) => { res.render('objetivos', { user: req.user } ) } );
+app.get('/obj/nova', (req, res) => { res.render('novoObjetivo', { user: req.user } ) } );
+app.get('/alim/', (req, res) => { res.render('alimHome', { user: req.user } ) } );
+app.get('/gym/', (req, res) => { res.render('gymHome', { user: req.user } ) } );
+app.get('/run/', (req, res) => { res.render('runHome', { user: req.user } ) } );
+app.get('/run/nova', (req, res) => { res.render('novaCorrida', { user: req.user } ) } );
+app.get('/run/best', (req, res) => { res.render('recordesCorridas', { user: req.user } ) } );
+app.get('/run/lista', (req, res) => { res.render('corridas', { user: req.user } ) } );
+app.get('/corridas', (req, res) => {
+    var busca = { $and: [ {userID: ObjectID(req.user._id)} /*, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }*/ ] }
+    dbModelRun.find(busca, (err, corridas) => {
         if (err) throw err
-        console.log("Resposta do post: " + resp)
-        res.send(resp)    
-    }).sort(ordemAtiv)
-    res.render('novaAtividade', {user: req.user})
-});
-
-app.get('/ativ/edit', (req, res) => {
-    console.log("Resposta do GET: " + req.body)
+        res.send(corridas)    
+    }).sort(ordemRun) 
+})
+app.get('/atividades', (req, res) => {
+    var busca = { $and: [ {userID: ObjectID(req.user._id)} /*, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }*/ ] }
+    dbModelAtiv.find(busca, (err, atividades) => {
+        if (err) throw err
+        res.send(atividades)    
+    }).sort(ordemAtiv) 
+})
+app.get('/iniciativas', (req, res) => {
+    var busca = { userID: ObjectID(req.user._id) }
+    dbModelIni.find(busca, (err, iniciativas) => {
+        if (err) throw err
+        res.send(iniciativas)    
+    }).sort(ordemIni)
+})
+app.get('/objetivos', (req, res) => {
+    var busca = { userID: ObjectID(req.user._id) }
+    dbModelObj.find(busca, (err, objetivos) => {
+        if (err) throw err
+        res.send(objetivos)    
+    }).sort(ordemObj)
 })
 
-*/
+//Criar rotar dinâmica para recordes
+for (let i=1 ; i <= 21 ; i++) {
+    var end = "Km" + i
+    var ordemK = {}
+    Object.defineProperty(ordemK, end, {value: 1})
+    var endURI = '/corridas/best' + i 
+    app.get(endURI, (req, res) => {
+        var busca = { $and: [ {userID: ObjectID(req.user._id)} /*, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }*/ ] }
+        dbModelRun.find(busca, (err, corridas) => {
+            if (err) throw err
+            res.send(corridas)    
+        }).sort(ordemK).limit(1)
+    })
+}
 
-app.get('/ini/', (req, res) => {
-    res.render('iniciativas', { user: req.user })
+//Rota para menu suspendo com o status
+app.get('/ragstatus', (req, res) => {
+    var MongoClient = require('mongodb').MongoClient;
+    MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
+        if (err) throw err;
+        var dbo = dbpbsc.db("dbpbsc");
+        var ordemStat = {ragstatus: 1}
+        dbo.collection("ragstatus").find({}, { projection: { _id: 0 } }).sort(ordemStat).toArray(function (err, ragstatus) {
+            if (err) throw err;
+            res.send(ragstatus)
+            dbpbsc.close();
+        })
+    })
+})
+app.get('/listIni', (req, res) => {
+    var busca = { userID: ObjectID(req.user._id) }
+    var MongoClient = require('mongodb').MongoClient;
+    MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
+        if (err) throw err;
+        var dbo = dbpbsc.db("dbpbsc");
+        var ordem = {iniNome: 1}
+        dbo.collection("collinis").find(busca, { projection: {_id: 0, iniNome: 1 } }).sort(ordem).toArray(function (err, info) {
+            if (err) throw err;
+            res.send(info)
+            dbpbsc.close();
+        })
+    })
+})
+app.get('/listObj', (req, res) => {
+    var busca = { userID: ObjectID(req.user._id) }
+    var MongoClient = require('mongodb').MongoClient;
+    MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
+        if (err) throw err;
+        var dbo = dbpbsc.db("dbpbsc");
+        var ordem = {objNome: 1}
+        dbo.collection("collobjs").find(busca, { projection: {_id: 0, objNome: 1 } }).sort(ordem).toArray(function (err, info) {
+            if (err) throw err;
+            res.send(info)
+            dbpbsc.close();
+        })
+    })
+})
+app.get('/ativEdit', (req, res) => {
+    idParaEditar = req.user.id
+    console.log("Chegou no servidor pedido para editar ID: ", idParaEditar)
 });
 
-app.get('/ini/nova', (req, res) => {
-    res.render('novaIniciativa', { user: req.user })
-});
-
-app.get('/obj/', (req, res) => {
-    res.render('objetivos', { user: req.user })
-});
-
-app.get('/obj/nova', (req, res) => {
-    res.render('novoObjetivo', { user: req.user })
-});
-
-app.get('/alim/', (req, res) => {
-    res.render('alimHome', { user: req.user })
-});
-
-app.get('/run/', (req, res) => {
-    res.render('runHome', { user: req.user })
-});
-
-app.get('/gym/', (req, res) => {
-    res.render('gymHome', { user: req.user })
-});
-
-
-//Começo das rotas
-
-//Backup -> PBSC OLD
-//Define os modelos de objetos para o mongoose -> PBSC OLD
+// Definição dos modelos para o Moongoose
 var dbModelAtiv = mongoose.model('collativs', {
     ativNome: String,
     ativStat: String,
@@ -191,108 +235,61 @@ var dbModelObj = mongoose.model('collobjs', {
     userID: ObjectID,
 })
 
-//Rotas CRUD -> PBSC NEW
-var ordemAtiv = { ativDataFim: 1, ativStat: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
-var ordemIni = { iniDataFim: 1, iniStat: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
-var ordemObj = { objDataFim: 1, objStat: 1, objDataCria: 1, objNome: 1 }
 
-var dataagora = new Date()
-var dataBR = ajustaDataHoraParaBrasil();
-
-console.log("Data Agora(Brasil): ", dataBR)
-
-app.get('/atividades', (req, res) => {
-    var busca = { $and: [ {userID: ObjectID(req.user._id)} /*, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }*/ ] }
-    dbModelAtiv.find(busca, (err, atividades) => {
-        if (err) throw err
-        res.send(atividades)    
-    }).sort(ordemAtiv) 
+var dbModelRun = mongoose.model('collruns', {
+    DistanciaTotal: Number,
+    TempoFinalS: Number,
+    PaceOrigem: Number,
+    DataCorridaOrigem: Date,
+    userID: ObjectID,
+    Km1: Number,
+    Km2: Number,
+    Km3: Number,
+    Km4: Number,
+    Km5: Number,
+    Km6: Number,
+    Km7: Number,
+    Km8: Number,
+    Km9: Number,
+    Km10: Number,
+    Km11: Number,
+    Km12: Number,
+    Km13: Number,
+    Km14: Number,
+    Km15: Number,
+    Km16: Number,
+    Km17: Number,
+    Km18: Number,
+    Km19: Number,
+    Km20: Number,
+    Km21: Number
 })
 
-app.get('/iniciativas', (req, res) => {
-    var busca = { userID: ObjectID(req.user._id) }
-    dbModelIni.find(busca, (err, iniciativas) => {
-        if (err) throw err
-        res.send(iniciativas)    
-    }).sort(ordemIni)
+//Rotas POST
+app.post('/run', (req, res) => {
+    //Gravar dados base da corrida
+    var Corrida = new dbModelRun(req.body)
+    console.log("O que chegou no servidor(Original): ", Corrida)
+    var RunSave = Corrida.save()
+    var IDCorrida = Corrida._id
+    console.log('Nova corrida salva no MongoDB: ' + IDCorrida)    
 })
 
-app.get('/objetivos', (req, res) => {
-    var busca = { userID: ObjectID(req.user._id) }
-    dbModelObj.find(busca, (err, objetivos) => {
-        if (err) throw err
-        res.send(objetivos)    
-    }).sort(ordemObj)
-})
-
-//Rotas de gravação - PSBC NEW
 app.post('/atividades', (req, res) => {
     var atividades = new dbModelAtiv(req.body)
     var ativSalvo = atividades.save()
     console.log('Nova atividade salva no MongoDB.')
 })
-
 app.post('/iniciativas', (req, res) => {
     var iniciativas = new dbModelIni(req.body)
     var ativSalvo = iniciativas.save()
     console.log('Nova iniciativa salva no MongoDB.')
 })
-
 app.post('/objetivos', (req, res) => {
     var objetivos = new dbModelObj(req.body)
     var objSalvo = objetivos.save()
     console.log('Novo objetivo salvo no MongoDB.')
 })
-
-
-//Rota para menu suspendo com o status - PBSC New
-app.get('/ragstatus', (req, res) => {
-    var MongoClient = require('mongodb').MongoClient;
-    MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
-        if (err) throw err;
-        var dbo = dbpbsc.db("dbpbsc");
-        var ordemStat = {ragstatus: 1}
-        dbo.collection("ragstatus").find({}, { projection: { _id: 0 } }).sort(ordemStat).toArray(function (err, ragstatus) {
-            if (err) throw err;
-            res.send(ragstatus)
-            dbpbsc.close();
-        })
-    })
-})
-
-app.get('/listIni', (req, res) => {
-    var busca = { userID: ObjectID(req.user._id) }
-    var MongoClient = require('mongodb').MongoClient;
-    MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
-        if (err) throw err;
-        var dbo = dbpbsc.db("dbpbsc");
-        var ordem = {iniNome: 1}
-        dbo.collection("collinis").find(busca, { projection: {_id: 0, iniNome: 1 } }).sort(ordem).toArray(function (err, info) {
-            if (err) throw err;
-            res.send(info)
-            dbpbsc.close();
-        })
-    })
-})
-
-app.get('/listObj', (req, res) => {
-    var busca = { userID: ObjectID(req.user._id) }
-    var MongoClient = require('mongodb').MongoClient;
-    MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
-        if (err) throw err;
-        var dbo = dbpbsc.db("dbpbsc");
-        var ordem = {objNome: 1}
-        dbo.collection("collobjs").find(busca, { projection: {_id: 0, objNome: 1 } }).sort(ordem).toArray(function (err, info) {
-            if (err) throw err;
-            res.send(info)
-            dbpbsc.close();
-        })
-    })
-})
-
-
-//Rotas CRUD -> PBSC OLD
-
 app.post('/deletaAtiv', (req, res) => {
     var atividade = new dbModelAtiv(req.body)
     console.log("Chegou no servidor o pedidod para apagar ID " + atividade._id)
@@ -310,7 +307,6 @@ app.post('/deletaAtiv', (req, res) => {
     }
     deletar()
 })
-
 app.post('/deletaIni', (req, res) => {
     var iniciativa = new dbModelIni(req.body)
     console.log("Chegou no servidor o pedidod para apagar ID " + iniciativa._id)
@@ -328,7 +324,6 @@ app.post('/deletaIni', (req, res) => {
     }
     deletar()
 })
-
 app.post('/deletaObj', (req, res) => {
     var objetivo = new dbModelObj(req.body)
     console.log("Chegou no servidor o pedidod para apagar ID " + objetivo._id)
@@ -346,7 +341,23 @@ app.post('/deletaObj', (req, res) => {
     }
     deletar()
 })
-
+app.post('/deletaRun', (req, res) => {
+    var corrida = new dbModelRun(req.body)
+    console.log("Chegou no servidor o pedido para apagar ID " + corrida._id)
+    function deletar() {
+        MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+            if (err) throw err
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(corrida._id) }
+            dbo.collection("collruns").deleteOne(busca, function(err, res) {
+                if (err) throw err
+                console.log("ID " + corrida._id + " deletado! ", res)
+                dbpbsc.close()
+            })
+        })
+    }
+    deletar()
+})
 app.post('/concluiAtiv', (req, res) => {
     var atividade = new dbModelAtiv(req.body)
     console.log("Chegou no servidor o pedidod para concluir ID " + atividade._id)
@@ -365,7 +376,6 @@ app.post('/concluiAtiv', (req, res) => {
     }
     concluir()
 })
-
 app.post('/concluiIni', (req, res) => {
     var iniciativa = new dbModelIni(req.body)
     console.log("Chegou no servidor o pedidod para concluir ID " + iniciativa._id)
@@ -384,7 +394,6 @@ app.post('/concluiIni', (req, res) => {
     }
     concluir()
 })
-
 app.post('/concluiObj', (req, res) => {
     var objetivo = new dbModelObj(req.body)
     console.log("Chegou no servidor o pedidod para concluir ID " + objetivo._id)
@@ -403,7 +412,6 @@ app.post('/concluiObj', (req, res) => {
     }
     concluir()
 })
-
 app.post('/andarAtiv', (req, res) => {
     var atividade = new dbModelAtiv(req.body)
     console.log("Chegou no servidor o pedidod para andar ID " + atividade._id)
@@ -422,7 +430,6 @@ app.post('/andarAtiv', (req, res) => {
     }
     andar()
 })
-
 app.post('/andarIni', (req, res) => {
     var iniciativa = new dbModelIni(req.body)
     console.log("Chegou no servidor o pedidod para andar ID " + iniciativa._id)
@@ -441,7 +448,6 @@ app.post('/andarIni', (req, res) => {
     }
     andar()
 })
-
 app.post('/andarObj', (req, res) => {
     var objetivo = new dbModelObj(req.body)
     console.log("Chegou no servidor o pedidod para andar ID " + objetivo._id)
@@ -460,7 +466,6 @@ app.post('/andarObj', (req, res) => {
     }
     andar()
 })
-
 app.post('/web/pbsc/ativ/atividades/buscaID', (req, res) => {
     var dados = new dbModelAtiv(req.body)
     var ativID = dados._id
@@ -476,7 +481,6 @@ app.post('/web/pbsc/ativ/atividades/buscaID', (req, res) => {
         console.log("nomelido: ", nomelido)
     })
 })
-
 app.post('/atrasarAtiv', (req, res) => {
     console.log("Acessando rota para marcar atividades como atrasada!", req)
     atraso.atrasar();
@@ -484,8 +488,8 @@ app.post('/atrasarAtiv', (req, res) => {
 })
 
 
-app.listen(porta, () => console.log(`App ok na porta ${porta}!`))
 
+app.listen(porta, () => console.log(`App ok na porta ${porta}!`))
 console.log("Finalizando leitura de server.js");
 
 function ajustaDataHoraParaBrasil() {

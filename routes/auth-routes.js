@@ -22,7 +22,6 @@ router.get('/google', passport.authenticate('google', {
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
     //res.send(req.user._id);
     var userID = req.user._id;
-    console.log("userID: ", userID);
     res.redirect('/profile');
     return userID;
 });
