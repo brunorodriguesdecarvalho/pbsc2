@@ -6,10 +6,11 @@ function queryRecordes(Dist) {
     var endKMAccSeg = "SDKm" + Dist
     var endKMAccMin = "SAKm" + Dist
     var endKMAccSegAnt = "SDKm" + (Dist-1)
+    var PaceCalculado = "PaceKm" + Dist
     $.get( uri , (corridas) => {
         var TempoSeg = corridas[0][Km] 
         var TempoMin = transSegMin(TempoSeg)
-        if (TempoSeg == null) {
+        if (TempoSeg < 1) {
             document.getElementById(endKMDiscSeg).innerHTML = "Sem Info."
             document.getElementById(endKMDiscMin).innerHTML = "Sem Info."
             document.getElementById(endKMAccSeg).innerHTML = "Sem Info."
@@ -19,10 +20,12 @@ function queryRecordes(Dist) {
             if( Dist == 1 ){ 
                 document.getElementById(endKMAccSeg).innerHTML = TempoSeg
                 document.getElementById(endKMAccMin).innerHTML = transSegMin(TempoSeg)
+                document.getElementById(PaceCalculado).innerHTML = transSegMin(TempoSeg)
             }
             else {
                 document.getElementById(endKMAccSeg).innerHTML = Number(document.getElementById(endKMAccSegAnt).innerHTML) + TempoSeg 
                 document.getElementById(endKMAccMin).innerHTML = transSegMin(document.getElementById(endKMAccSeg).innerHTML)
+                document.getElementById(PaceCalculado).innerHTML = transSegMin(Number(document.getElementById(endKMAccSeg).innerHTML)/Dist)
             }
         }
     } ) 
@@ -41,7 +44,7 @@ function transSegMin(SegParaTrans){
             var minIntResto = minInt - (Hora * 60)
             var StringMinSeg = Hora + "h" + minIntResto + "m" + minResto + "s."
         }else{
-            var StringMinSeg = minInt + "m" + minResto + "s."
+            var StringMinSeg = minInt + "m" + Math.floor(minResto) + "s."
         }
         return StringMinSeg
     } else {return null} 

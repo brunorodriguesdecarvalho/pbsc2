@@ -91,7 +91,7 @@ function listarCorridas(corridas){
 
     $("#Run").append(`
     
-            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 align-content-stretch teste" id="${corridas._id}" data-value="id="${corridas._id}">
+            <div class="col-sm-4 col-md-3 col-xl-2 align-content-stretch teste" id="${corridas._id}" data-value="id="${corridas._id}">
                 
                 <!-- início do cartão -->
                 <div class="card mt-2">
@@ -137,44 +137,44 @@ function listarCorridas(corridas){
                         </div>
 
                         <div class="card-body cartao pb-0" style="display:none" id="cardBody${corridas._id}">
-                            <p>
-                                <strong>Distância Registrada (Km): </strong>${corridas.DistanciaTotal}<br>
-                                <strong>Tempo Final: </strong>${TempoTotalCorrigido}<br>
-                                <strong>Pace: </strong>${PaceCorrigido}<br>
+                                <strong>Distância(Km): </strong>${corridas.DistanciaTotal}<br>
+                                <strong>Tempo Total: </strong>${TempoTotalCorrigido}<br>
+                                <strong>Pace Médio: </strong>${PaceCorrigido}<br>
                                 <strong>Tempos Parciais:</strong>
-                                <ul id="Parciais">
-                                    <li>Km #1: ${Km1 || "Não registrado"}</li>
-                                    <li>Km #2: ${Km2 || "Não registrado"}</li>
-                                    <li>Km #3: ${Km3 || "Não registrado"}</li>
-                                    <li>Km #4: ${Km4 || "Não registrado"}</li>
-                                    <li>Km #5: ${Km5 || "Não registrado"}</li>
-                                    <li>Km #6: ${Km6 || "Não registrado"}</li>
-                                    <li>Km #7: ${Km7 || "Não registrado"}</li>
-                                    <li>Km #8: ${Km8 || "Não registrado"}</li>
-                                    <li>Km #9: ${Km9 || "Não registrado"}</li>
-                                    <li>Km #10: ${Km10 || "Não registrado"}</li>
-                                    <li>Km #11: ${Km11 || "Não registrado"}</li>
-                                    <li>Km #12: ${Km12 || "Não registrado"}</li>
-                                    <li>Km #13: ${Km13 || "Não registrado"}</li>
-                                    <li>Km #14: ${Km14 || "Não registrado"}</li>
-                                    <li>Km #15: ${Km15 || "Não registrado"}</li>
-                                    <li>Km #16: ${Km16 || "Não registrado"}</li>
-                                    <li>Km #17: ${Km17 || "Não registrado"}</li>
-                                    <li>Km #18: ${Km18 || "Não registrado"}</li>
-                                    <li>Km #19: ${Km19 || "Não registrado"}</li>
-                                    <li>Km #20: ${Km20 || "Não registrado"}</li>
-                                    <li>Km #21: ${Km21 || "Não registrado"}</li>
-                                </ul>
-                                <a  href="#!" 
-                                    onclick="javascript: excluirCorrida('${corridas._id}')" 
-                                    class="bg-danger text-white botao"
-                                    style="text-decoration: none;"
-                                >
-                                    <span class="fas">
-                                        &#xf12d;&nbsp;<strong>Excluir</strong>
-                                    </span>
-                                </a>
-                            </p>
+                                <div id="Parciais style="padding-inline-start: 0px">
+                                    <div>Km #1: ${Km1 || "Não registrado"}</div>
+                                    <div>Km #2: ${Km2 || "Não registrado"}</div>
+                                    <div>Km #3: ${Km3 || "Não registrado"}</div>
+                                    <div>Km #4: ${Km4 || "Não registrado"}</div>
+                                    <div>Km #5: ${Km5 || "Não registrado"}</div>
+                                    <div>Km #6: ${Km6 || "Não registrado"}</div>
+                                    <div>Km #7: ${Km7 || "Não registrado"}</div>
+                                    <div>Km #8: ${Km8 || "Não registrado"}</div>
+                                    <div>Km #9: ${Km9 || "Não registrado"}</div>
+                                    <div>Km #10: ${Km10 || "Não registrado"}</div>
+                                    <div>Km #11: ${Km11 || "Não registrado"}</div>
+                                    <div>Km #12: ${Km12 || "Não registrado"}</div>
+                                    <div>Km #13: ${Km13 || "Não registrado"}</div>
+                                    <div>Km #14: ${Km14 || "Não registrado"}</div>
+                                    <div>Km #15: ${Km15 || "Não registrado"}</div>
+                                    <div>Km #16: ${Km16 || "Não registrado"}</div>
+                                    <div>Km #17: ${Km17 || "Não registrado"}</div>
+                                    <div>Km #18: ${Km18 || "Não registrado"}</div>
+                                    <div>Km #19: ${Km19 || "Não registrado"}</div>
+                                    <div>Km #20: ${Km20 || "Não registrado"}</div>
+                                    <div>Km #21: ${Km21 || "Não registrado"}</div>
+                                </div>
+                                <div>
+                                    <a  href="#!" 
+                                        onclick="javascript: excluirCorrida('${corridas._id}')" 
+                                        class="bg-danger text-white botao"
+                                        style="text-decoration: none;"
+                                    >
+                                        <span class="fas">
+                                            &#xf12d;&nbsp;<strong>Excluir</strong>
+                                        </span>
+                                    </a>
+                                <div>
                         </div>
                     </div>
                 </div>
