@@ -87,6 +87,28 @@ var ordemIni = { iniDataFim: 1, iniStat: 1, iniObj: -1, iniDataCria: 1, iniNome:
 var ordemObj = { objDataFim: 1, objStat: 1, objDataCria: 1, objNome: 1 }
 var ordemRun = { DataCorridaOrigem: 1 }
 
+var ordemKm1 = { Km1: 1 }
+var ordemKm2 = { Km2: 1 }
+var ordemKm3 = { Km3: 1 }
+var ordemKm4 = { Km4: 1 }
+var ordemKm5 = { Km5: 1 }
+var ordemKm6 = { Km6: 1 }
+var ordemKm7 = { Km7: 1 }
+var ordemKm8 = { Km8: 1 }
+var ordemKm9 = { Km9: 1 }
+var ordemKm10 = { Km10: 1 }
+var ordemKm11 = { Km11: 1 }
+var ordemKm12 = { Km12: 1 }
+var ordemKm13 = { Km13: 1 }
+var ordemKm14 = { Km14: 1 }
+var ordemKm15 = { Km15: 1 }
+var ordemKm16 = { Km16: 1 }
+var ordemKm17 = { Km17: 1 }
+var ordemKm18 = { Km18: 1 }
+var ordemKm19 = { Km19: 1 }
+var ordemKm20 = { Km20: 1 }
+var ordemKm21 = { Km21: 1 }
+
 //Ajustes de data
 var dataagora = new Date()
 var dataBR = ajustaDataHoraParaBrasil();
@@ -137,25 +159,43 @@ app.get('/objetivos', (req, res) => {
 })
 
 //Criar rotar dinâmica para recordes
-for (let i=1 ; i <= 21 ; i++) {
-    var end = "Km" + i
-    var ordemK = {}
-    Object.defineProperty(ordemK, end, {value: 1})
-    var endURI = '/corridas/best' + i 
+function criaRotaDinKm(km, ordem) {
+    var endURI = '/corridas/best' + (km)
     app.get(endURI, (req, res) => {
         var busca = { 
             $and: [ 
                 {userID: ObjectID(req.user._id)},
-                {DistanciaTotal: { $gte: i}}              
-                //, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }
+                {DistanciaTotal: { $gte: km}}              
             ]
         }
         dbModelRun.find(busca, (err, corridas) => {
             if (err) throw err
             res.send(corridas)    
-        }).sort(ordemK).limit(1)
+        }).sort(ordem).limit(1)
     })
 }
+
+criaRotaDinKm(1, ordemKm1)
+criaRotaDinKm(2, ordemKm2)
+criaRotaDinKm(3, ordemKm3)
+criaRotaDinKm(4, ordemKm4)
+criaRotaDinKm(5, ordemKm5)
+criaRotaDinKm(6, ordemKm6)
+criaRotaDinKm(7, ordemKm7)
+criaRotaDinKm(8, ordemKm8)
+criaRotaDinKm(9, ordemKm9)
+criaRotaDinKm(10, ordemKm10)
+criaRotaDinKm(11, ordemKm11)
+criaRotaDinKm(12, ordemKm12)
+criaRotaDinKm(13, ordemKm13)
+criaRotaDinKm(14, ordemKm14)
+criaRotaDinKm(15, ordemKm15)
+criaRotaDinKm(16, ordemKm16)
+criaRotaDinKm(17, ordemKm17)
+criaRotaDinKm(18, ordemKm18)
+criaRotaDinKm(19, ordemKm19)
+criaRotaDinKm(20, ordemKm20)
+criaRotaDinKm(21, ordemKm21)
 
 //Rota para menu suspendo com o status
 app.get('/ragstatus', (req, res) => {
