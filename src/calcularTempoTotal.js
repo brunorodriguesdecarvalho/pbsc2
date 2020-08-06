@@ -1,3 +1,5 @@
+//Essa função serve para calcular o tempo total da corrida com base nos tempos parciais informados pelo usuário.
+
 function calcularTempoTotal() {
     //A quantidade de campos que precisom somar é igual ao KM
     var qtd = Number($("#runKm").val())
@@ -62,5 +64,6 @@ function calcularTempoTotal() {
         document.getElementById("runTempoS").value = somaSeg
 
         calcularPace()
+        criarParciaisAcc()
     }
 }

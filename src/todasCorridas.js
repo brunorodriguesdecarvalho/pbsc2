@@ -46,25 +46,6 @@ function listarCorridas(corridas){
 
     var dataCorrida = ajustaDataBr(corridas.DataCorridaOrigem)
 
-    function transSegMin(SegParaTrans){
-        
-        var origem = SegParaTrans
-        
-        if(origem>0) {
-            var minInt = Math.floor(origem/60)
-            var minResto = origem - (minInt*60)
-
-            if(minInt>59){
-                Hora = Math.floor(minInt/60)
-                var minIntResto = minInt - (Hora * 60)
-                var StringMinSeg = Hora + "h" + minIntResto + "m" + minResto + "s."
-            }else{
-                var StringMinSeg = minInt + "m" + minResto + "s."
-            }
-            return StringMinSeg
-        } else {return null} 
-    }
-
     var TempoTotalCorrigido = transSegMin(corridas.TempoFinalS)
     var PaceCorrigido = transSegMin(corridas.PaceOrigem)
     var Km1 = transSegMin(corridas.Km1)
@@ -138,8 +119,8 @@ function listarCorridas(corridas){
 
                         <div class="card-body cartao pb-0" style="display:none" id="cardBody${corridas._id}">
                                 <strong>Distância(Km): </strong>${corridas.DistanciaTotal}<br>
-                                <strong>Tempo Total: </strong>${TempoTotalCorrigido}<br>
-                                <strong>Pace Médio: </strong>${PaceCorrigido}<br>
+                                <strong>Tempo Total: </strong>${corridas.TempoTotalLer}<br>
+                                <strong>Pace Médio: </strong>${corridas.PaceTotalLer}<br>
                                 <strong>Tempos Parciais:</strong>
                                 <div id="Parciais style="padding-inline-start: 0px">
                                     <div>Km #1: ${Km1 || "Não registrado"}</div>

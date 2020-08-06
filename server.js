@@ -281,13 +281,14 @@ var dbModelObj = mongoose.model('collobjs', {
     userID: ObjectID,
 })
 
-
 var dbModelRun = mongoose.model('collruns', {
     DistanciaTotal: Number,
     TempoFinalS: Number,
     PaceOrigem: Number,
     DataCorridaOrigem: Date,
     userID: ObjectID,
+    PaceTotalLer: String,
+    TempoTotalLer: String,
     Km1: Number,
     Km2: Number,
     Km3: Number,
@@ -308,7 +309,28 @@ var dbModelRun = mongoose.model('collruns', {
     Km18: Number,
     Km19: Number,
     Km20: Number,
-    Km21: Number
+    Km21: Number,
+    KmAcc1: Number,
+    KmAcc2: Number,
+    KmAcc3: Number,
+    KmAcc4: Number,
+    KmAcc5: Number,
+    KmAcc6: Number,
+    KmAcc7: Number,
+    KmAcc8: Number,
+    KmAcc9: Number,
+    KmAcc10: Number,
+    KmAcc11: Number,
+    KmAcc12: Number,
+    KmAcc13: Number,
+    KmAcc14: Number,
+    KmAcc15: Number,
+    KmAcc16: Number,
+    KmAcc17: Number,
+    KmAcc18: Number,
+    KmAcc19: Number,
+    KmAcc20: Number,
+    KmAcc21: Number
 })
 
 //Rotas POST
@@ -532,8 +554,6 @@ app.post('/atrasarAtiv', (req, res) => {
     atraso.atrasar();
     res.send(console.log("atrasado? -> Chegamos no final do get"))
 })
-
-
 
 app.listen(porta, () => console.log(`App ok na porta ${porta}!`))
 console.log("Finalizando leitura de server.js");

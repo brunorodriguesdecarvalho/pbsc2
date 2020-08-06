@@ -1,5 +1,5 @@
 function calcularPace(){
-    var hora = Number($("#runTempoH").val())
+    var hora = Number($("#runTempoH").val()) 
     var min = Number($("#runTempoM").val())
     var seg = Number($("#runTempoS").val())
     var Dist = Number($("#runKm").val())

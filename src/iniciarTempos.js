@@ -1,3 +1,6 @@
+//Essa função serve para mostrar ao usuário os campos para preencher o tempo por cada KM.
+//Essa função utiliza a distância para incluir dinâmicamente a quantidade de campos necessários para preencher.
+
 function iniciarTempos() {
     var Dist = Number($("#runKm").val())
     var cartaoMain = document.getElementById("tabelaKmETempoMain");
@@ -13,12 +16,31 @@ function iniciarTempos() {
             $("#kmEtempoGerado").append(`
 
             <div class="row py-2 align-items-center text-primary">
-                <div class="col-2 bg-white font-weight-bold text-right">Tempo do KM ${i}:</div>
-                <div class="col-2">
-                    <input type="number"  id="runTempoMKm${i}" placeholder="mm" min=0 max=59>
+                <div class="col-0 font-weight-bold text-right mr-2">Tempo do KM ${i}:</div>
+                <div class="col-0">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-6 text-right">
+                                Min:
+                            </div>
+                            <div class="col-6">
+                                <input type="number" id="runTempoMKm${i}" placeholder="mm" min=0 max=59 style="width:100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-6 text-right  ">
+                                Seg:
+                            </div>
+                            <div class="col-6">
+                                <input type="number" id="runTempoSKm${i}" placeholder="ss" max=59 style="width:100%">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <input type="number"  id="runTempoSKm${i}" placeholder="ss" max=59>
+                <div class="col">
+                    <p id="TempoMKmAcc${i}"></p>
                 </div>
             </div>
             
@@ -28,7 +50,7 @@ function iniciarTempos() {
         var testFracaoKm = (Dist % Math.floor(Dist))
         
         if (testFracaoKm != 0) {
-            $("#kmEtempoGerado").append(`
+            $("#kmEtempoGerado").append(` 
 
                 <div class="row py-2 align-items-center text-primary">
                     <div class="col-2 bg-white font-weight-bold text-right">Tempo do KM Incompleto:</div>
@@ -43,21 +65,15 @@ function iniciarTempos() {
             `)
         }
         
-
         $("#kmEtempoGerado").append(`
-
             <div class="row py-2 align-items-center text-primary">
-                <div></div>
-                <div class="col-sm col-lg">
                 <input 
                     type="button" 
                     id="calcTempoTrecho" 
                     onclick="javascript: calcularTempoTotal()" 
                     value="Calcular Tempo Total"
                 >
-                </div>
             </div>
-            
         `)
     }
 }

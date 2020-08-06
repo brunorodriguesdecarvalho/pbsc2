@@ -3,7 +3,6 @@
     <head>
         <title>Corridas: Nova</title>
         <%- include('meta'); %>
-
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -11,72 +10,90 @@
         <script src="../src/iniciarTempos.js"></script>
         <script src="../src/calcularTempoTotal.js"></script>
         <script src="../src/gravarNovaCorrida.js"></script>
+        <script src="../src/criarParciais.js"></script>
+        <script src="../src/transSegMin.js"></script>
     </head>
     <body>
         <%- include('nav'); %>
         
-        <main class="container mt-5">
-            <section class="fmresp">
-                <form id="form_ativ">
-                    <div class="row pt-2 align-items-center">
-                        <div class="col-2 bg-white font-weight-bold text-right">Distância (KM):</div>
-                        <div class="col-1">
-                            <input type="number" required id="runKm" min=1 style="width: 3em;" value="0">
-                        </div>
-                        <div class="col-1">
-                            <input type="button" id="calcPace" onclick="javascript: iniciarTempos()" value="Gravar tempo por KM">
-                        </div>
+        <main class="container mt-5 px-5 mx-auto">
+            <section class="fmresp justify-self-center">
+                <form id="form_ativ" style="max-width: 800px">
+                    <div class="row">
+                        <h2>Novo Registro de Corridas</h2>
                     </div>
-
-                    <div class="row py-2 align-items-center" id="tabelaKmETempoTitulo" style="display: none;">
-                        <div class="col bg-white font-weight-bold">KM e Tempo:</div>
-                    </div>
-                    <div class="row py-2 align-items-center" id="tabelaKmETempoMain" style="display: none;">
-                        <div class="col-sm col-lg" id="kmEtempoGerado">
-                        </div>
-                    </div>
-
-                    <div class="row py-2 align-items-center">
-                        <div class="col-2 bg-white font-weight-bold text-right">Tempo Total:</div>
-                        <div class="row">
-                            <div class="col-2">
-                                <input type="number" id="runTempoH" placeholder="hh" style="width:3.2em">&nbsp;hora
+                    <div class="row">
+                        <div class="col">
+                            <div class="row pt-2 align-items-center justify-content-start">
+                                <div class="col-0 font-weight-bold text-right">Distância (KM):</div>
+                                <div class="col-0 ml-2">
+                                    <input type="number" required id="runKm" min=1 style="width: 3em;" value="0">
+                                </div>
                             </div>
-                            <div class="col-2">
-                                <input type="number" required id="runTempoM" placeholder="mm" min=0 max=59 style="width:3.2em">&nbsp;min.
+        
+                            <div class="row justify-content-start mt-2">
+                                <input type="button" id="calcPace" onclick="javascript: iniciarTempos()" value="Gravar tempo por KM">
                             </div>
-                            <div class="col-2">
-                                <input type="number" required id="runTempoS" placeholder="ss" min=0 max=59 style="width:3.2em">&nbsp;seg.
+        
+                            <div class="row pt-3 align-items-center" id="tabelaKmETempoTitulo" style="display: none;">
+                                <div class="col pl-0 bg-white font-weight-bold">KM e Tempo:</div>
+                            </div>
+                            <div class="row py-2 align-items-center" id="tabelaKmETempoMain" style="display: none;">
+                                <div class="col" id="kmEtempoGerado">
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row py-2 align-items-center">
-                        <div class="col-2 bg-white font-weight-bold text-right">Pace (min/Km):</div>
-                        <div class="col-2 text-left">
-                            <p id="resultPace" class="mb-0">Não Calculado.</p>
+    
+                        <div class="col">
+                            <div class="row py-2 justify-content-start align-items-center">
+                                <div class="col-0 mt-2 mr-2 font-weight-bold">
+                                    Tempo Total:
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-0">
+                                            Hora:<br>
+                                            <input type="number" id="runTempoH" placeholder="hh" style="width:3.2em">
+                                        </div>
+                                        <div class="col-0">
+                                            Min:<br>
+                                            <input type="number" required id="runTempoM" placeholder="mm" min=0 max=59 style="width:3.2em">
+                                        </div>
+                                        <div class="col-0">
+                                            Seg:</br>
+                                            <input type="number" required id="runTempoS" placeholder="ss" min=0 max=59 style="width:3.2em">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="row py-2 align-items-center justify-content-start">
+                                <div class="col-0 bg-white font-weight-bold text-right">Pace (min/Km):</div>
+                                <div class="row ml-2 align-items-center">
+                                    <div class="col-0 mr-2 text-left">
+                                        <p id="resultPace" class="mb-0">Não Calculado.</p>
+                                    </div>
+                                    <div class="col-0 mr-1">
+                                        <input type="button" id="calcPace" onclick="javascript: calcularPace(resultPace)" value="Calcular Pace">
+                                    </div>
+                                </div>
+                            </div> 
+        
+                            <div class="row py-2">
+                                <div class="col-0 mr-2 bg-white font-weight-bold text-right">Data da Corrida: </div>
+                                <div class="col-0">
+                                    <input type="date" id="runData" required>
+                                </div> 
+                            </div>
+                            <div class="row py-2">
+                                <button id="enviar" class="bg-dark text-white font-weight-bold border-0 p-2 rounded btresp w-100">
+                                    Gravar
+                                </button>
+                            </div> 
                         </div>
-                        <div class="col-3 mr-1">
-                            <input type="button" id="calcPace" onclick="javascript: calcularPace()" value="Calcular Pace">
-                        </div>
-                    </div> 
-
-                    <div class="row py-2">
-                        <div class="col-2 bg-white font-weight-bold text-right">Data da Corrida: </div>
-                        <div class="col-3">
-                            <input type="date" id="runData" required>
-                        </div> 
-                    </div> 
-
-                    <div class="row py-2 align-items-center">
-                        <div class="col-6">
-                            <button id="enviar" class="bg-dark text-white font-weight-bold border-0 p-2 rounded btresp w-100">
-                                Gravar
-                            </button>
-                        </div>
-                    </div>     
-                    <input type="hidden" id="userID" value="<%= user._id %>"> 
-                    <p style="display: none;" id="resultPaceSegundos"></p> 
+                    </div>    
+                    <input type="hidden" id="userID" value="<%= user._id %>">
+                    <p id="resultPaceSegundos" style="display: none" class="mb-0"></p>
                 </form>                
             </section>
         </main>

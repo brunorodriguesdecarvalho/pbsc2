@@ -1,7 +1,10 @@
+//Esse arquivo é responsável pela base de envio para gravação no banco de dados, contendo as informações completas sobre cada corrida para gravar.
+
 var dist = Number($("#runKm").val())
 
 function novaCorrida(Corrida) {
     $.post('/run', Corrida)
+    console.log("enviado para Post")
 }
 
 $(() => {
@@ -19,20 +22,15 @@ $(() => {
             DataCorridaOrigem: $("#runData").val(),
             userID: $("#userID").val(),
         }
+        console.log("Objeto Corrida criado e iniciado")
 
-        function criarParciais() {
-            for (let i = 0 ; i < Math.floor(Corrida.DistanciaTotal) ; i++) {
-                var KmAtual = "Km" + (i+1)
-                if( Number($("#runTempoMKm"+(i+1)).val()) > 0 || Number($("#runTempoSKm"+(i+1)).val()) > 0)  {
-                    Corrida[KmAtual] = (Number($("#runTempoMKm"+(i+1)).val()) * 60) + Number($("#runTempoSKm"+(i+1)).val())
-                }   
-            }
-        }
+        criarParciais(Corrida)
+        //criarParciaisAcc(Corrida)
+        Corrida.PaceTotalLer = transSegMin(Corrida.PaceOrigem)
+        Corrida.TempoTotalLer = transSegMin(Corrida.TempoFinalS)
 
-        criarParciais()
-
-        console.log(Corrida)
-
+        console.log("Objeto Corrida finalizado")
+        
         if ( Corrida.DistanciaTotal < 1 ) {
             window.alert("Por favor incluir a distância total para efetuar a gravação. Tente novamente, por favor.")        
         } else if ( Corrida.DataCorridaOrigem == "" ) {
@@ -44,6 +42,7 @@ $(() => {
         } else {
             novaCorrida(Corrida)
         }
+        console.log("Terminou função base")
     })
 })
 
