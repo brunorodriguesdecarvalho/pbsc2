@@ -109,6 +109,28 @@ var ordemKm19 = { Km19: 1 }
 var ordemKm20 = { Km20: 1 }
 var ordemKm21 = { Km21: 1 }
 
+var ordemKmAcc1 = { KmAcc1: 1 }
+var ordemKmAcc2 = { KmAcc2: 1 }
+var ordemKmAcc3 = { KmAcc3: 1 }
+var ordemKmAcc4 = { KmAcc4: 1 }
+var ordemKmAcc5 = { KmAcc5: 1 }
+var ordemKmAcc6 = { KmAcc6: 1 }
+var ordemKmAcc7 = { KmAcc7: 1 }
+var ordemKmAcc8 = { KmAcc8: 1 }
+var ordemKmAcc9 = { KmAcc9: 1 }
+var ordemKmAcc10 = { KmAcc10: 1 }
+var ordemKmAcc11 = { KmAcc11: 1 }
+var ordemKmAcc12 = { KmAcc12: 1 }
+var ordemKmAcc13 = { KmAcc13: 1 }
+var ordemKmAcc14 = { KmAcc14: 1 }
+var ordemKmAcc15 = { KmAcc15: 1 }
+var ordemKmAcc16 = { KmAcc16: 1 }
+var ordemKmAcc17 = { KmAcc17: 1 }
+var ordemKmAcc18 = { KmAcc18: 1 }
+var ordemKmAcc19 = { KmAcc19: 1 }
+var ordemKmAcc20 = { KmAcc20: 1 }
+var ordemKmAcc21 = { KmAcc21: 1 }
+
 //Ajustes de data
 var dataagora = new Date()
 var dataBR = ajustaDataHoraParaBrasil();
@@ -158,9 +180,9 @@ app.get('/objetivos', (req, res) => {
     }).sort(ordemObj)
 })
 
-//Criar rotar dinâmica para recordes
-function criaRotaDinKm(km, ordem) {
-    var endURI = '/corridas/best' + (km)
+//Criar rotar dinâmica para recordes discretos
+function RotaDinMelhorDisc(km, ordem) {
+    var endURI = '/corridas/best/disc' + (km)
     app.get(endURI, (req, res) => {
         var busca = { 
             $and: [ 
@@ -175,27 +197,76 @@ function criaRotaDinKm(km, ordem) {
     })
 }
 
-criaRotaDinKm(1, ordemKm1)
-criaRotaDinKm(2, ordemKm2)
-criaRotaDinKm(3, ordemKm3)
-criaRotaDinKm(4, ordemKm4)
-criaRotaDinKm(5, ordemKm5)
-criaRotaDinKm(6, ordemKm6)
-criaRotaDinKm(7, ordemKm7)
-criaRotaDinKm(8, ordemKm8)
-criaRotaDinKm(9, ordemKm9)
-criaRotaDinKm(10, ordemKm10)
-criaRotaDinKm(11, ordemKm11)
-criaRotaDinKm(12, ordemKm12)
-criaRotaDinKm(13, ordemKm13)
-criaRotaDinKm(14, ordemKm14)
-criaRotaDinKm(15, ordemKm15)
-criaRotaDinKm(16, ordemKm16)
-criaRotaDinKm(17, ordemKm17)
-criaRotaDinKm(18, ordemKm18)
-criaRotaDinKm(19, ordemKm19)
-criaRotaDinKm(20, ordemKm20)
-criaRotaDinKm(21, ordemKm21)
+RotaDinMelhorDisc(1, ordemKm1)
+RotaDinMelhorDisc(2, ordemKm2)
+RotaDinMelhorDisc(3, ordemKm3)
+RotaDinMelhorDisc(4, ordemKm4)
+RotaDinMelhorDisc(5, ordemKm5)
+RotaDinMelhorDisc(6, ordemKm6)
+RotaDinMelhorDisc(7, ordemKm7)
+RotaDinMelhorDisc(8, ordemKm8)
+RotaDinMelhorDisc(9, ordemKm9)
+RotaDinMelhorDisc(10, ordemKm10)
+RotaDinMelhorDisc(11, ordemKm11)
+RotaDinMelhorDisc(12, ordemKm12)
+RotaDinMelhorDisc(13, ordemKm13)
+RotaDinMelhorDisc(14, ordemKm14)
+RotaDinMelhorDisc(15, ordemKm15)
+RotaDinMelhorDisc(16, ordemKm16)
+RotaDinMelhorDisc(17, ordemKm17)
+RotaDinMelhorDisc(18, ordemKm18)
+RotaDinMelhorDisc(19, ordemKm19)
+RotaDinMelhorDisc(20, ordemKm20)
+RotaDinMelhorDisc(21, ordemKm21)
+
+//Criar rotar dinâmica para recordes discretos
+function RotaDinMelhorAcc(km, ordem, ende) {
+    var endURI = '/corridas/best/acc' + (km)
+    app.get(endURI, (req, res) => {
+        var busca = { 
+            $and: [ 
+                {userID: ObjectID(req.user._id)},
+                {DistanciaTotal: { $gte: km }},
+                ende         
+            ]
+        }
+        dbModelRun.find(busca, (err, corridas) => {
+            if (err) throw err
+            res.send(corridas)    
+        }).sort(ordem).limit(1)
+    })
+}
+
+for(let i=1; i<22; i++) {
+    var endereco = ("KmAcc" + 1)
+    var ordem = "ordemKmAcc" + i
+    var ende = { 
+    }
+    ende[endereco] = { '$exists' : true}
+    RotaDinMelhorAcc(i, ordem, ende)
+}
+/*
+RotaDinMelhorAcc(2, ordemKmAcc2)
+RotaDinMelhorAcc(3, ordemKmAcc3)
+RotaDinMelhorAcc(4, ordemKmAcc4)
+RotaDinMelhorAcc(5, ordemKmAcc5)
+RotaDinMelhorAcc(6, ordemKmAcc6)
+RotaDinMelhorAcc(7, ordemKmAcc7)
+RotaDinMelhorAcc(8, ordemKmAcc8)
+RotaDinMelhorAcc(9, ordemKmAcc9)
+RotaDinMelhorAcc(10, ordemKmAcc10)
+RotaDinMelhorAcc(11, ordemKmAcc11)
+RotaDinMelhorAcc(12, ordemKmAcc12)
+RotaDinMelhorAcc(13, ordemKmAcc13)
+RotaDinMelhorAcc(14, ordemKmAcc14)
+RotaDinMelhorAcc(15, ordemKmAcc15)
+RotaDinMelhorAcc(16, ordemKmAcc16)
+RotaDinMelhorAcc(17, ordemKmAcc17)
+RotaDinMelhorAcc(18, ordemKmAcc18)
+RotaDinMelhorAcc(19, ordemKmAcc19)
+RotaDinMelhorAcc(20, ordemKmAcc20)
+RotaDinMelhorAcc(21, ordemKmAcc21)*/
+
 
 //Rota para menu suspendo com o status
 app.get('/ragstatus', (req, res) => {

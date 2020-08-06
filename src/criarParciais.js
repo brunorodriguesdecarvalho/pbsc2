@@ -1,11 +1,22 @@
 //Essa função serve para alimentar os dados que serão enviados para gravar na base de dados com as informações dos tempos parciais.
 
-function criarParciais(Dados) {
+function gravarParciais(Dados) {
     for (let i = 0 ; i < Math.floor(Dados.DistanciaTotal) ; i++) {
         var KmAtual = "Km" + (i+1)
         if( Number($("#runTempoMKm"+(i+1)).val()) > 0 || Number($("#runTempoSKm"+(i+1)).val()) > 0)  {
             Dados[KmAtual] = (Number($("#runTempoMKm"+(i+1)).val()) * 60) + Number($("#runTempoSKm"+(i+1)).val())
         }   
+    }
+}
+
+function gravarParciaisAcc(Dados) {
+    for (let i = 0 ; i < Math.floor(Dados.DistanciaTotal) ; i++) {
+        var KmAtual = "KmAcc" + (i+1)
+        var gravar = document.getElementById("TempoMKmAcc"+(i+1)).innerHTML
+        if( gravar > 0 )  {
+            Dados[KmAtual] = gravar
+        }
+        console.log("O que será gravado("+(i+1)+"): " + gravar)
     }
 }
 
@@ -26,7 +37,9 @@ function criarParciaisAcc(){
             refAcumular = Number(document.getElementById("TempoMKmAcc"+(i)).innerHTML)
             console.log("Acumulado agora (" + (i+1) + "): " + refAcumular)
             preencher.innerHTML = parapreencherAgora + refAcumular
-        } else { preencher.innerHTML = parapreencherAgora }
+        } else {
+            preencher.innerHTML = parapreencherAgora
+        }
     }
     console.log("Terminou de criar parciais")
 }

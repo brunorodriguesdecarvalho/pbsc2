@@ -12,81 +12,130 @@
     <body>
         <%- include('nav'); %>
         <br><br><br>
-        <main class="container mt-5">
-            <div class="row " >
-                <div class="col-0 mr-2">
-                    <div><strong>Distância</strong><br><em>(Km)</em></div>
-                    <div><strong>KM1&nbsp;</strong></div>
-                    <div><strong>KM2&nbsp;</strong></div>
-                    <div><strong>KM3&nbsp;</strong></div>
-                    <div><strong>KM4&nbsp;</strong></div>
-                    <div><strong>KM5&nbsp;</strong></div>
-                    <div><strong>KM6&nbsp;</strong></div>
-                    <div><strong>KM7&nbsp;</strong></div>
-                    <div><strong>KM8&nbsp;</strong></div>
-                    <div><strong>KM9&nbsp;</strong></div>
-                    <div><strong>KM10&nbsp;</strong></div>  
-                    <div><strong>KM11&nbsp;</strong></div>
-                    <div><strong>KM12&nbsp;</strong></div>
-                    <div><strong>KM13&nbsp;</strong></div>
-                    <div><strong>KM14&nbsp;</strong></div>
-                    <div><strong>KM15&nbsp;</strong></div>
-                    <div><strong>KM16&nbsp;</strong></div>
-                    <div><strong>KM17&nbsp;</strong></div>
-                    <div><strong>KM18&nbsp;</strong></div>
-                    <div><strong>KM19&nbsp;</strong></div>
-                    <div><strong>KM20&nbsp;</strong></div>
-                    <div><strong>KM21&nbsp;</strong></div>
-                </div>
-                <div class="col-0 mr-2">
-                    <div><strong>Melhor Tempo no KM</strong><br><em>(Min/Seg)</em></div>
-                    <div id="RKm1"></div>
-                    <div id="RKm2"></div>
-                    <div id="RKm3"></div>
-                    <div id="RKm4"></div>
-                    <div id="RKm5"></div>
-                    <div id="RKm6"></div>
-                    <div id="RKm7"></div>
-                    <div id="RKm8"></div>
-                    <div id="RKm9"></div>
-                    <div id="RKm10"></div>
-                    <div id="RKm11"></div>
-                    <div id="RKm12"></div>
-                    <div id="RKm13"></div>
-                    <div id="RKm14"></div>
-                    <div id="RKm15"></div>
-                    <div id="RKm16"></div>
-                    <div id="RKm17"></div>
-                    <div id="RKm18"></div>
-                    <div id="RKm19"></div>
-                    <div id="RKm20"></div>
-                    <div id="RKm21"></div>
-                </div>
-                <div class="col-0 mr-2">
-                    <div><strong>Melhor Tempo até o KM</strong><br><em>(Min/Seg)</em></div>
-                    <div id="SAKm1"></div>
-                    <div id="SAKm2"></div>
-                    <div id="SAKm3"></div>
-                    <div id="SAKm4"></div>
-                    <div id="SAKm5"></div>
-                    <div id="SAKm6"></div>
-                    <div id="SAKm7"></div>
-                    <div id="SAKm8"></div>
-                    <div id="SAKm9"></div>
-                    <div id="SAKm10"></div>
-                    <div id="SAKm11"></div>
-                    <div id="SAKm12"></div>
-                    <div id="SAKm13"></div>
-                    <div id="SAKm14"></div>
-                    <div id="SAKm15"></div>
-                    <div id="SAKm16"></div>
-                    <div id="SAKm17"></div>
-                    <div id="SAKm18"></div>
-                    <div id="SAKm19"></div>
-                    <div id="SAKm20"></div>
-                    <div id="SAKm21"></div>
-                </div>
-            </div>
+        <main class="table-responsive mt-5">
+            <h2><br><br>Melhores tempos</h2><br>
+            <table class="table table-hover table-sm">
+                <thead class="thead-dark">
+                  <tr>
+                      <th rowspan="2"># Km</th>
+                      <th colspan="2">Melhor Tempo</th>
+                      <th>Pace Médio</th>
+                      <th>Tempo Total</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">no Km</th>
+                    <th scope="col">até Km</th>
+                    <th scope="col">até Km</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td id="MTDisc1"></td>
+                    <td id="MTAcc1"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td id="MTDisc2"></td>
+                    <td id="MTAcc2"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td id="MTDisc3"></td>
+                    <td id="MTAcc3"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td id="MTDisc4"></td>
+                    <td id="MTAcc4"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td id="MTDisc5"></td>
+                    <td id="MTAcc5"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td id="MTDisc6"></td>
+                    <td id="MTAcc6"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
+                    <td id="MTDisc7"></td>
+                    <td id="MTAcc7"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
+                    <td id="MTDisc8"></td>
+                    <td id="MTAcc8"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">9</th>
+                    <td id="MTDisc9"></td>
+                    <td id="MTAcc9"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">10</th>
+                    <td id="MTDisc10"></td>
+                    <td id="MTAcc10"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">11</th>
+                    <td id="MTDisc11"></td>
+                    <td id="MTAcc11"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">12</th>
+                    <td id="MTDisc12"></td>
+                    <td id="MTAcc12"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">13</th>
+                    <td id="MTDisc13"></td>
+                    <td id="MTAcc13"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">14</th>
+                    <td id="MTDisc14"></td>
+                    <td id="MTAcc14"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">15</th>
+                    <td id="MTDisc15"></td>
+                    <td id="MTAcc15"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">16</th>
+                    <td id="MTDisc16"></td>
+                    <td id="MTAcc16"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">17</th>
+                    <td id="MTDisc17"></td>
+                    <td id="MTAcc17"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">18</th>
+                    <td id="MTDisc18"></td>
+                    <td id="MTAcc18"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">19</th>
+                    <td id="MTDisc19"></td>
+                    <td id="MTAcc19"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">20</th>
+                    <td id="MTDisc20"></td>
+                    <td id="MTAcc20"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">21</th>
+                    <td id="MTDisc21"></td>
+                    <td id="MTAcc21"></td>
+                  </tr>
+                </tbody>
+              </table>
         </main>
     </body>    
 </html>

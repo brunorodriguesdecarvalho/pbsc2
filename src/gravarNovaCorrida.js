@@ -24,8 +24,8 @@ $(() => {
         }
         console.log("Objeto Corrida criado e iniciado")
 
-        criarParciais(Corrida)
-        //criarParciaisAcc(Corrida)
+        gravarParciais(Corrida)
+        gravarParciaisAcc(Corrida)
         Corrida.PaceTotalLer = transSegMin(Corrida.PaceOrigem)
         Corrida.TempoTotalLer = transSegMin(Corrida.TempoFinalS)
 
