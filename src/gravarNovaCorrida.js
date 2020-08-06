@@ -14,7 +14,7 @@ $(() => {
         var rtS = Number($("#runTempoS").val())
         var Dist = Number($("#runKm").val())
         var rtF = rtH + rtM + rtS
-
+ 
         var Corrida = { 
             DistanciaTotal: Dist, 
             TempoFinalS: rtF,
@@ -26,6 +26,7 @@ $(() => {
 
         gravarParciais(Corrida)
         gravarParciaisAcc(Corrida)
+        gravarPaceAcc(Corrida)
         Corrida.PaceTotalLer = transSegMin(Corrida.PaceOrigem)
         Corrida.TempoTotalLer = transSegMin(Corrida.TempoFinalS)
 

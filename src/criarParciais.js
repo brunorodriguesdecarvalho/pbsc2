@@ -18,6 +18,17 @@ function gravarParciaisAcc(Dados) {
         }
         console.log("O que será gravado("+(i+1)+"): " + gravar)
     }
+} 
+
+function gravarPaceAcc(Dados) {
+    for (let i = 0 ; i < Math.floor(Dados.DistanciaTotal) ; i++) {
+        var KmAtual = "PaceSegAcc" + (i+1)
+        var gravar = document.getElementById("PaceKmAcc"+(i+1)).innerHTML
+        if( gravar > 0 )  {
+            Dados[KmAtual] = gravar
+        }
+        console.log("O que será gravado("+(i+1)+"): " + gravar)
+    }
 }
 
 //Essa função serve para acumular o tempo no km
@@ -28,18 +39,25 @@ function criarParciaisAcc(){
     console.log("Distância que chegou: " + distanciaArrendondada)
     for(let i = 0; i < distanciaArrendondada; i++){
         var preencher = document.getElementById("TempoMKmAcc"+(i+1))
+        var preencherPace = document.getElementById("PaceKmAcc"+(i+1))
         console.log("Aonde será preenchido ("+(i+1)+"): " + preencher)
         var origemMin = Number($("#runTempoMKm"+(i+1)).val()) * 60
         var origemSeg = Number($("#runTempoSKm"+(i+1)).val())
         var parapreencherAgora = origemMin + origemSeg
+        
         var refAcumular
         if(i>0){
             refAcumular = Number(document.getElementById("TempoMKmAcc"+(i)).innerHTML)
             console.log("Acumulado agora (" + (i+1) + "): " + refAcumular)
             preencher.innerHTML = parapreencherAgora + refAcumular
+            var pacepreencherAgora = (Math.floor(Number(preencher.innerHTML)) / (i+1))
+            preencherPace.innerHTML = Math.floor(pacepreencherAgora)
         } else {
             preencher.innerHTML = parapreencherAgora
+            var pacepreencherAgora = Math.floor(parapreencherAgora)
+            preencherPace.innerHTML = Math.floor(pacepreencherAgora)
         }
+        
     }
     console.log("Terminou de criar parciais")
 }

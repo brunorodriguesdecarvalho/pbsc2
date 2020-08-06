@@ -131,6 +131,28 @@ var ordemKmAcc19 = { KmAcc19: 1 }
 var ordemKmAcc20 = { KmAcc20: 1 }
 var ordemKmAcc21 = { KmAcc21: 1 }
 
+var ordemPaceSegAcc1 = { PaceSegAcc1: 1 }
+var ordemPaceSegAcc2 = { PaceSegAcc2: 1 }
+var ordemPaceSegAcc3 = { PaceSegAcc3: 1 }
+var ordemPaceSegAcc4 = { PaceSegAcc4: 1 }
+var ordemPaceSegAcc5 = { PaceSegAcc5: 1 }
+var ordemPaceSegAcc6 = { PaceSegAcc6: 1 }
+var ordemPaceSegAcc7 = { PaceSegAcc7: 1 }
+var ordemPaceSegAcc8 = { PaceSegAcc8: 1 }
+var ordemPaceSegAcc9 = { PaceSegAcc9: 1 }
+var ordemPaceSegAcc10 = { PaceSegAcc10: 1 }
+var ordemPaceSegAcc11 = { PaceSegAcc11: 1 }
+var ordemPaceSegAcc12 = { PaceSegAcc12: 1 }
+var ordemPaceSegAcc13 = { PaceSegAcc13: 1 }
+var ordemPaceSegAcc14 = { PaceSegAcc14: 1 }
+var ordemPaceSegAcc15 = { PaceSegAcc15: 1 }
+var ordemPaceSegAcc16 = { PaceSegAcc16: 1 }
+var ordemPaceSegAcc17 = { PaceSegAcc17: 1 }
+var ordemPaceSegAcc18 = { PaceSegAcc18: 1 }
+var ordemPaceSegAcc19 = { PaceSegAcc19: 1 }
+var ordemPaceSegAcc20 = { PaceSegAcc20: 1 }
+var ordemPaceSegAcc21 = { PaceSegAcc21: 1 }
+
 //Ajustes de data
 var dataagora = new Date()
 var dataBR = ajustaDataHoraParaBrasil();
@@ -181,47 +203,8 @@ app.get('/objetivos', (req, res) => {
 })
 
 //Criar rotar dinâmica para recordes discretos
-function RotaDinMelhorDisc(km, ordem) {
-    var endURI = '/corridas/best/disc' + (km)
-    app.get(endURI, (req, res) => {
-        var busca = { 
-            $and: [ 
-                {userID: ObjectID(req.user._id)},
-                {DistanciaTotal: { $gte: km}}              
-            ]
-        }
-        dbModelRun.find(busca, (err, corridas) => {
-            if (err) throw err
-            res.send(corridas)    
-        }).sort(ordem).limit(1)
-    })
-}
-
-RotaDinMelhorDisc(1, ordemKm1)
-RotaDinMelhorDisc(2, ordemKm2)
-RotaDinMelhorDisc(3, ordemKm3)
-RotaDinMelhorDisc(4, ordemKm4)
-RotaDinMelhorDisc(5, ordemKm5)
-RotaDinMelhorDisc(6, ordemKm6)
-RotaDinMelhorDisc(7, ordemKm7)
-RotaDinMelhorDisc(8, ordemKm8)
-RotaDinMelhorDisc(9, ordemKm9)
-RotaDinMelhorDisc(10, ordemKm10)
-RotaDinMelhorDisc(11, ordemKm11)
-RotaDinMelhorDisc(12, ordemKm12)
-RotaDinMelhorDisc(13, ordemKm13)
-RotaDinMelhorDisc(14, ordemKm14)
-RotaDinMelhorDisc(15, ordemKm15)
-RotaDinMelhorDisc(16, ordemKm16)
-RotaDinMelhorDisc(17, ordemKm17)
-RotaDinMelhorDisc(18, ordemKm18)
-RotaDinMelhorDisc(19, ordemKm19)
-RotaDinMelhorDisc(20, ordemKm20)
-RotaDinMelhorDisc(21, ordemKm21)
-
-//Criar rotar dinâmica para recordes discretos
-function RotaDinMelhorAcc(km, ordem, ende) {
-    var endURI = '/corridas/best/acc' + (km)
+function RotaDinMelhor(km, ordem, ende, acumula) {
+    var endURI = '/corridas/best/' + acumula + (km)
     app.get(endURI, (req, res) => {
         var busca = { 
             $and: [ 
@@ -237,35 +220,396 @@ function RotaDinMelhorAcc(km, ordem, ende) {
     })
 }
 
-for(let i=1; i<22; i++) {
-    var endereco = ("KmAcc" + 1)
-    var ordem = "ordemKmAcc" + i    
-    var ende = { 
-    }
-    ende[endereco] = { '$exists' : true}
-    RotaDinMelhorAcc(i, ordem, ende)
-}
-/*
-RotaDinMelhorAcc(2, ordemKmAcc2)
-RotaDinMelhorAcc(3, ordemKmAcc3)
-RotaDinMelhorAcc(4, ordemKmAcc4)
-RotaDinMelhorAcc(5, ordemKmAcc5)
-RotaDinMelhorAcc(6, ordemKmAcc6)
-RotaDinMelhorAcc(7, ordemKmAcc7)
-RotaDinMelhorAcc(8, ordemKmAcc8)
-RotaDinMelhorAcc(9, ordemKmAcc9)
-RotaDinMelhorAcc(10, ordemKmAcc10)
-RotaDinMelhorAcc(11, ordemKmAcc11)
-RotaDinMelhorAcc(12, ordemKmAcc12)
-RotaDinMelhorAcc(13, ordemKmAcc13)
-RotaDinMelhorAcc(14, ordemKmAcc14)
-RotaDinMelhorAcc(15, ordemKmAcc15)
-RotaDinMelhorAcc(16, ordemKmAcc16)
-RotaDinMelhorAcc(17, ordemKmAcc17)
-RotaDinMelhorAcc(18, ordemKmAcc18)
-RotaDinMelhorAcc(19, ordemKmAcc19)
-RotaDinMelhorAcc(20, ordemKmAcc20)
-RotaDinMelhorAcc(21, ordemKmAcc21)*/
+
+    idxRun = 1
+    ordRun = ordemKm1
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 2
+    ordRun = ordemKm2
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 3
+    ordRun = ordemKm3
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 4
+    ordRun = ordemKm4
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 5
+    ordRun = ordemKm5
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 6
+    ordRun = ordemKm6
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 7
+    ordRun = ordemKm7
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 8
+    ordRun = ordemKm8
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 9
+    ordRun = ordemKm9
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 10
+    ordRun = ordemKm10
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 11
+    ordRun = ordemKm11
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 12
+    ordRun = ordemKm12
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 13
+    ordRun = ordemKm13
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 14
+    ordRun = ordemKm14
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 15
+    ordRun = ordemKm15
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 16
+    ordRun = ordemKm16
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 17
+    ordRun = ordemKm17
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 18
+    ordRun = ordemKm18
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 19
+    ordRun = ordemKm19
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 20
+    ordRun = ordemKm20
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+    idxRun = 21
+    ordRun = ordemKm21
+    endeCorrida = {}
+    endeCorrida[("Km" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "disc")
+
+
+
+
+
+
+    idxRun = 1
+    ordRun = ordemKmAcc1
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 2
+    ordRun = ordemKmAcc2
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 3
+    ordRun = ordemKmAcc3
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 4
+    ordRun = ordemKmAcc4
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 5
+    ordRun = ordemKmAcc5
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 6
+    ordRun = ordemKmAcc6
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 7
+    ordRun = ordemKmAcc7
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 8
+    ordRun = ordemKmAcc8
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 9
+    ordRun = ordemKmAcc9
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 10
+    ordRun = ordemKmAcc10
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 11
+    ordRun = ordemKmAcc11
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 12
+    ordRun = ordemKmAcc12
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 13
+    ordRun = ordemKmAcc13
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 14
+    ordRun = ordemKmAcc14
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 15
+    ordRun = ordemKmAcc15
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 16
+    ordRun = ordemKmAcc16
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 17
+    ordRun = ordemKmAcc17
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 18
+    ordRun = ordemKmAcc18
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 19
+    ordRun = ordemKmAcc19
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 20
+    ordRun = ordemKmAcc20
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+    idxRun = 21
+    ordRun = ordemKmAcc21
+    endeCorrida = {}
+    endeCorrida[("KmAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "acc")
+
+
+
+
+
+
+
+
+    idxRun = 1
+    ordRun = ordemPaceSegAcc1
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 2
+    ordRun = ordemPaceSegAcc2
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 3
+    ordRun = ordemPaceSegAcc3
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 4
+    ordRun = ordemPaceSegAcc4
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 5
+    ordRun = ordemPaceSegAcc5
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 6
+    ordRun = ordemPaceSegAcc6
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 7
+    ordRun = ordemPaceSegAcc7
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 8
+    ordRun = ordemPaceSegAcc8
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 9
+    ordRun = ordemPaceSegAcc9
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 10
+    ordRun = ordemPaceSegAcc10
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 11
+    ordRun = ordemPaceSegAcc11
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 12
+    ordRun = ordemPaceSegAcc12
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 13
+    ordRun = ordemPaceSegAcc13
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 14
+    ordRun = ordemPaceSegAcc14
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 15
+    ordRun = ordemPaceSegAcc15
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 16
+    ordRun = ordemPaceSegAcc16
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 17
+    ordRun = ordemPaceSegAcc17
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 18
+    ordRun = ordemPaceSegAcc18
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 19
+    ordRun = ordemPaceSegAcc19
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 20
+    ordRun = ordemPaceSegAcc20
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
+
+    idxRun = 21
+    ordRun = ordemPaceSegAcc21
+    endeCorrida = {}
+    endeCorrida[("PaceSegAcc" + idxRun)] = { '$exists' : true}
+    RotaDinMelhor(idxRun, ordRun, endeCorrida, "pace")
 
 
 //Rota para menu suspendo com o status
@@ -327,7 +671,6 @@ var dbModelAtiv = mongoose.model('collativs', {
     ativDataFim: Date,
     userID: ObjectID,
 })
-
 var dbModelIni = mongoose.model('collinis', {
     iniNome: String,
     iniStat: String,
@@ -339,7 +682,6 @@ var dbModelIni = mongoose.model('collinis', {
     iniDataFim: Date,
     userID: ObjectID,
 })
-
 var dbModelObj = mongoose.model('collobjs', {
     objNome: String,
     objStat: String,
@@ -351,8 +693,7 @@ var dbModelObj = mongoose.model('collobjs', {
     objDataFim: Date,
     userID: ObjectID,
 })
-
-var dbModelRun = mongoose.model('collruns', {
+var ObjetoCorrida = {
     DistanciaTotal: Number,
     TempoFinalS: Number,
     PaceOrigem: Number,
@@ -401,8 +742,31 @@ var dbModelRun = mongoose.model('collruns', {
     KmAcc18: Number,
     KmAcc19: Number,
     KmAcc20: Number,
-    KmAcc21: Number
-})
+    KmAcc21: Number,
+    PaceSegAcc1: Number,
+    PaceSegAcc2: Number,
+    PaceSegAcc3: Number,
+    PaceSegAcc4: Number,
+    PaceSegAcc5: Number,
+    PaceSegAcc6: Number,
+    PaceSegAcc7: Number,
+    PaceSegAcc8: Number,
+    PaceSegAcc9: Number,
+    PaceSegAcc10: Number,
+    PaceSegAcc11: Number,
+    PaceSegAcc12: Number,
+    PaceSegAcc13: Number,
+    PaceSegAcc14: Number,
+    PaceSegAcc15: Number,
+    PaceSegAcc16: Number,
+    PaceSegAcc17: Number,
+    PaceSegAcc18: Number,
+    PaceSegAcc19: Number,
+    PaceSegAcc20: Number,
+    PaceSegAcc21: Number
+}
+var dbSchemaRun = mongoose.Schema(ObjetoCorrida)
+var dbModelRun = mongoose.model('collruns', dbSchemaRun )
 
 //Rotas POST
 app.post('/run', (req, res) => {

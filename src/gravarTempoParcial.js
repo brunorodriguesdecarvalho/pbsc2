@@ -11,7 +11,7 @@ function gravarTempoParcial(tempoParcial, Dist) {
         ParObj = Object.create(Par)
         Object.defineProperty(ParObj, nomeProp, {
             value: valorAtual,
-            writable: true,
+            writable: true, 
             enumerable: true,
             configurable: true
         })

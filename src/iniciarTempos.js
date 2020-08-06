@@ -41,6 +41,7 @@ function iniciarTempos() {
                 </div>
                 <div class="col">
                     <p id="TempoMKmAcc${i}"></p>
+                    <p id="PaceKmAcc${i}"></p>
                 </div>
             </div>
             
