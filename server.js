@@ -239,7 +239,7 @@ function RotaDinMelhorAcc(km, ordem, ende) {
 
 for(let i=1; i<22; i++) {
     var endereco = ("KmAcc" + 1)
-    var ordem = "ordemKmAcc" + i
+    var ordem = "ordemKmAcc" + i    
     var ende = { 
     }
     ende[endereco] = { '$exists' : true}
