@@ -21,61 +21,11 @@
         </header>
         <main class="container">
            
-            <div class="grid mx-3">
-                <div class="row">
-                    <div class="col bg-dark text-white h5 p-2 rounded">Planejamento</div>
-                </div>
-                <div class="row text-center">
-                    <div class="col-4">
-                        <a href="/ativ/nova" class="link">
-                            <img src="../img/startup-vector-free-icon-set-25.png" style="width: 6vw;" class="my-2">
-                            <br>
-                            <span class="legico">Criar Atividades</span>
-                        </a>                
-                    </div>
-                    <div class="col-4">
-                        <a href="/ini/nova" class="link">
-                            <img src="../img/project-management-vector-free-icons-set--22.png" style="width: 6vw;" class="my-2">
-                            <br>
-                            <span class="legico">Criar Iniciativas</span>
-                        </a>
-                    </div>
-                    <div class="col-4">
-                        <a href="/obj/nova" class="link"> 
-                            <img src="../img/project-management-vector-free-icons-set--31.png" style="width: 6vw;" class="my-2">
-                            <br>
-                           <span class="legico">Criar Objetivos</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row text-center">
-                    <div class="col-4">
-                        <a href="/ativ" class="link">
-                            <img src="../img/business-vector-free-icon-set-39.png" style="width: 6vw;" class="my-2">
-                            <br>
-                            <span class="legico">Ver Atividades</span>
-                        </a>                
-                    </div>
-                    <div class="col-4">
-                        <a href="/ini" class="link">
-                            <img src="../img/strategy-vector-free-icons-set-21.png" style="width: 6vw;" class="my-2">
-                            <br>
-                            <span class="legico">Ver Iniciativas</span>
-                        </a>
-                    </div>
-                    <div class="col-4">
-                        <a href="/obj" class="link">
-                            <img src="../img/startup-vector-free-icon-set-30.png" style="width: 6vw;" class="my-2">
-                            <br>
-                            <span class="legico">Ver Objetivos</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
+            <%- include('PlanMenu'); %>
 
             <br>
+
+            <%- include('RunMenu'); %>
             
         </main>
 
