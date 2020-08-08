@@ -72,90 +72,80 @@ function listarCorridas(corridas){
 
     $("#Run").append(`
     
-            <div class="col-sm-4 col-md-3 col-xl-2 align-content-stretch teste" id="${corridas._id}" data-value="id="${corridas._id}">
-                
+            <div class="col-sm-4 col-md-3 col-xl-3 align-content-stretch" id="${corridas._id}" data-value="id="${corridas._id}">
+            
                 <!-- início do cartão -->
                 <div class="card mt-2">
 
                 <!-- início do header do cartão -->
                     <div class="card-header px-2 ">
-                        
-                        <!-- início do grupo do título do cartão -->
-
-                        <div>
-
-                            <!-- início do grupo do título do cartão -->
-                            <div class="d-flex align-items-center">
-                                <div class="d-flex">                                    
-                                    <!-- título principal do cartão -->
-                                    <div class="pl-2 pr-2">
-                                        <h3>
-                                            <div class="d-flex pr-1 align-items-center" id="tituloAtividade">
-                                                <span class="pr-3">${dataCorrida}</span>
-                                                <div class="d-flex" id="mostrador-${corridas._id}">
-                                                    <a 
-                                                        href="#!" 
-                                                        onclick="expandir('cardBody${corridas._id}', 'encolhemais${corridas._id}', 'encolhemenos${corridas._id}')" 
-                                                        id="encolhemenos${corridas._id}" 
-                                                        style="display:none"
-                                                    >
-                                                        <span class='fas text-dark'>&#xf056;</span>
-                                                    </a> 
-                                                    <a 
-                                                        href="#!" 
-                                                        onclick="expandir('cardBody${corridas._id}', 'encolhemais${corridas._id}', 'encolhemenos${corridas._id}')"
-                                                        id="encolhemais${corridas._id}" 
-                                                        style="display:block"
-                                                    >
-                                                        <span class='fas text-dark'>&#xf055;</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </h3>
+                        <div class="container">                                    
+                            <!-- título principal do cartão -->
+                            <div class="row">
+                                <div class="col px-1" id="tituloAtividade">
+                                    <span class="align-middle" style="font-size:1.25em; font-weight:bold">${dataCorrida}<span>                                              
+                                </div>
+                                <div class="col" id="mostrador-${corridas._id}">
+                                    <div class="row justify-content-end">
+                                        <a 
+                                            href="#!" 
+                                            onclick="expandir('cardBody${corridas._id}', 'encolhemais${corridas._id}', 'encolhemenos${corridas._id}')" 
+                                            id="encolhemenos${corridas._id}" 
+                                            style="display:none"
+                                            class="rounded-circle p-1"
+                                        >
+                                            <span class='fas'>&#xf056;</span>
+                                        </a> 
+                                        <a 
+                                            href="#!" 
+                                            onclick="expandir('cardBody${corridas._id}', 'encolhemais${corridas._id}', 'encolhemenos${corridas._id}')"
+                                            id="encolhemais${corridas._id}" 
+                                            style="display:block"
+                                            class="rounded-circle p-1"
+                                        >
+                                            <span class='fas'>&#xf055;</span>
+                                        </a>
+                                        <a 
+                                            href="#!" 
+                                            onclick="javascript: excluirCorrida('${corridas._id}')" 
+                                            style="display:block"
+                                            class="rounded-circle p-1"
+                                        >
+                                            <span class='fas text-danger'>&#xf2ed;</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card-body cartao pb-0" style="display:none" id="cardBody${corridas._id}">
+                        
+                        <div class="card-body cartao p-2 mt-2 mb-1 bg-white rounded" style="display:none" id="cardBody${corridas._id}">
                                 <strong>Distância(Km): </strong>${corridas.DistanciaTotal}<br>
                                 <strong>Tempo Total: </strong>${corridas.TempoTotalLer}<br>
                                 <strong>Pace Médio: </strong>${corridas.PaceTotalLer}<br>
                                 <strong>Tempos Parciais:</strong>
                                 <div id="Parciais style="padding-inline-start: 0px">
-                                    <div>Km #1: ${Km1 || "Não registrado"}</div>
-                                    <div>Km #2: ${Km2 || "Não registrado"}</div>
-                                    <div>Km #3: ${Km3 || "Não registrado"}</div>
-                                    <div>Km #4: ${Km4 || "Não registrado"}</div>
-                                    <div>Km #5: ${Km5 || "Não registrado"}</div>
-                                    <div>Km #6: ${Km6 || "Não registrado"}</div>
-                                    <div>Km #7: ${Km7 || "Não registrado"}</div>
-                                    <div>Km #8: ${Km8 || "Não registrado"}</div>
-                                    <div>Km #9: ${Km9 || "Não registrado"}</div>
-                                    <div>Km #10: ${Km10 || "Não registrado"}</div>
-                                    <div>Km #11: ${Km11 || "Não registrado"}</div>
-                                    <div>Km #12: ${Km12 || "Não registrado"}</div>
-                                    <div>Km #13: ${Km13 || "Não registrado"}</div>
-                                    <div>Km #14: ${Km14 || "Não registrado"}</div>
-                                    <div>Km #15: ${Km15 || "Não registrado"}</div>
-                                    <div>Km #16: ${Km16 || "Não registrado"}</div>
-                                    <div>Km #17: ${Km17 || "Não registrado"}</div>
-                                    <div>Km #18: ${Km18 || "Não registrado"}</div>
-                                    <div>Km #19: ${Km19 || "Não registrado"}</div>
-                                    <div>Km #20: ${Km20 || "Não registrado"}</div>
-                                    <div>Km #21: ${Km21 || "Não registrado"}</div>
+                                    <div>Km1: ${Km1 || "Não registrado"}</div>
+                                    <div>Km2: ${Km2 || "Não registrado"}</div>
+                                    <div>Km3: ${Km3 || "Não registrado"}</div>
+                                    <div>Km4: ${Km4 || "Não registrado"}</div>
+                                    <div>Km5: ${Km5 || "Não registrado"}</div>
+                                    <div>Km6: ${Km6 || "Não registrado"}</div>
+                                    <div>Km7: ${Km7 || "Não registrado"}</div>
+                                    <div>Km8: ${Km8 || "Não registrado"}</div>
+                                    <div>Km9: ${Km9 || "Não registrado"}</div>
+                                    <div>Km10: ${Km10 || "Não registrado"}</div>
+                                    <div>Km11: ${Km11 || "Não registrado"}</div>
+                                    <div>Km12: ${Km12 || "Não registrado"}</div>
+                                    <div>Km13: ${Km13 || "Não registrado"}</div>
+                                    <div>Km14: ${Km14 || "Não registrado"}</div>
+                                    <div>Km15: ${Km15 || "Não registrado"}</div>
+                                    <div>Km16: ${Km16 || "Não registrado"}</div>
+                                    <div>Km17: ${Km17 || "Não registrado"}</div>
+                                    <div>Km18: ${Km18 || "Não registrado"}</div>
+                                    <div>Km19: ${Km19 || "Não registrado"}</div>
+                                    <div>Km20: ${Km20 || "Não registrado"}</div>
+                                    <div>Km21: ${Km21 || "Não registrado"}</div>
                                 </div>
-                                <div>
-                                    <a  href="#!" 
-                                        onclick="javascript: excluirCorrida('${corridas._id}')" 
-                                        class="bg-danger text-white botao"
-                                        style="text-decoration: none;"
-                                    >
-                                        <span class="fas">
-                                            &#xf12d;&nbsp;<strong>Excluir</strong>
-                                        </span>
-                                    </a>
-                                <div>
                         </div>
                     </div>
                 </div>

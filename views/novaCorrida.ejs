@@ -3,7 +3,8 @@
     <head>
         <title>Corridas: Nova</title>
         <%- include('meta'); %>
-        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="../src/calcularPace.js"></script>
@@ -32,7 +33,11 @@
                             </div>
         
                             <div class="row justify-content-start mt-2">
-                                <input type="button" id="calcPace" onclick="javascript: iniciarTempos()" value="Gravar tempo por KM">
+                                <input 
+                                    class="botao bg-success border-0 font-weight-bold text-white" 
+                                    type="button" id="calcPace" 
+                                    onclick="javascript: iniciarTempos()" 
+                                    value="Gravar tempo por KM">
                             </div>
         
                             <div class="row pt-3 align-items-center" id="tabelaKmETempoTitulo" style="display: none;">
@@ -74,7 +79,12 @@
                                         <p id="resultPace" class="mb-0">Não Calculado.</p>
                                     </div>
                                     <div class="col-0 mr-1">
-                                        <input type="button" id="calcPace" onclick="javascript: calcularPace(resultPace)" value="Calcular Pace">
+                                        <input 
+                                            class="botao bg-success border-0 font-weight-bold text-white"
+                                            type="button" 
+                                            id="calcPace" 
+                                            onclick="javascript: calcularPace(resultPace)" 
+                                            value="Calcular Pace">
                                     </div>
                                 </div>
                             </div> 
@@ -86,7 +96,9 @@
                                 </div> 
                             </div>
                             <div class="row py-2">
-                                <button id="enviar" class="bg-dark text-white font-weight-bold border-0 p-2 rounded btresp w-100">
+                                <button 
+                                    id="enviar" 
+                                    class="botao bg-primary border-0 font-weight-bold text-white w-100">
                                     Gravar
                                 </button>
                             </div> 

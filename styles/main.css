@@ -17,14 +17,14 @@ body{
 }
 
 .botao{
-    margin: 1vh 0vh;
-    padding: 1.5vh;
+    margin: 1em 0em;
+    padding: 0.5em;
     height: 100%;
     display: inline-block;
     line-height: 100%;
     font-size: 1em;
     text-align: center;
-    border-radius: 2px;
+    border-radius: 2em;
 }
 
 .gruda1{
