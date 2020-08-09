@@ -12,25 +12,11 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEZEBwEq2FCna70N-F9rWX5pSdqnWYt4E&callback=initMap"
       defer
     ></script>
-    <style type="text/css">
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-        width: 100%;
-      }
-
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
     <script src="../src/localizacao.js"></script>
   </head>
   <body>
     <%- include('nav'); %>
     <div id="map"></div>
+    <%- include('btnLocalAtual'); %>
   </body>
 </html>
