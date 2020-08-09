@@ -159,6 +159,20 @@ var dataBR = ajustaDataHoraParaBrasil();
 console.log("Data Agora(Brasil): ", dataBR)
 
 // Definação das rotas GET
+app.get('/run/mapa', (req, res) => { 
+    response.writeHead(200, {
+        'Content-Type': 'text/html'
+    });
+    fs.readFile('./googlefe8873c300c5b983.html', null, function (error, data) {
+        if (error) {
+            response.writeHead(404);
+            respone.write('Whoops! File not found!');
+        } else {
+            response.write(data);
+        }
+        response.end();
+    });
+ } );
 app.get('/commits/', (req, res) => {res.render('commits', { user: req.user } ) } );
 app.get('/plan/', (req, res) => { res.render('planHome', { user: req.user } ) } );
 app.get('/ativ/', (req, res) => { res.render('atividades', { user: req.user } ) } );
