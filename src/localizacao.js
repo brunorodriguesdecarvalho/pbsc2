@@ -1,5 +1,3 @@
-
-window.alert(teste)
 var map, infoWindow;
 var posicaoInicial = {lat: -34.397, lng: 150.644};
 function initMap() {
