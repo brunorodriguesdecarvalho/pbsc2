@@ -8,6 +8,13 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEZEBwEq2FCna70N-F9rWX5pSdqnWYt4E&callback=initMap&libraries=&v=weekly"
+            defer
+        ></script>
+        <script src="../src/localizacao.js"></script>
+        
     </head>
     <body>
         <%- include('nav'); %>
@@ -23,7 +30,9 @@
             <%- include('runMenu'); %>
 
             <br>
-            
+
+            <div id="map"></div>
+
         </main>
     </body>
 </html>
