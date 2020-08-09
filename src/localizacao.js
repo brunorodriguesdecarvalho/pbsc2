@@ -1,11 +1,15 @@
 var map, infoWindow;
-var posicaoInicial = {lat: -34.397, lng: 150.644};
+var posicaoInicial = {lat: 23.5677861, lng: -46.7006432};
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: posicaoInicial,
         zoom: 15
     });
-    var marker = new google.maps.Marker({position: posicaoInicial, map: map});
+    new google.maps.Marker({
+        position: posicaoInicial,
+        map,
+        title: "Hello World!"
+    });
 
 infoWindow = new google.maps.InfoWindow;
 
@@ -31,9 +35,9 @@ if (navigator.geolocation) {
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-infoWindow.setPosition(pos);
-infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
-infoWindow.open(map);
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                            'Error: The Geolocation service failed.' :
+                            'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
 }
