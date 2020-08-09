@@ -81,6 +81,9 @@ app.use("/img", express.static('img'));
 app.use("/styles", express.static('styles')); 
 app.use("/src", express.static('src'));
 
+// Carrega o FileSystem
+let fs = require('fs');
+
 //Variáveis para operações CRUD 
 var ordemAtiv = { ativDataFim: 1, ativStat: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
 var ordemIni = { iniDataFim: 1, iniStat: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
@@ -159,18 +162,18 @@ var dataBR = ajustaDataHoraParaBrasil();
 console.log("Data Agora(Brasil): ", dataBR)
 
 // Definação das rotas GET
-app.get('/run/mapa', (req, res) => { 
-    response.writeHead(200, {
+app.get('/googlefe8873c300c5b983.html', (req, res) => { 
+    res.writeHead(200, {
         'Content-Type': 'text/html'
     });
     fs.readFile('./googlefe8873c300c5b983.html', null, function (error, data) {
         if (error) {
-            response.writeHead(404);
-            respone.write('Whoops! File not found!');
+            res.writeHead(404);
+            res.write('Whoops! File not found!');
         } else {
-            response.write(data);
+            res.write(data);
         }
-        response.end();
+        res.end();
     });
  } );
 app.get('/commits/', (req, res) => {res.render('commits', { user: req.user } ) } );
