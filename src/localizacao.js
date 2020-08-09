@@ -1,5 +1,5 @@
 var map, infoWindow;
-var posicaoInicial = {lat: 23.5677861, lng: -46.7006432};
+var posicaoInicial = {lat: -23.5677861, lng: -46.7006432};
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: posicaoInicial,
