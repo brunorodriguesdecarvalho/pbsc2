@@ -19,6 +19,28 @@ function initMap() {
     obterLocalAtual();
 }
 
+function teste() {
+    var flightPlanCoordinates = [
+        {lat: -23.54628437009063, lng: -46.689233779907234}, 
+        {lat: -23.545733579365486, lng: -46.68884754180908},
+        {lat: -23.545241799982602, lng: -46.68957710266114},
+        {lat: -23.54535982720223, lng: -46.68979167938233},
+        {lat: -23.545989303917665, lng: -46.68981313705445},
+        {lat: -23.546520422552213, lng: -46.690456867218025},
+        {lat: -23.54691384237976, lng: -46.689920425415046},
+        {lat: -23.546677790624496, lng: -46.689555644989014}
+      ];
+      var flightPath = new google.maps.Polyline({
+        path: flightPlanCoordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+
+      flightPath.setMap(map);
+}
+
 function obterLocalAtual() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -53,9 +75,4 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ? 'Erro: Serviço de Geolocalização falhou.' : 'Erro: Seu navegador não oferece suporte a geolocalização.');
     infoWindow.open(map);
-}
-
-function teste(){
-    alert("testando e provando")
-    console.log("testando e provando")
 }
