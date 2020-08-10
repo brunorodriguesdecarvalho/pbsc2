@@ -1,22 +1,31 @@
 var map, infoWindow;
-var posicaoInicial = {lat: -23.5465491, lng: -46.6909216};
+var posicaoSemGPS = {lat: -23.5465491, lng: -46.6909216};
 var track = []
 var posicao = {lat: 0, lng: 0}
+var marcadorAtual
+let markers = [];
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: posicaoInicial,
-        zoom: 14
+        center: posicaoSemGPS,
+        zoom: 18
     });
+    obterLocalAtual()
+}
 
-    new google.maps.Marker({
-        position: posicaoInicial,
+var marcadorAtual = new google.maps.Marker({
+    position: null,
+    map,
+    title: null,
+});
+
+function criarMarcador(pos, map, titulo) {
+    
+    marcadorAtual = new google.maps.Marker({
+        position: pos,
         map,
-        title: "Posição Inicial!"
-      });
-
-    infoWindow = new google.maps.InfoWindow;
-
+        title: titulo
+    });
 }
 
 function obterLocalAtual() {
@@ -29,9 +38,11 @@ function obterLocalAtual() {
                 lng: position.coords.longitude
             };
 
-            infoWindow.setPosition(pos);
             console.log("Posição recebida do navegador: Lat->"+pos.lat+". Lon->"+pos.lng+".")
             map.setCenter(pos);
+
+            addMarker(pos, map, "Localização Atual");
+
             return pos
         },
 
@@ -48,6 +59,7 @@ function obterLocalAtual() {
 
     }
 }
+
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ? 'Erro: Serviço de Geolocalização falhou.' : 'Erro: Seu navegador não oferece suporte a geolocalização.');
@@ -66,7 +78,6 @@ function gravarAtual(){
                 lng: position.coords.longitude
             };
 
-            infoWindow.setPosition(pos);
             console.log("Posição recebida do navegador: Lat->"+pos.lat+". Lon->"+pos.lng+".")
             map.setCenter(pos);
             
@@ -81,7 +92,7 @@ function gravarAtual(){
                 geodesic: true,
                 strokeColor: '#0B00FF',
                 strokeOpacity: 1.0,
-                strokeWeight: 2
+                strokeWeight: 3
               });
         
             Path.setMap(map);
@@ -101,41 +112,23 @@ function gravarAtual(){
 
     }
 }
-//backup...
 
+function addMarker(location, map, titulo) {
+    const marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: titulo
+    });
+    markers.push(marker);
+} // Sets the map on all markers in the array.
 
-function preencherHistoria() {
-    var Coordinates = track
-      var Path = new google.maps.Polyline({
-        path: Coordinates,
-        geodesic: true,
-        strokeColor: '#0B00FF',
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
+function setMapOnAll(map) {
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+} 
 
-      Path.setMap(map);
-}
-
-var Coordinates = [
-    {lat: -23.54628437009063, lng: -46.689233779907234}, 
-    {lat: -23.545733579365486, lng: -46.68884754180908},
-    {lat: -23.545241799982602, lng: -46.68957710266114},
-    {lat: -23.54535982720223, lng: -46.68979167938233},
-    {lat: -23.545989303917665, lng: -46.68981313705445},
-    {lat: -23.546520422552213, lng: -46.690456867218025},
-    {lat: -23.54691384237976, lng: -46.689920425415046},
-    {lat: -23.546677790624496, lng: -46.689555644989014}
-  ];
-
-function teste(Coordinates) {
-      var flightPath = new google.maps.Polyline({
-        path: Coordinates,
-        geodesic: true,
-        strokeColor: '#0B00FF',
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
-
-      flightPath.setMap(map);
-}
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+    setMapOnAll(null);
+} 
