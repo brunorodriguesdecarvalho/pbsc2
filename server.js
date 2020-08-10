@@ -8,8 +8,10 @@ console.log("Express: OK");
 
 //Definição da porta do servidor
 //const http = require('http').Server(app);
-const porta = process.env.PORT || 5500;
+const porta = process.env.PORT || 8926;
 console.log("Servidor - Porta: " + porta)
+
+
 
 //Importa o mongoose para criar os modelos de dados (Schemas) e conectar ao banco
 const mongoose = require('mongoose')
@@ -80,6 +82,15 @@ app.use('/profile', profileRoutes);
 app.use("/img", express.static('img')); 
 app.use("/styles", express.static('styles')); 
 app.use("/src", express.static('src'));
+
+//Disponibiliza chave do GMAPS
+app.get('/yeKsPaMG', (req, res) => {
+    function gmaps() {
+        var gk = process.env.MapsKey
+        res.send(gk)
+    };
+    gmaps()
+});
 
 // Carrega o FileSystem
 let fs = require('fs');
