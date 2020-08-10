@@ -1,22 +1,24 @@
-.localIco1{
-    background-color: #0B00FF;
+
+
+.localIco{
     color: white;
     position: fixed;
-    bottom: 50%;
     right: 0.75em;
     font-size: 1.5rem;
     padding: 0.75rem;
     z-index: +1;
 }
+.localIco1{
+    background-color: #0B00FF;
+    bottom: 50%;
+}
 .localIco2{
     background-color:#FF0002;
-    color: white;
-    position: fixed;
     bottom: 40%;
-    right: 0.75em;
-    font-size: 1.5rem;
-    padding: 0.75rem;
-    z-index: +1;
+}
+.localIco3{
+    background-color:#12A802;
+    bottom: 30%;
 }
 #map {
     height: 100%;
