@@ -1,22 +1,22 @@
 var map, infoWindow;
-var posicaoInicial = {lat: -23.553286, lng: -46.702505};
+var posicaoInicial = {lat: -23.5465491, lng: -46.6909216};
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: posicaoInicial,
-        zoom: 13
+        zoom: 18
     });
+
+    new google.maps.Marker({
+        position: posicaoInicial,
+        map,
+        title: "Posição Inicial!"
+      });
 
     infoWindow = new google.maps.InfoWindow;
 
     //Try HTML5 geolocation.
     obterLocalAtual();
-
-    var marker = new google.maps.Marker({
-        position: posicaoInicial,
-        map: map,
-        title: 'Hello World!'
-    });
 }
 
 function obterLocalAtual() {
@@ -28,10 +28,15 @@ function obterLocalAtual() {
             };
 
             infoWindow.setPosition(pos);
-            console.log("Posição recebida do navegador: Lat->"+ pos.lat+". Lon->"+ pos.lng+".")
-            infoWindow.setContent('Localiazação via Browser Encontrada');
+            console.log("Posição recebida do navegador: Lat->"+pos.lat+". Lon->"+pos.lng+".")
+            infoWindow.setContent("Localiazação via Browser Encontrada. Lat:"+pos.lat+".Lon:"+pos.lng+".");
             infoWindow.open(map);
             map.setCenter(pos);
+            new google.maps.Marker({
+                position: pos,
+                map,
+                title: "Posição Browser!"
+              });
         }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
             console.log("Disparou FUNCTION QUE NÂO DEVIA!!")
@@ -46,9 +51,7 @@ function obterLocalAtual() {
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-                            'Error: The Geolocation service failed.' :
-                            'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.setContent(browserHasGeolocation ? 'Erro: Serviço de Geolocalização falhou.' : 'Erro: Seu navegador não oferece suporte a geolocalização.');
     infoWindow.open(map);
 }
 
