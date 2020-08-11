@@ -2,28 +2,57 @@
 
 .localIco{
     color: white;
-    position: fixed;
-    right: 0.75rem;
     font-size: 1.5rem;
     padding: 0.75rem;
     z-index: +1;
     border-radius: 2rem;
+    text-align: center;
+    cursor: pointer;
 }
 .localIco1{
+    position: fixed;
     background-color: #0B00FF;
     bottom: 50%;
+    right: 0rem;
+    width: 2em;
+    height: 2em;
+    padding: 0.25em;
+    margin: 0.25em;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 .localIco2{
-    background-color:#FF0002;
-    bottom: 40%;
+    position: fixed;
+    background-color:#12A802;
+    bottom: 5%;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%, 0%);
 }
 .localIco3{
-    background-color:#12A802;
-    bottom: 30%;
+    position: fixed;
+    background-color:#FF0002;
+    bottom: 5%;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%, 0%);
 }
 #map {
     height: 100%;
     width: 100%;
+}
+
+#displayContador {
+    position: fixed;
+    top:10%; 
+    width: 100%;
+    padding: 10px;
+    z-index: 1;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    background-color: #000000;
+    color: #ffffff
 }
 
 html, body {

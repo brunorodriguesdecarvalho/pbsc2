@@ -1,16 +1,11 @@
-<a onclick="javascript: obterLocalAtual()">
-    <div class="localIco localIco1 fas" data-toggle="tooltip" title="IR PARA: Meu Local Atual">
-        &#xf05b;
-    </div>
-</a>
-<a onclick="javascript: gravarAtual()">
-    <div class="localIco localIco2 fas" data-toggle="tooltip" title="IR PARA: Teste Oficial">
-        &#xf13d;
-    </div>
-</a>
+<div onclick="javascript: obterLocalAtual()" class="localIco localIco1" data-toggle="tooltip" title="IR PARA: Meu Local Atual">
+    <p class="fas">&#xf05b;</p>
+</div>
 
-<a onclick="javascript: testebackup()">
-    <div class="localIco localIco3 fas" data-toggle="tooltip" title="IR PARA: Mostrar o que foi gravado">
-        &#xf13d;
-    </div>
-</a>
+<div class="fas localIco localIco3" data-toggle="tooltip" title="Encerrar atividade" id="btnAcabarRun">
+    <a onclick="javascript: mostrarBtnIniciar()">Encerrar</a>
+</div>
+
+<div class="localIco localIco2 fas" data-toggle="tooltip" title="Iniciar Corrida" id="btnIniciarRun">
+    <a onclick="javascript: mostrarBtnEncerrar()">Iniciar</a>
+</div>

@@ -1,9 +1,7 @@
-var map, infoWindow;
+var map, infoWindow, marcadorAtual, OnRec, OnTime, tempo = 0;
 var posicaoSemGPS = {lat: -23.5465491, lng: -46.6909216};
-var track = []
-var posicao = {lat: 0, lng: 0}
-var marcadorAtual
-let markers = [];
+var posicao = {lat: 0, lng: 0};
+var track = [], markers = []; 
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -11,21 +9,6 @@ function initMap() {
         zoom: 18
     });
     obterLocalAtual()
-}
-
-var marcadorAtual = new google.maps.Marker({
-    position: null,
-    map,
-    title: null,
-});
-
-function criarMarcador(pos, map, titulo) {
-    
-    marcadorAtual = new google.maps.Marker({
-        position: pos,
-        map,
-        title: titulo
-    });
 }
 
 function obterLocalAtual() {
@@ -80,12 +63,7 @@ function gravarAtual(){
 
             console.log("Posição recebida do navegador: Lat->"+pos.lat+". Lon->"+pos.lng+".")
             map.setCenter(pos);
-            
             track.push(pos)
-            var sizeArray = track.length
-            for (let i=0; i<sizeArray; i++) {
-                console.log(`Imprimindo array[${i}]: ${track[i]}.`)
-            }
 
             var Path = new google.maps.Polyline({
                 path: track,
@@ -93,7 +71,7 @@ function gravarAtual(){
                 strokeColor: '#0B00FF',
                 strokeOpacity: 1.0,
                 strokeWeight: 3
-              });
+            });
         
             Path.setMap(map);
 
@@ -101,19 +79,44 @@ function gravarAtual(){
 
         () => {
             handleLocationError(true, infoWindow, map.getCenter());
-            console.log("Disparou FUNCTION QUE NÂO DEVIA!!")
-        } 
+            alert("Disparou FUNCTION QUE NÂO DEVIA!!")
+        },
+        
+        {enableHighAccuracy: true}
 
     )} else {
-
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
         alert("Não foi possível encontrar a localização atual.")
-
     }
 }
 
+function mostrarBtnEncerrar() {
+    document.getElementById("btnIniciarRun").style = "display: none";
+    document.getElementById("btnAcabarRun").style = "display: fixed";
+    console.log("Iniciando gravação da corrida...")
+    OnRec = setInterval(gravarAtual, 1000)
+    OnTime = setInterval(contagem, 1000)
+    inicializarContador()
+}
+
+function mostrarBtnIniciar() {
+    clearInterval(OnRec)
+    clearInterval(OnTime)
+    inicializarContador()
+    console.log("Encerrando gravação da corrida...")
+    document.getElementById("btnIniciarRun").style = "display: fixed";
+    document.getElementById("btnAcabarRun").style = "display: none";
+    var sizeArray = track.length
+    for (let i=0; i<sizeArray; i++) {
+        console.dir(`Resultado da corrida na parcial do segundo #[${i+1}]: Lat->${track[i].lat} |  Lng->${track[i].lng}.`)
+    }
+}
+
+
 function addMarker(location, map, titulo) {
+    clearMarkers()
+    
     const marker = new google.maps.Marker({
         position: location,
         map: map,
@@ -132,3 +135,26 @@ function setMapOnAll(map) {
 function clearMarkers() {
     setMapOnAll(null);
 } 
+
+function inicializarContador(){
+    document.getElementById("displayContador").innerText=("00:00:00").toString()
+    tempo=0
+}
+
+inicializarContador()
+
+function contagem() {
+    tempo += 1
+    if(tempo<60) {
+        document.getElementById("displayContador").innerText=(tempo+"s").toString()
+    } else if (tempo<3600) {
+        var minuto = Math.floor(tempo / 60)
+        var segundo = Math.floor(tempo % 60)
+        document.getElementById("displayContador").innerText=(minuto+"m"+segundo+"s").toString()
+    } else {
+        var hora = Math.floor(tempo / 60 / 60)
+        var minuto = Math.floor(tempo / 60)
+        var segundo = Math.floor(tempo % 60)
+        document.getElementById("displayContador").innerText=(hora+"h"+minuto+"m"+segundo+"s").toString()
+    }
+}
