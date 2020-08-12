@@ -115,14 +115,14 @@ function gravarDistanciaMom(){
     var lngB = track[tempoAtual].lng
     var distParAtual = distGPS(latA, lngA, latB, lngB)
     distancia += Number((distParAtual).toFixed(3))
-    document.getElementById("displayDist").innerText=(Number(distancia)+"m")
+    document.getElementById("displayDist").innerText=((Number(distancia)).toFixed(3)+"m")
 }
 
 function mostrarBtnIniciar() {
     clearInterval(OnRec)
     clearInterval(OnTime)
     inicializarContador()
-    inicializarDistancia()
+    //inicializarDistancia()
     var Path = new google.maps.Polyline({
         path: [],
         geodesic: true,
