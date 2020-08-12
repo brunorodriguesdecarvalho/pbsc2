@@ -202,6 +202,7 @@ app.get('/run/nova', (req, res) => { res.render('novaCorrida', { user: req.user 
 app.get('/run/best', (req, res) => { res.render('recordesCorridas', { user: req.user } ) } );
 app.get('/run/lista', (req, res) => { res.render('corridas', { user: req.user } ) } );
 app.get('/run/mapa', (req, res) => { res.render('maps', { user: req.user } ) } );
+app.get('/run/gps', (req, res) => { res.render('gpsConverter', { user: req.user } ) } );
 app.get('/corridas', (req, res) => {
     var busca = { $and: [ {userID: ObjectID(req.user._id)} /*, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }*/ ] }
     dbModelRun.find(busca, (err, corridas) => {

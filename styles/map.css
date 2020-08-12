@@ -21,38 +21,82 @@
     font-weight: bold;
     font-size: 1.5em;
 }
-.localIco2{
+
+.localIco2, .localIco3{
     position: fixed;
-    background-color:#12A802;
     bottom: 5%;
     left: 50%;
-    width: 50%;
     transform: translate(-50%, 0%);
+    width: 40%;
+}
+.localIco2{
+    background-color:#12A802;
 }
 .localIco3{
-    position: fixed;
     background-color:#FF0002;
-    bottom: 5%;
-    left: 50%;
-    width: 50%;
-    transform: translate(-50%, 0%);
 }
+
 #map {
     height: 100%;
     width: 100%;
 }
 
-#displayContador {
+.disPlay {
     position: fixed;
-    top:10%; 
+    top:9%; 
     width: 100%;
-    padding: 10px;
-    z-index: 1;
-    font-size: 2em;
+    z-index: 1 !important;
+    background-color: #000000;
+    color: #ffffff;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+.limiteDisplay {
+    max-width: 500px;
+}
+
+@media(min-width: 990px) {
+    .disPlay {
+        top: 12.5%;
+    }
+}
+
+@media(max-height: 569px) {
+    .disPlay {
+        top: 8.5%;
+    }
+}
+@media(min-height: 800px) {
+    .disPlay {
+        top: 6%;
+    }
+}
+@media(min-height: 1100px) {
+    .disPlay {
+        top: 7%;
+    }
+}
+
+
+
+.item {
+    margin-top: 0.7em;
+    margin-left: 0.5em;
+}
+
+.legDisplay {
+    font-size: 0.5em;
+    font-weight: normal;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.txtDisplay {
+    font-size: 1.5em;
     font-weight: bold;
     text-align: center;
-    background-color: #000000;
-    color: #ffffff
 }
 
 html, body {

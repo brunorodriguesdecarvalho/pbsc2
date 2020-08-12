@@ -50,8 +50,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function gravarAtual(){
-    console.log("Gravando localização atual na Array...")
-
     if (navigator.geolocation) {
         
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -61,7 +59,7 @@ function gravarAtual(){
                 lng: position.coords.longitude
             };
 
-            console.log("Posição recebida do navegador: Lat->"+pos.lat+". Lon->"+pos.lng+".")
+            console.log("Posição gravadada agora: Lat->"+pos.lat+". Lon->"+pos.lng+".")
             map.setCenter(pos);
             track.push(pos)
 
@@ -111,6 +109,9 @@ function mostrarBtnIniciar() {
     for (let i=0; i<sizeArray; i++) {
         console.dir(`Resultado da corrida na parcial do segundo #[${i+1}]: Lat->${track[i].lat} |  Lng->${track[i].lng}.`)
     }
+    if (sizeArray > 0) {
+        track = []
+    }
 }
 
 
@@ -137,7 +138,7 @@ function clearMarkers() {
 } 
 
 function inicializarContador(){
-    document.getElementById("displayContador").innerText=("00:00:00").toString()
+    document.getElementById("displayTimer").innerText=("00:00").toString()
     tempo=0
 }
 
@@ -146,15 +147,15 @@ inicializarContador()
 function contagem() {
     tempo += 1
     if(tempo<60) {
-        document.getElementById("displayContador").innerText=(tempo+"s").toString()
+        document.getElementById("displayTimer").innerText=(tempo+"s").toString()
     } else if (tempo<3600) {
         var minuto = Math.floor(tempo / 60)
         var segundo = Math.floor(tempo % 60)
-        document.getElementById("displayContador").innerText=(minuto+"m"+segundo+"s").toString()
+        document.getElementById("displayTimer").innerText=(minuto+"m"+segundo+"s").toString()
     } else {
         var hora = Math.floor(tempo / 60 / 60)
         var minuto = Math.floor(tempo / 60)
         var segundo = Math.floor(tempo % 60)
-        document.getElementById("displayContador").innerText=(hora+"h"+minuto+"m"+segundo+"s").toString()
+        document.getElementById("displayTimer").innerText=(hora+"h"+minuto+"m"+segundo+"s").toString()
     }
 }
