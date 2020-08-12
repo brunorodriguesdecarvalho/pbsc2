@@ -12,7 +12,8 @@ function distGPS(latA, lngA, latB, lngB){
     var a = 0.5 - c((latB - latA) * p)/2 + 
             c(latA * p) * c(latB * p) * 
             (1 - c((lngB - lngA) * p))/2;
-    var dist = (12742 * 1000 * Math.asin(Math.sqrt(a))).toFixed(3)
+    var dist = Number((12742 * Math.asin(Math.sqrt(a))).toFixed(3))
+    console.log("distancia atual: " +dist)
     return dist
 }
 

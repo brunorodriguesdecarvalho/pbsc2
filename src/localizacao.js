@@ -114,8 +114,13 @@ function gravarDistanciaMom(){
     var latB = track[tempoAtual].lat
     var lngB = track[tempoAtual].lng
     var distParAtual = distGPS(latA, lngA, latB, lngB)
-    distancia += Number(distParAtual)
-    document.getElementById("displayDist").innerText=distancia
+    distancia += Number((distParAtual).toFixed(3))
+    if(distancia<1000) {
+        document.getElementById("displayDist").innerText=(Number(distancia)+"m")
+    } else {
+        document.getElementById("displayDist").innerText=((Number(distancia/1000)).toFixed(3)+"m")
+    }
+    
 }
 
 function mostrarBtnIniciar() {
@@ -128,7 +133,7 @@ function mostrarBtnIniciar() {
     document.getElementById("btnAcabarRun").style = "display: none";
     var sizeArray = track.length
     for (let i=0; i<sizeArray; i++) {
-        alert(`Resultado da corrida na parcial do segundo #[${i+1}]: Lat->${track[i].lat} |  Lng->${track[i].lng}.`)
+        console.log(`Resultado da corrida na parcial do segundo #[${i+1}]: Lat->${track[i].lat} |  Lng->${track[i].lng}.`)
     }
     if (sizeArray > 0) {
         track = []
