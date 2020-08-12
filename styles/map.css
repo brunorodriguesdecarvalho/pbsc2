@@ -3,11 +3,13 @@
 .localIco{
     color: white;
     font-size: 1.5rem;
-    padding: 0.75rem;
     z-index: +1;
     border-radius: 2rem;
     text-align: center;
     cursor: pointer;
+    font-weight: bold;
+    padding: 0.25em;
+    margin: 0.25em;
 }
 .localIco1{
     position: fixed;
@@ -16,10 +18,7 @@
     right: 0rem;
     width: 2em;
     height: 2em;
-    padding: 0.25em;
-    margin: 0.25em;
-    font-weight: bold;
-    font-size: 1.5em;
+    
 }
 
 .localIco2, .localIco3{

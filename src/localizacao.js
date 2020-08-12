@@ -2,6 +2,7 @@ var map, infoWindow, marcadorAtual, OnRec, OnTime, OnDist, distancia=0, tempo = 
 var posicaoSemGPS = {lat: -23.5465491, lng: -46.6909216};
 var posicao = {lat: 0, lng: 0};
 var track = [], markers = []; 
+var Path 
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -63,7 +64,7 @@ function gravarAtual(){
             map.setCenter(pos);
             track.push(pos)
 
-            var Path = new google.maps.Polyline({
+            Path = new google.maps.Polyline({
                 path: track,
                 geodesic: true,
                 strokeColor: '#0B00FF',
@@ -115,16 +116,16 @@ function gravarDistanciaMom(){
     var lngB = track[tempoAtual].lng
     var distParAtual = distGPS(latA, lngA, latB, lngB)
     distancia += Number((distParAtual).toFixed(3))
-    document.getElementById("displayDist").innerText=((Number(distancia)).toFixed(3)+"m")
+    document.getElementById("displayDist").innerText=((Number(distancia)).toFixed(3)+"K")
 }
 
 function mostrarBtnIniciar() {
     clearInterval(OnRec)
     clearInterval(OnTime)
     inicializarContador()
-    alert("Distância Percorrida: " + distancia)
+    console.log("Distância Percorrida: " + distancia)
+    Path.setMap(map);
     inicializarDistancia()
-    flightPath.setMap(null)
     console.log("Encerrando gravação da corrida...")
     document.getElementById("btnIniciarRun").style = "display: fixed";
     document.getElementById("btnAcabarRun").style = "display: none";
@@ -170,6 +171,7 @@ inicializarContador()
 function inicializarDistancia(){
     document.getElementById("displayDist").innerText=("0.000").toString()
     distancia=0
+    track = []
 }
 
 inicializarDistancia()
