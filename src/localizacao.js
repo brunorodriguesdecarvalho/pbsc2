@@ -1,4 +1,4 @@
-var map, infoWindow, marcadorAtual, OnRec, OnTime, tempo = 0;
+var map, infoWindow, marcadorAtual, OnRec, OnTime, OnDist, distancia=0, tempo = 0;
 var posicaoSemGPS = {lat: -23.5465491, lng: -46.6909216};
 var posicao = {lat: 0, lng: 0};
 var track = [], markers = []; 
@@ -73,6 +73,8 @@ function gravarAtual(){
         
             Path.setMap(map);
 
+            gravarDistanciaMom()
+
         },
 
         () => {
@@ -95,13 +97,32 @@ function mostrarBtnEncerrar() {
     console.log("Iniciando gravação da corrida...")
     OnRec = setInterval(gravarAtual, 1000)
     OnTime = setInterval(contagem, 1000)
-    inicializarContador()
+}
+
+function gravarDistanciaMom(){
+    var tempoAnterior = (track.length) - 2
+    var tempoAtual = (track.length) - 1
+    var latA
+    var lngA
+    if(tempoAtual == 0) {
+        latA = track[tempoAtual].lat
+        lngA = track[tempoAtual].lng
+    } else {
+        latA = track[tempoAnterior].lat
+        lngA = track[tempoAnterior].lng
+    }
+    var latB = track[tempoAtual].lat
+    var lngB = track[tempoAtual].lng
+    var distParAtual = distGPS(latA, lngA, latB, lngB)
+    distancia += Number(distParAtual)
+    document.getElementById("displayDist").innerText=distancia
 }
 
 function mostrarBtnIniciar() {
     clearInterval(OnRec)
     clearInterval(OnTime)
     inicializarContador()
+    inicializarDistancia()
     console.log("Encerrando gravação da corrida...")
     document.getElementById("btnIniciarRun").style = "display: fixed";
     document.getElementById("btnAcabarRun").style = "display: none";
@@ -143,6 +164,13 @@ function inicializarContador(){
 }
 
 inicializarContador()
+
+function inicializarDistancia(){
+    document.getElementById("displayDist").innerText=("0.000").toString()
+    distancia=0
+}
+
+inicializarDistancia()
 
 function contagem() {
     tempo += 1

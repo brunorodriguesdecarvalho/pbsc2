@@ -6,18 +6,28 @@
     </head>
     <body style="padding:2em">
         <%- include('nav') %>
-        <br><br><br><br><br>
+        <br><br>
         Posição A:<br>
-        Latitude: <input type="text" id="latA"> <br>
-        Longitude: <input type="text" id="lngA"> <br>
+        Latitude: <input type="text" id="latA" value="-23.5461664"> <br>
+        Longitude: <input type="text" id="lngA" value="-46.6892627"> <br>
         <br><br>
         Posição B:<br>
-        Latitude: <input type="text" id="latB"> <br>
-        Longitude: <input type="text" id="lngB"> <br>
+        Latitude: <input type="text" id="latB" value="-23.5462819"> <br>
+        Longitude: <input type="text" id="lngB" value="-46.6899743"> <br>
         <br><br>
-        <input type="button" value="Calcular" onclick="calcular()">
+        <input type="button" value="Calcular" onclick="calcularDistancia()">
         <br><br>
         Resultado: <input type="text" id="res"> <br>
+        <br>
+        <hr>
+        <br>
+        Calculadora de velocidade....<br>
+        Distância (metros): <input type="number" id="distancia" value="0"> <br>
+        Tempo (segundos): <input type="number" id="tempo" value="1"> <br>
+        <input type="button" value="Calcular" onclick="calcularVelocidade()">
+        <br><br>
+        Resultado(m/s): <input type="number" id="velMS"> <br>
+        Resultado(Km/h): <input type="number" id="velKmH"> <br>
     </body>
     <%- include('scripts'); %>
     <script src="../src/calcularDistGPS.js"></script>
