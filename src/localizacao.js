@@ -122,14 +122,9 @@ function mostrarBtnIniciar() {
     clearInterval(OnRec)
     clearInterval(OnTime)
     inicializarContador()
-    //inicializarDistancia()
-    var Path = new google.maps.Polyline({
-        path: [],
-        geodesic: true,
-        strokeColor: '#0B00FF',
-        strokeOpacity: 1.0,
-        strokeWeight: 3
-    });
+    alert("Distância Percorrida: " + distancia)
+    inicializarDistancia()
+    flightPath.setMap(null)
     console.log("Encerrando gravação da corrida...")
     document.getElementById("btnIniciarRun").style = "display: fixed";
     document.getElementById("btnAcabarRun").style = "display: none";
