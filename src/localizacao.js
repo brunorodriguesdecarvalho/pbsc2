@@ -124,6 +124,7 @@ function mostrarBtnIniciar() {
     clearInterval(OnTime)
     inicializarContador()
     console.log("Distância Percorrida: " + distancia)
+    Path.setMap(null)
     inicializarDistancia()
     console.log("Encerrando gravação da corrida...")
     document.getElementById("btnIniciarRun").style = "display: fixed";
@@ -170,8 +171,6 @@ inicializarContador()
 function inicializarDistancia(){
     document.getElementById("displayDist").innerText=("0.000").toString()
     distancia=0
-    track = []
-    Path.setMap(null)
 }
 
 inicializarDistancia()
