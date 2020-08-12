@@ -4,9 +4,21 @@
         <%- include('meta') %>
         <title>Calculadora de Distância</title>
     </head>
-    <body>
+    <body style="padding:2em">
         <%- include('nav') %>
-        Testando e provando...
+        <br><br><br><br><br>
+        Posição A:<br>
+        Latitude: <input type="text" id="latA"> <br>
+        Longitude: <input type="text" id="lngA"> <br>
+        <br><br>
+        Posição B:<br>
+        Latitude: <input type="text" id="latB"> <br>
+        Longitude: <input type="text" id="lngB"> <br>
+        <br><br>
+        <input type="button" value="Calcular" onclick="calcular()">
+        <br><br>
+        Resultado: <input type="text" id="res"> <br>
     </body>
     <%- include('scripts'); %>
+    <script src="../src/calcularDistGPS.js"></script>
 </html>

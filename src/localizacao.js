@@ -107,7 +107,7 @@ function mostrarBtnIniciar() {
     document.getElementById("btnAcabarRun").style = "display: none";
     var sizeArray = track.length
     for (let i=0; i<sizeArray; i++) {
-        console.dir(`Resultado da corrida na parcial do segundo #[${i+1}]: Lat->${track[i].lat} |  Lng->${track[i].lng}.`)
+        alert(`Resultado da corrida na parcial do segundo #[${i+1}]: Lat->${track[i].lat} |  Lng->${track[i].lng}.`)
     }
     if (sizeArray > 0) {
         track = []
