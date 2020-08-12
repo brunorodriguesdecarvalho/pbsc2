@@ -115,12 +115,7 @@ function gravarDistanciaMom(){
     var lngB = track[tempoAtual].lng
     var distParAtual = distGPS(latA, lngA, latB, lngB)
     distancia += Number((distParAtual).toFixed(3))
-    if(distancia<1000) {
-        document.getElementById("displayDist").innerText=(Number(distancia)+"m")
-    } else {
-        document.getElementById("displayDist").innerText=((Number(distancia/1000)).toFixed(3)+"m")
-    }
-    
+    document.getElementById("displayDist").innerText=(Number(distancia)+"m")
 }
 
 function mostrarBtnIniciar() {
