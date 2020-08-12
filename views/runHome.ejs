@@ -10,7 +10,10 @@
     
         <br><br><br>
         <header class="container mt-5">
-            <h1>Olá <%= user.username %></h1>
+            <h1>
+                <img src="<%=user.thumbnail%>" width="75rem" height="75rem" class="rounded-circle nav-item">
+                Olá <%= user.username %>
+            </h1>
             <hr>
             <h2>Escolha uma das opções</h2>
         </header>

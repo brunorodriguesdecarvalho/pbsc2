@@ -155,3 +155,45 @@ ul {
         margin-top: 160px;
     }
 }
+
+.bgBtnMain{
+    background-color: #000000;
+}
+.bgBtnMain1:hover{
+    background-color: #FF0002;
+}
+.bgBtnMain2:hover{
+    background-color: #0B00FF;
+}
+
+.hoverBtnMain {
+    color: #ffffff;
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+
+.hoverBtnMain:hover, .hoverBtnMain::after, .hoverBtnMain:visited, .hoverBtnMain:focus {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.txtHome, .iconHome, .txtHome:hover, .iconHome:hover {
+    font-weight: bold;
+}
+
+.hoverBtnMain > .iconHome {
+    padding: 0.25em;
+    border-radius: 5em;
+    width: 1.5em;
+    height: 1.5em;
+    font-weight: bold;
+}
+
+.hoverBtnMain:hover > .iconHome {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.hoverBtnMain:hover > .txtHome {
+    font-weight: bold;
+}

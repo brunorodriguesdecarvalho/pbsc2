@@ -1,53 +1,67 @@
-<div class="grid mx-3">
-    <div class="row">
-        <div class="col bg-dark text-white h5 p-2 rounded">Planejamento</div>
+<div id="accordion">
+    <div class="card rounded-lg">
+      <div class="card-header rounded-lg bgBtnMain bgBtnMain1 h5 p-2" id="headingOne">
+        <h5 class="mb-0">
+          <button 
+            class="btn btn-link hoverBtnMain" 
+            data-toggle="collapse" 
+            data-target="#collapseOne" 
+            aria-expanded="false" 
+            aria-controls="collapseOne"
+          >
+            <i class='fas iconHome'>&#xf073;</i>
+            <span class="txtHome">PLANEJAMENTO</span>
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+            <div class="row text-center">
+                <div class="col">
+                    <a href="/ativ/nova" class="link">
+                        <img src="../img/startup-vector-free-icon-set-25.png" class="icoHome">
+                        <br>
+                        <span class="legico">Criar Atividades</span>
+                    </a>                
+                </div>
+                <div class="col">
+                    <a href="/ini/nova" class="link">
+                        <img src="../img/project-management-vector-free-icons-set--22.png" class="icoHome">
+                        <br>
+                        <span class="legico">Criar Iniciativas</span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="/obj/nova" class="link"> 
+                        <img src="../img/project-management-vector-free-icons-set--31.png" class="icoHome">
+                        <br>
+                       <span class="legico">Criar Objetivos</span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="/ativ" class="link">
+                        <img src="../img/business-vector-free-icon-set-39.png" class="icoHome">
+                        <br>
+                        <span class="legico">Ver Atividades</span>
+                    </a>                
+                </div>
+                <div class="col">
+                    <a href="/ini" class="link">
+                        <img src="../img/strategy-vector-free-icons-set-21.png" class="icoHome">
+                        <br>
+                        <span class="legico">Ver Iniciativas</span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="/obj" class="link">
+                        <img src="../img/startup-vector-free-icon-set-30.png" class="icoHome">
+                        <br>
+                        <span>Ver Objetivos</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
-    <div class="row text-center">
-        <div class="col-4">
-            <a href="/ativ/nova" class="link">
-                <img src="../img/startup-vector-free-icon-set-25.png" class="icoHome">
-                <br>
-                <span class="legico">Criar Atividades</span>
-            </a>                
-        </div>
-        <div class="col-4">
-            <a href="/ini/nova" class="link">
-                <img src="../img/project-management-vector-free-icons-set--22.png" class="icoHome">
-                <br>
-                <span class="legico">Criar Iniciativas</span>
-            </a>
-        </div>
-        <div class="col-4">
-            <a href="/obj/nova" class="link"> 
-                <img src="../img/project-management-vector-free-icons-set--31.png" class="icoHome">
-                <br>
-               <span class="legico">Criar Objetivos</span>
-            </a>
-        </div>
-    </div>
-
-    <div class="row text-center">
-        <div class="col-4">
-            <a href="/ativ" class="link">
-                <img src="../img/business-vector-free-icon-set-39.png" class="icoHome">
-                <br>
-                <span class="legico">Ver Atividades</span>
-            </a>                
-        </div>
-        <div class="col-4">
-            <a href="/ini" class="link">
-                <img src="../img/strategy-vector-free-icons-set-21.png" class="icoHome">
-                <br>
-                <span class="legico">Ver Iniciativas</span>
-            </a>
-        </div>
-        <div class="col-4">
-            <a href="/obj" class="link">
-                <img src="../img/startup-vector-free-icon-set-30.png" class="icoHome">
-                <br>
-                <span>Ver Objetivos</span>
-            </a>
-        </div>
-    </div>
-
 </div>
