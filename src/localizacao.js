@@ -128,6 +128,13 @@ function mostrarBtnIniciar() {
     clearInterval(OnTime)
     inicializarContador()
     inicializarDistancia()
+    var Path = new google.maps.Polyline({
+        path: [],
+        geodesic: true,
+        strokeColor: '#0B00FF',
+        strokeOpacity: 1.0,
+        strokeWeight: 3
+    });
     console.log("Encerrando gravação da corrida...")
     document.getElementById("btnIniciarRun").style = "display: fixed";
     document.getElementById("btnAcabarRun").style = "display: none";
