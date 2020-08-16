@@ -813,6 +813,27 @@ app.post('/atividades', (req, res) => {
     var ativSalvo = atividades.save()
     console.log('Nova atividade salva no MongoDB.')
 })
+app.post('/atividades/alterarPrazo', (req, res) => {
+    var atividades = new dbModelAtiv(req.body)
+    console.log('Recebido no servidor:')
+    console.log('ID da atividade: ' + atividades._id)
+    console.log('Novo Prazo: ' + atividades.ativDataFim)
+    MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        if (err) throw err
+        else {
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(atividades._id) }
+            var novoPrazo = { $set: {ativDataFim: atividades.ativDataFim } };
+            dbo.collection("collativs").updateOne(busca, novoPrazo, function(err, res) {
+                if (err) throw err
+                else {
+                    console.log("ID " + atividades._id + " atualizada! ", res)
+                }
+                dbpbsc.close()
+            })
+        }
+    })
+})
 app.post('/iniciativas', (req, res) => {
     var iniciativas = new dbModelIni(req.body)
     var ativSalvo = iniciativas.save()

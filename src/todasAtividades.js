@@ -90,80 +90,79 @@ function listarAtividades(atividades){
                         </div>
 
                         <div class="card-body cartao pb-0" style="display:none" id="cardBody${atividades._id}">
-                        <p id="Stat-${atividades.ativStat}" data-value="${atividades.ativStat}">
-                            <strong>Status: </strong>${atividades.ativStat}<br>
-                            <strong>Iniciativa Associada: </strong>${atividades.ativIni}<br>
-                            <strong>Prazo: </strong>${dataPrazoAjustada}<br>
-                            <strong>Criação: </strong>${dataCriacaoAjustada}<br>
-                            <strong>Descrição: </strong>${atividades.ativDesc}<br>
-                            <strong>Motivação: </strong>${atividades.ativMot}<br>
-                            <strong>Riscos: </strong>${atividades.ativRisk}<br>
-                            
-                            <i style="display: none">
-                                <strong>ID Atividade: </strong>${atividades._id}<br>
-                                <strong>ID Usuário: </strong>${atividades.userID}<br>
-                            </i>
+                            <p id="Stat-${atividades.ativStat}" data-value="${atividades.ativStat}">
+                                <strong>Status: </strong>${atividades.ativStat}<br>
+                                <strong>Iniciativa Associada: </strong>${atividades.ativIni}<br>
+                                <strong>Prazo: </strong>${dataPrazoAjustada}<br>
+                                <strong>Criação: </strong>${dataCriacaoAjustada}<br>
+                                <strong>Descrição: </strong>${atividades.ativDesc}<br>
+                                <strong>Motivação: </strong>${atividades.ativMot}<br>
+                                <strong>Riscos: </strong>${atividades.ativRisk}<br>
+                                
+                                <i style="display: none">
+                                    <strong>ID Atividade: </strong>${atividades._id}<br>
+                                    <strong>ID Usuário: </strong>${atividades.userID}<br>
+                                </i>
 
-                            
-
-                            <a  href="#!" 
-                                onclick="javascript: excluirAtividade('${atividades._id}')" 
-                                class="bg-danger text-white botao"
-                                style="text-decoration: none;"
-                            >
-                                <span class="fas">
-                                    &#xf12d;&nbsp;<strong>Excluir</strong>
-                                </span>
-                            </a>
-                            
-                            <a  href="#!" 
-                                onclick="javascript: andarAtividade('${atividades._id}')" 
-                                class="bg-success text-white botao"
-                                style="text-decoration: none;"
-                            >
-                                <span class="fas">
-                                    &#xf04b;&nbsp;<strong>Iniciar</strong>
-                                </span>
-                            </a>
-
-                            <a  href="#!" 
-                                onclick="javascript: concluirAtividade('${atividades._id}')" 
-                                class="bg-primary text-white botao"
-                                style="text-decoration: none;"
-                            >
-                                <span class="fas">
-                                    &#xf058;&nbsp;<strong>Concluir</strong>
-                                </span>
-                            </a>
-
-                            <a  href="#!" 
-                                class="bg-dark text-white botao" 
-                                onclick="javascript: editar('${atividades._id}')"
-                                style="text-decoration: none;"
-                            >
-                                <span class="fas">
-                                    &#xf044;&nbsp;<strong>Editar</strong>
-                                </span>
-                            </a>
-                        </p>
+                                <div class="row">
+                                    <div class="col bg-danger botao">
+                                        <a  href="#!" 
+                                            onclick="javascript: excluirAtividade('${atividades._id}')" 
+                                            class="text-white"
+                                            style="text-decoration: none;"
+                                        >
+                                            <span class="fas">
+                                                &#xf12d;&nbsp;<strong>Excluir</strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col bg-success botao">
+                                        <a  href="#!" 
+                                            onclick="javascript: andarAtividade('${atividades._id}')" 
+                                            class="text-white"
+                                            style="text-decoration: none;"
+                                        >
+                                            <span class="fas">
+                                                &#xf04b;&nbsp;<strong>Iniciar</strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col bg-primary botao">
+                                        <a  href="#!" 
+                                            onclick="javascript: concluirAtividade('${atividades._id}')" 
+                                            class="text-white"
+                                            style="text-decoration: none;"
+                                        >
+                                            <span class="fas">
+                                                &#xf058;&nbsp;<strong>Concluir</strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col bg-dark botao">
+                                        <a  href="#!" 
+                                            class="text-white" 
+                                            onclick="javascript: alterarPrazo('${atividades._id}')"
+                                            style="text-decoration: none;"
+                                        >
+                                            <span class="fas">
+                                                &#xf044;&nbsp;<strong>Alterar Prazo</strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row text-danger" id="novoPrazoDiv_${atividades._id}"></div>   
+                            </p>
+                        </div>
                     </div>
-
-                    </div>
-                    
-                    
                 </div>
             </div>
 
-            
-
             <script>  
-    
                 var valorStat = document.getElementById("Stat-${atividades.ativStat}").getAttribute("data-value");
                 var id = document.getElementById('bola-${atividades._id}')
                 colorirStatus(valorStat, id)
-    
             </script>
     `)
 
-
+ 
 }
