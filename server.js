@@ -658,7 +658,7 @@ app.get('/ragstatus', (req, res) => {
     })
 })
 app.get('/listIni', (req, res) => {
-    var busca = { userID: ObjectID(req.user._id) }
+    var busca = { $and: [ {userID: ObjectID(req.user._id)} , { $and: [ { iniStat: { $not: { $regex: "^3 - Concluído.*" } } }, { iniStat: { $not: { $regex: "^4 - Cancelado.*" } } } ] } ] }
     var MongoClient = require('mongodb').MongoClient;
     MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
         if (err) throw err;
@@ -672,7 +672,7 @@ app.get('/listIni', (req, res) => {
     })
 })
 app.get('/listObj', (req, res) => {
-    var busca = { userID: ObjectID(req.user._id) }
+    var busca = { $and: [ {userID: ObjectID(req.user._id)} , { $and: [ { objStat: { $not: { $regex: "^3 - Concluído.*" } } }, { objStat: { $not: { $regex: "^4 - Cancelado.*" } } } ] } ] }
     var MongoClient = require('mongodb').MongoClient;
     MongoClient.connect(process.env.mongodbURI, { useUnifiedTopology: true }, function (err, dbpbsc) {
         if (err) throw err;
