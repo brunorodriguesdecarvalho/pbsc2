@@ -6,8 +6,28 @@
     </head>
     <body>
         <%- include('nav'); %>
-        <main class="container">
-            <div class="row mgresp" id="Ativ"></div>
+        <main class="container mt-5">
+            <br><br>
+            <p class="mt-4">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseConcluido" aria-expanded="false" aria-controls="collapseConcluido">
+                    Exibir Atividades Encerradas
+                </button>
+            </p>
+            <div class="collapse" id="collapseConcluido">
+                <div class="card card-body">
+                    <div class="row" id="AtivCompl"></div>
+                </div>
+            </div>
+            <p class="mt-4">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseDemais" aria-expanded="false" aria-controls="collapseDemais">
+                    Exibir Demais Atividades
+                </button>
+            </p>
+            <div class="collapse" id="collapseDemais">
+                <div class="card card-body">
+                    <div class="row" id="Ativ"></div>
+                </div>
+            </div>
         </main>
     </body>
     <%- include('scripts'); %>

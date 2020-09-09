@@ -7,10 +7,28 @@
     </head>
     <body>
         <%- include('nav'); %>
-        <main class="container">
-            <section>
-                <div class="row mgresp" id="Ini"></div>
-            </section>
+        <main class="container mt-5">
+            <br><br>
+            <p class="mt-4">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseConcluido" aria-expanded="false" aria-controls="collapseConcluido">
+                    Exibir Iniciativas Encerradas
+                </button>
+            </p>
+            <div class="collapse" id="collapseConcluido">
+                <div class="card card-body">
+                    <div class="row" id="IniCompl"></div>
+                </div>
+            </div>
+            <p class="mt-4">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseDemais" aria-expanded="false" aria-controls="collapseDemais">
+                    Exibir Demais Iniciativas
+                </button>
+            </p>
+            <div class="collapse" id="collapseDemais">
+                <div class="card card-body">
+                    <div class="row" id="Ini"></div>
+                </div>
+            </div>
         </main>
     </body>
     <%- include('scripts'); %>
