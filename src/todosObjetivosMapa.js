@@ -63,8 +63,8 @@ consulta("atividades")
 
 function listarObjetivos(resultado){
     var a = `
-        <div class="row border border-primary py-1 mx-0 align-items-center justify-items-center" id="${resultado._id}" data-value="${resultado._id}">
-            <div class="border-dark px-0 mx-1">
+        <div class="row border border-dark py-1 px-0 mx-0 align-items-center justify-items-center" id="${resultado._id}" data-value="${resultado._id}">
+            <div class="px-0 mx-1">
                 <div class="text-center bola2" id="bola-${resultado._id}"></div>
             </div>
             <div class="col-2 px-0">
@@ -103,7 +103,7 @@ function listarObjetivos(resultado){
     }
 
     var nomeDestino = "ini_" + `${resultado._id}`
-    var b = `<div class="col-9 px-0 border border-danger"id=` + nomeDestino + `></div>`
+    var b = `<div class="col px-0"id=` + nomeDestino + `></div>`
     var id = "#" + resultado._id
     $(id).append(b)
 }
@@ -111,11 +111,11 @@ function listarObjetivos(resultado){
 
 function listarIniciativas(iniciativas){ 
     var a = `
-    <div class="row border border-primary py-1 mx-0 align-items-center justify-items-center" id="${iniciativas._id}" data-value="${iniciativas._id}">
-        <div class="border-dark px-0 mx-1">
+    <div class="row border border-dark py-1 px-0 mx-0 align-items-center justify-items-center" id="${iniciativas._id}" data-value="${iniciativas._id}">
+        <div class="px-0 mx-1">
             <div class="text-center bola2" id="bola-${iniciativas._id}"></div>
         </div>
-        <div class="col-5 px-0">
+        <div class="col-3 px-0">
             <div>
                 <div class="pr-1 align-items-center">
                     <span>${iniciativas.iniNome}</span>
@@ -136,7 +136,7 @@ function listarIniciativas(iniciativas){
     $(endObj).append(a)
 
     var nomeDestino = "ativ_" + `${iniciativas._id}`
-    var b = `<div class="col-6 px-0 border border-danger"id=` + nomeDestino + `></div>`
+    var b = `<div class="col px-0"id=` + nomeDestino + `></div>`
     var id = "#" + iniciativas._id
     $(id).append(b)
 }
@@ -144,8 +144,8 @@ function listarIniciativas(iniciativas){
 
 function listarAtividades(atividades){ 
     var a = `
-        <div class="row border border-primary py-1 mx-0 align-items-center justify-items-center" id="${atividades._id}" data-value="${atividades._id}">
-            <div class="border-dark px-0 mx-1">
+        <div class="row border border-dark py-1 mx-0 align-items-center justify-items-center" id="${atividades._id}" data-value="${atividades._id}">
+            <div class="px-0 mx-1">
                 <div class="text-center bola2" id="bola-${atividades._id}"></div>
             </div>
             <div class="col px-0">
@@ -157,7 +157,7 @@ function listarAtividades(atividades){
                         <p id="Stat-${atividades.ativStat}" data-value="${atividades.ativStat}"></p>
                     </div>
                 </div>
-            </div>  
+            </div>   
         </div>
         <script>  
             var valorStat = document.getElementById("Stat-${atividades.ativStat}").getAttribute("data-value");
