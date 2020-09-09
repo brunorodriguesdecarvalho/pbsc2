@@ -195,6 +195,7 @@ app.get('/ini/', (req, res) => { res.render('iniciativas', { user: req.user } ) 
 app.get('/ini/nova', (req, res) => { res.render('novaIniciativa', { user: req.user } ) } );
 app.get('/obj/', (req, res) => { res.render('objetivos', { user: req.user } ) } );
 app.get('/obj/nova', (req, res) => { res.render('novoObjetivo', { user: req.user } ) } );
+app.get('/map', (req, res) => { res.render('strategymap', { user: req.user } ) } );
 app.get('/alim/', (req, res) => { res.render('alimHome', { user: req.user } ) } );
 app.get('/gym/', (req, res) => { res.render('gymHome', { user: req.user } ) } );
 app.get('/run/', (req, res) => { res.render('runHome', { user: req.user } ) } );
@@ -700,6 +701,7 @@ var dbModelAtiv = mongoose.model('collativs', {
     ativDataCria: Date,
     ativDataFim: Date,
     userID: ObjectID,
+    ativIniID: ObjectID,
 })
 var dbModelIni = mongoose.model('collinis', {
     iniNome: String,
@@ -711,6 +713,7 @@ var dbModelIni = mongoose.model('collinis', {
     iniDataCria: Date,
     iniDataFim: Date,
     userID: ObjectID,
+    iniObjID: ObjectID
 })
 var dbModelObj = mongoose.model('collobjs', {
     objNome: String,
@@ -721,7 +724,7 @@ var dbModelObj = mongoose.model('collobjs', {
     objRisk: String,
     objDataCria: Date,
     objDataFim: Date,
-    userID: ObjectID,
+    userID: ObjectID
 })
 var ObjetoCorrida = {
     DistanciaTotal: Number,

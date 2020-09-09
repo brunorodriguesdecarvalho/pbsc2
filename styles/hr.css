@@ -34,6 +34,14 @@ h3 {
     border-radius: 40px;
     display: float;
 }
+.bola2 {
+    font-size: 0.75em;
+    text-align: center;
+    height: 1.8em;
+    width: 1.8em;
+    line-height: 1.8em;
+    border-radius: 1.8em;
+}
 
 .icobola {
     font-size: 1.25em;

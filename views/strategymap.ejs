@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('meta'); %>
+        <title>Mapa Estratégico</title>    
+    </head>
+    <body>
+        <%- include('nav'); %>
+        <br><br><br>
+        <header class="container mt-5">
+            <h1>
+                Mapa Estratégico
+            </h1>
+            <hr>
+        </header>
+        <main class="container">
+          <div class="row" id="corpoTabela">
+            <div class="col-12 px-0 py-2" id="Fisica">
+              <strong>Saúde Física</strong>
+              <div class="col-12 pl-2 pr-0" id="Fis"></div>
+            </div>
+            <div class="col-12 px-0 py-2" id="Emocional">
+              <strong>Saúde Emocional</strong>
+              <div class="col-12 px-0" id="Emo"></div>
+            </div>
+            <div class="col-12 px-0 py-2" id="Espiritual">
+              <strong>Saúde Espiritual</strong>
+              <div class="col-12 px-0" id="Esp"></div>
+            </div>
+            <div class="col-12 px-0 py-2" id="Social">
+              <strong>Saúde Social</strong>
+              <div class="col-12 px-0" id="Soc"></div>
+            </div>
+            <div class="col-12 px-0 px-0 py-2" id="Intelectual">
+              <strong>Saúde Intelectual</strong>
+              <div class="col-12 px-0" id="Int"></div>
+            </div>
+            <div class="col-12 px-0 py-2" id="Profissional">
+              <strong>Saúde Profissional</strong>
+              <div class="col-12 px-0" id="Pro"></div>
+            </div>
+            <div class="col-12 px-0 py-2" id="Financeira">
+              <strong>Saúde Financeira</strong>
+              <div class="col-12 px-0" id="Fin"></div>
+            </div>
+            <div class="row" id="Outros">
+              <div class="col-3 font-weight-bold">Outros</div>
+              <div class="col-3" id="Obj"></div>
+              <div class="col-3" id="Ini"></div>
+              <div class="col-3" id="Ativ"></div>
+            </div>
+          </div>           
+        </main>
+    </body>
+    <%- include('scripts'); %>
+    <script src="../src/todosObjetivosMapa.js" type="text/javascript"></script>
+    <script src="../src/botao_excluir.js" type="text/javascript"></script>
+    <script src="../src/botao_concluir.js" type="text/javascript"></script>
+    <script src="../src/botao_andamento.js" type="text/javascript"></script>
+    <script src="../src/emconstrucao.js" type="text/javascript"></script>
+    <script src="../src/expandirCard.js" type="text/javascript"></script>
+    <script src="../src/colorirStatus.js" type="text/javascript"></script>
+    <script src="../src/ajustaDataBr.js" type="text/javascript"></script>
+</html> 
