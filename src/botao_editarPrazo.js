@@ -1,6 +1,7 @@
-function alterarPrazo(idAtividade) {
-    const chaveDiv = "novoPrazoDiv_" + idAtividade
-    const chaveInput = "novoPrazoInput_" + idAtividade
+function alterarPrazo(ID, tipoItem) {
+    const chaveDiv = "novoPrazoDiv_" + ID
+    const chaveInput = "novoPrazoInput_" + ID
+    console.log("tipo do item: " + tipoItem)
     document.getElementById(chaveDiv).innerHTML = `
         <div class="row">
             <div class="col"> 
@@ -10,26 +11,46 @@ function alterarPrazo(idAtividade) {
                 <input type='datetime-local' id=${chaveInput}>
             </div>
             <div class="col">
-                <button onclick="gravarNovoPrazo('${idAtividade}', '${chaveInput}')">Alterar!</button>
+                <button onclick="gravarNovoPrazo('${ID}', '${chaveInput}', '${tipoItem}')">Alterar!</button>
             </div>
         </div>
     `
 }
 
-function gravarNovoPrazo(chaveAtividade, chaveData){
+function gravarNovoPrazo(ID, chaveData, tipoItem){
     console.log("chave Data: " + chaveData)
+    console.log("chegou para gavar: " + tipoItem)
     var novaData = $("#"+chaveData).val()
     var prazoAjustado  = ajustaDataBr(novaData)
-    console.log("ID da atividade:" + chaveAtividade + ". Nova prazo ajustado: " + prazoAjustado + ".")
-    var atividades = {
-        _id : chaveAtividade,
-        ativDataFim : prazoAjustado
+    console.log("ID do item:" + ID + ". Nova prazo ajustado: " + prazoAjustado + ".")
+    if (tipoItem == 'Atividade') {
+        console.log("entrou no if do atividade")
+        var atividades = {
+            _id : ID,
+            ativDataFim : prazoAjustado
+        }
+        $.post('/atividades/alterarPrazo', atividades)
+        alert("Alterando prazo, por favor aguarde...")
+        setTimeout(function() {location.reload()}, 4000)
+    } else if (tipoItem == 'Iniciativa') {
+        console.log("entrou no if da iniciativa")
+        var iniciativas = {
+            _id : ID,
+            iniDataFim : prazoAjustado
+        }
+        $.post('/iniciativas/alterarPrazo', iniciativas)
+        alert("Alterando prazo, por favor aguarde...")
+        setTimeout(function() {location.reload()}, 4000)
+    }  else if (tipoItem == 'Objetivo') {
+        console.log("entrou no if do objetivo")
+        var objetivos = {
+            _id : ID,
+            objDataFim : prazoAjustado
+        }
+        $.post('/objetivos/alterarPrazo', objetivos)
+        alert("Alterando prazo, por favor aguarde...")
+        setTimeout(function() {location.reload()}, 4000)
+    } else {
+        alert("Alguma coisa deu errado..")
     }
-    alterarPrazoAtividade(atividades)
-}
-
-function alterarPrazoAtividade(atividades) {
-    $.post('/atividades/alterarPrazo', atividades)
-    alert("Alterando prazo, por favor aguarde...")
-    setTimeout(function() {location.reload()}, 4000)
 }

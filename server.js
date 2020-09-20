@@ -837,6 +837,111 @@ app.post('/atividades/alterarPrazo', (req, res) => {
         }
     })
 })
+app.post('/iniciativas/alterarPrazo', (req, res) => {
+    var iniciativas = new dbModelIni(req.body)
+    console.log('Recebido no servidor:')
+    console.log('ID da iniciativa: ' + iniciativas._id)
+    console.log('Novo Prazo: ' + iniciativas.iniDataFim)
+    MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        if (err) throw err
+        else {
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(iniciativas._id) }
+            var novoPrazo = { $set: {iniDataFim: iniciativas.iniDataFim } };
+            dbo.collection("collinis").updateOne(busca, novoPrazo, function(err, res) {
+                if (err) throw err
+                else {
+                    console.log("ID " + iniciativas._id + " atualizada! ", res)
+                }
+                dbpbsc.close()
+            })
+        }
+    })
+})
+app.post('/objetivos/alterarPrazo', (req, res) => {
+    var objetivos = new dbModelObj(req.body)
+    console.log('Recebido no servidor:')
+    console.log('ID do Objetivo: ' + objetivos._id)
+    console.log('Novo Prazo: ' + objetivos.objDataFim)
+    MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        if (err) throw err
+        else {
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(objetivos._id) }
+            var novoPrazo = { $set: {objDataFim: objetivos.objDataFim } };
+            dbo.collection("collobjs").updateOne(busca, novoPrazo, function(err, res) {
+                if (err) throw err
+                else {
+                    console.log("ID " + objetivos._id + " atualizado! ", res)
+                }
+                dbpbsc.close()
+            })
+        }
+    })
+})
+app.post('/atividades/alterarStatus', (req, res) => {
+    var atividades = new dbModelAtiv(req.body)
+    console.log('Recebido no servidor:')
+    console.log('ID da atividade: ' + atividades._id)
+    console.log('Novo Status: ' + atividades.ativStat)
+    MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        if (err) throw err
+        else {
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(atividades._id) }
+            var novoStatus = { $set: {ativStat: atividades.ativStat } };
+            dbo.collection("collativs").updateOne(busca, novoStatus, function(err, res) {
+                if (err) throw err
+                else {
+                    console.log("ID " + atividades._id + " atualizada! ", res)
+                }
+                dbpbsc.close()
+            })
+        }
+    })
+})
+app.post('/iniciativas/alterarStatus', (req, res) => {
+    var iniciativas = new dbModelIni(req.body)
+    console.log('Recebido no servidor:')
+    console.log('ID da iniciativa: ' + iniciativas._id)
+    console.log('Novo Status: ' + iniciativas.iniStat)
+    MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        if (err) throw err
+        else {
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(iniciativas._id) }
+            var novoStatus = { $set: {iniStat: iniciativas.iniStat } };
+            dbo.collection("collinis").updateOne(busca, novoStatus, function(err, res) {
+                if (err) throw err
+                else {
+                    console.log("ID " + iniciativas._id + " atualizada! ", res)
+                }
+                dbpbsc.close()
+            })
+        }
+    })
+})
+app.post('/objetivos/alterarStatus', (req, res) => {
+    var objetivos = new dbModelObj(req.body)
+    console.log('Recebido no servidor:')
+    console.log('ID do objetivo: ' + objetivos._id)
+    console.log('Novo Status: ' + objetivos.objStat)
+    MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        if (err) throw err
+        else {
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(objetivos._id) }
+            var novoStatus = { $set: {objStat: objetivos.objStat } };
+            dbo.collection("collobjs").updateOne(busca, novoStatus, function(err, res) {
+                if (err) throw err
+                else {
+                    console.log("ID " + objetivos._id + " atualizado! ", res)
+                }
+                dbpbsc.close()
+            })
+        }
+    })
+})
 app.post('/iniciativas', (req, res) => {
     var iniciativas = new dbModelIni(req.body)
     var ativSalvo = iniciativas.save()

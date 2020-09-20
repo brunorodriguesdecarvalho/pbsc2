@@ -115,41 +115,31 @@ function listarAtividades(atividades){
                                         </span>
                                     </a>
                                 </div>
-                                <div class="col bg-success botao">
+                                <div class="col bg-dark botao">
                                     <a  href="#!" 
-                                        onclick="javascript: andarAtividade('${atividades._id}')" 
-                                        class="text-white"
+                                        class="text-white" 
+                                        onclick="javascript: alterarStatus('${atividades._id}', 'Atividade')"
                                         style="text-decoration: none;"
                                     >
                                         <span class="fas">
-                                            &#xf04b;&nbsp;<strong>Iniciar</strong>
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="col bg-primary botao">
-                                    <a  href="#!" 
-                                        onclick="javascript: concluirAtividade('${atividades._id}')" 
-                                        class="text-white"
-                                        style="text-decoration: none;"
-                                    >
-                                        <span class="fas">
-                                            &#xf058;&nbsp;<strong>Concluir</strong>
+                                            &#xf044;&nbsp;<strong>Alterar Status</strong>
                                         </span>
                                     </a>
                                 </div>
                                 <div class="col bg-dark botao">
                                     <a  href="#!" 
                                         class="text-white" 
-                                        onclick="javascript: alterarPrazo('${atividades._id}')"
+                                        onclick="javascript: alterarPrazo('${atividades._id}', 'Atividade')"
                                         style="text-decoration: none;"
                                     >
                                         <span class="fas">
-                                            &#xf044;&nbsp;<strong>Alterar Prazo</strong>
+                                            &#xf017;&nbsp;<strong>Alterar Prazo</strong>
                                         </span>
                                     </a>
                                 </div>
                             </div>
-                            <div class="row text-danger" id="novoPrazoDiv_${atividades._id}"></div>   
+                            <div class="row text-danger" id="novoPrazoDiv_${atividades._id}"></div> 
+                            <div class="row text-danger" id="novoStatusDiv_${atividades._id}"></div>  
                         </p>
                     </div>
                 </div>

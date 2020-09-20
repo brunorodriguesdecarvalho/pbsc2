@@ -99,63 +99,52 @@ function listarIniciativas(iniciativas){
                             <strong>ID Iniciativa: </strong>${iniciativas._id}<br>
                             <strong>ID Usuário: </strong>${iniciativas.userID}<br>
                         </i>
-
-                        
-
-                        <a  href="#!" 
-                            onclick="javascript: excluirIniciativa('${iniciativas._id}')" 
-                            class="bg-danger text-white botao"
-                            style="text-decoration: none;"
-                        >
-                            <span class="fas">
-                                &#xf12d;&nbsp;<strong>Excluir</strong>
-                            </span>
-                        </a>
-                        
-                        <a  href="#!" 
-                            onclick="javascript: andarIniciativa('${iniciativas._id}')" 
-                            class="bg-success text-white botao"
-                            style="text-decoration: none;"
-                        >
-                            <span class="fas">
-                                &#xf04b;&nbsp;<strong>Iniciar</strong>
-                            </span>
-                        </a>
-
-                        <a  href="#!" 
-                            onclick="javascript: concluirIniciativa('${iniciativas._id}')" 
-                            class="bg-primary text-white botao"
-                            style="text-decoration: none;"
-                        >
-                            <span class="fas">
-                                &#xf058;&nbsp;<strong>Concluir</strong>
-                            </span>
-                        </a>
-
-                        <a  href="#!" 
-                            class="bg-dark text-white botao" 
-                            onclick="javascript: editar()"
-                            style="text-decoration: none;"
-                        >
-                            <span class="fas">
-                                &#xf044;&nbsp;<strong>Editar</strong>
-                            </span>
-                        </a>
+                        <div class="row">
+                            <div class="col bg-danger botao">
+                                <a  href="#!" 
+                                    onclick="javascript: excluirIniciativa('${iniciativas._id}')" 
+                                    class="text-white"
+                                    style="text-decoration: none;"
+                                >
+                                    <span class="fas">
+                                        &#xf12d;&nbsp;<strong>Excluir</strong>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="col bg-dark botao">
+                                <a  href="#!" 
+                                    class="text-white" 
+                                    onclick="javascript: alterarPrazo('${iniciativas._id}', 'Iniciativa')"
+                                    style="text-decoration: none;"
+                                >
+                                    <span class="fas">
+                                        &#xf017;&nbsp;<strong>Alterar Prazo</strong>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="col bg-dark botao">
+                                <a  href="#!" 
+                                    class="text-white" 
+                                    onclick="javascript: alterarStatus('${iniciativas._id}', 'Iniciativa')"
+                                    style="text-decoration: none;"
+                                >
+                                    <span class="fas">
+                                        &#xf044;&nbsp;<strong>Alterar Status</strong>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row text-danger" id="novoPrazoDiv_${iniciativas._id}"></div> 
+                        <div class="row text-danger" id="novoStatusDiv_${iniciativas._id}"></div>  
                     </p>
-                </div>
-
-                </div>
-                
-                
+                </div>                
             </div>
         </div>
 
         <script>  
-
-        var valorStat = document.getElementById("Stat-${iniciativas.iniStat}").getAttribute("data-value");
-        var id = document.getElementById('bola-${iniciativas._id}')
-        colorirStatus(valorStat, id)
-
+            var valorStat = document.getElementById("Stat-${iniciativas.iniStat}").getAttribute("data-value");
+            var id = document.getElementById('bola-${iniciativas._id}')
+            colorirStatus(valorStat, id)
         </script>
 
 
