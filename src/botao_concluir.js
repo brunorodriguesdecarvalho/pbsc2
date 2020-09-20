@@ -1,25 +1,20 @@
 var reloadTempo = 4000
 
-function concluirAtividade(idparaApagar) {
-    console.log('Init to complete: ', idparaApagar)
-    var atividade = { _id: idparaApagar }
-    $.post('/concluiAtiv', atividade)
-    console.log('Trying to complete: ', atividade)
-    setTimeout(function() {location.reload()}, reloadTempo)
-}
-
-function concluirIniciativa(idparaApagar) {
-    console.log('Init to complete: ', idparaApagar)
-    var iniciativa = { _id: idparaApagar }
-    $.post('/concluiIni', iniciativa)
-    console.log('Trying to complete: ', iniciativa)
-    setTimeout(function() {location.reload()}, reloadTempo)
-}
-
-function concluirObjetivo(idparaApagar) {
-    console.log('Init to complete: ', idparaApagar)
-    var objetivo = { _id: idparaApagar }
-    $.post('/concluiObj', objetivo)
-    console.log('Trying to complete: ', objetivo)
-    setTimeout(function() {location.reload()}, reloadTempo)
+function concluir(ID, tipoItem) {
+    console.log('Iniciando processo para apagar item do tipo '+tipoItem+', com este ID: ', ID)
+    if(tipoItem == 'Atividade') {
+        var atividade = { _id: ID }
+        $.post('/concluiAtiv', atividade)
+        setTimeout(function() {location.reload()}, reloadTempo)
+    } else if (tipoItem == 'Iniciativa') {
+        var iniciativa = { _id: ID }
+        $.post('/concluiIni', iniciativa)
+        setTimeout(function() {location.reload()}, reloadTempo)
+    } else if (tipoItem == 'Objetivo') {
+        var objetivo = { _id: ID }
+        $.post('/concluiObj', objetivo)
+        setTimeout(function() {location.reload()}, reloadTempo)
+    } else {
+        alert('Algo deu errado...')
+    }
 }

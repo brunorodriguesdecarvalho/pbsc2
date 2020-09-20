@@ -942,6 +942,75 @@ app.post('/objetivos/alterarStatus', (req, res) => {
         }
     })
 })
+app.post('/atividades/alterarDetalhes', (req, res) => {
+    var atividades = new dbModelAtiv(req.body)
+    console.log('Recebido no servidor:')
+    console.log('ID da atividade: ' + atividades._id)
+    console.log('Nova Descrição: ' + atividades.ativDesc)
+    console.log('Novo Motivo: ' + atividades.ativMot)
+    console.log('Novo Risco: ' + atividades.ativRisk)
+    MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        if (err) throw err
+        else {
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(atividades._id) }
+            var novoStatus = { $set: {ativDesc: atividades.ativDesc, ativMot: atividades.ativMot, ativRisk: atividades.ativRisk } };
+            dbo.collection("collativs").updateOne(busca, novoStatus, function(err, res) {
+                if (err) throw err
+                else {
+                    console.log("ID " + atividades._id + " atualizada! ", res)
+                }
+                dbpbsc.close()
+            })
+        }
+    })
+})
+app.post('/iniciativas/alterarDetalhes', (req, res) => {
+    var iniciativas = new dbModelIni(req.body)
+    console.log('Recebido no servidor:')
+    console.log('ID da iniciativa: ' + iniciativas._id)
+    console.log('Nova Descrição: ' + iniciativas.iniDesc)
+    console.log('Novo Motivo: ' + iniciativas.iniMot)
+    console.log('Novo Risco: ' + iniciativas.iniRisk)
+    MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        if (err) throw err
+        else {
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(iniciativas._id) }
+            var novoStatus = { $set: {iniDesc: iniciativas.iniDesc, iniMot: iniciativas.iniMot, iniRisk: iniciativas.iniRisk } };
+            dbo.collection("collinis").updateOne(busca, novoStatus, function(err, res) {
+                if (err) throw err
+                else {
+                    console.log("ID " + iniciativas._id + " atualizada! ", res)
+                }
+                dbpbsc.close()
+            })
+        }
+    })
+})
+app.post('/objetivos/alterarDetalhes', (req, res) => {
+    var objetivos = new dbModelObj(req.body)
+    console.log('Recebido no servidor:')
+    console.log('ID do objetivo: ' + objetivos._id)
+    console.log('Nova Descrição: ' + objetivos.objDesc)
+    console.log('Novo Motivo: ' + objetivos.objMot)
+    console.log('Novo Risco: ' + objetivos.objRisk)
+    MongoClient.connect(process.env.mongodbURI, {useUnifiedTopology: true}, function(err, dbpbsc) {
+        if (err) throw err
+        else {
+            var dbo = dbpbsc.db("dbpbsc")
+            var busca = { _id: ObjectID(objetivos._id) }
+            var novoStatus = { $set: {objDesc: objetivos.objDesc, objMot: objetivos.objMot, objRisk: objetivos.objRisk } };
+            dbo.collection("collobjs").updateOne(busca, novoStatus, function(err, res) {
+                if (err) throw err
+                else {
+                    console.log("ID " + objetivos._id + " atualizado! ", res)
+                }
+                dbpbsc.close()
+            })
+        }
+    })
+})
 app.post('/iniciativas', (req, res) => {
     var iniciativas = new dbModelIni(req.body)
     var ativSalvo = iniciativas.save()

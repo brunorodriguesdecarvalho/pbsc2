@@ -3,8 +3,8 @@ function alterarPrazo(ID, tipoItem) {
     const chaveInput = "novoPrazoInput_" + ID
     console.log("tipo do item: " + tipoItem)
     document.getElementById(chaveDiv).innerHTML = `
-        <div class="row">
-            <div class="col"> 
+        <div class="row py-2 align-items-center">
+            <div class="col text-center"> 
                 <strong>Novo Prazo:</strong>
             </div>
             <div class="col">

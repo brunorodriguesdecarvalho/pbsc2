@@ -7,7 +7,7 @@ function getIniciativas() {
                 console.log("sem registros")
                 $("#Ini").append(`
                     <div class="mx-auto">
-                    <br>
+                    <br> 
                     <p style="font-weight:bold">Você ainda não criou nenhuma iniciativa...</p>
                         <img 
                             src="../img/startup-vector-free-icon-set-14.png" 
@@ -33,7 +33,7 @@ function listarIniciativas(iniciativas){
     var dataCriacaoAjustada = transformarDataString(iniciativas.iniDataCria) 
     var a = `
     
-        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 align-content-stretch teste" id="${iniciativas._id}" data-value="id="${iniciativas._id}">
+        <div class="col-md-12 col-lg-6 align-content-stretch teste" id="${iniciativas._id}" data-value="id="${iniciativas._id}">
             
             <!-- início do cartão -->
             <div class="card mt-2">
@@ -90,10 +90,21 @@ function listarIniciativas(iniciativas){
                         <strong>Status: </strong>${iniciativas.iniStat}<br>
                         <strong>Objetivo Associado: </strong>${iniciativas.iniObj}<br>
                         <strong>Prazo: </strong>${dataPrazoAjustada}<br>
-                        <strong>Criação: </strong>${dataCriacaoAjustada}<br>
-                        <strong>Descrição: </strong>${iniciativas.iniDesc}<br>
-                        <strong>Motivação: </strong>${iniciativas.iniMot}<br>
-                        <strong>Riscos: </strong>${iniciativas.iniRisk}<br>
+                        <strong>Criação: </strong>${dataCriacaoAjustada}
+                        <div>
+                            <div class="col-sm">
+                                <strong>Descrição: </strong>
+                                <div id="desc_${iniciativas._id}">${iniciativas.iniDesc}</div>
+                            </div>
+                            <div class="col-sm">
+                                <strong>Motivação: </strong>
+                                <div id="motv_${iniciativas._id}">${iniciativas.iniMot}</div>
+                            </div>
+                            <div class="col-sm">
+                                <strong>Riscos: </strong>
+                                <div id="risc_${iniciativas._id}">${iniciativas.iniRisk}</div>
+                            </div>
+                        </div>
                         
                         <i style="display: none">
                             <strong>ID Iniciativa: </strong>${iniciativas._id}<br>
@@ -111,31 +122,52 @@ function listarIniciativas(iniciativas){
                                     </span>
                                 </a>
                             </div>
-                            <div class="col bg-dark botao">
+                            <div class="col bg-success botao">
                                 <a  href="#!" 
                                     class="text-white" 
-                                    onclick="javascript: alterarPrazo('${iniciativas._id}', 'Iniciativa')"
+                                    onclick="javascript: concluir('${iniciativas._id}', 'Iniciativa')"
                                     style="text-decoration: none;"
                                 >
                                     <span class="fas">
-                                        &#xf017;&nbsp;<strong>Alterar Prazo</strong>
+                                        &#xf00c;&nbsp;<strong>Concluído</strong>
                                     </span>
                                 </a>
                             </div>
-                            <div class="col bg-dark botao">
+                            <div class="col bg-warning botao">
+                                <a  href="#!"
+                                    onclick="javascript: alterarStatus('${iniciativas._id}', 'Iniciativa')"
+                                    style="text-decoration: none; color: black;"
+                                >
+                                    <span class="fas">
+                                        &#xf071;&nbsp;<strong>Alterar Status</strong>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="col bg-warning botao">
+                                <a  href="#!" 
+                                    onclick="javascript: alterarPrazo('${iniciativas._id}', 'Iniciativa')"
+                                    style="text-decoration: none; color: black;"
+                                >
+                                    <span class="fas">
+                                        &#xf2f2;&nbsp;<strong>Alterar Prazo</strong>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="row bg-dark botao">
                                 <a  href="#!" 
                                     class="text-white" 
-                                    onclick="javascript: alterarStatus('${iniciativas._id}', 'Iniciativa')"
+                                    onclick="javascript: alterarDetalhe('${iniciativas._id}', 'Iniciativa')"
                                     style="text-decoration: none;"
                                 >
                                     <span class="fas">
-                                        &#xf044;&nbsp;<strong>Alterar Status</strong>
+                                        &#xf044;&nbsp;<strong>Editar Descrição / Motivos / Riscos</strong>
                                     </span>
                                 </a>
                             </div>
                         </div>
                         <div class="row text-danger" id="novoPrazoDiv_${iniciativas._id}"></div> 
-                        <div class="row text-danger" id="novoStatusDiv_${iniciativas._id}"></div>  
+                        <div class="row text-danger" id="novoStatusDiv_${iniciativas._id}"></div>
+                        <div class="row text-danger" id="novoEdit_${iniciativas._id}"></div> 
                     </p>
                 </div>                
             </div>

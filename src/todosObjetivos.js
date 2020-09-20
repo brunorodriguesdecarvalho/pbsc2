@@ -34,7 +34,7 @@ function listarObjetivos(objetivos){
     
     var a = `
 
-        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 align-content-stretch teste" id="${objetivos._id}" data-value="id="${objetivos._id}">
+        <div class="col-md-12 col-lg-6 align-content-stretch teste" id="${objetivos._id}" data-value="id="${objetivos._id}">
                     
             <!-- início do cartão -->
             <div class="card mt-2">
@@ -89,11 +89,22 @@ function listarObjetivos(objetivos){
                         <p id="Stat-${objetivos.objStat}" data-value="${objetivos.objStat}">
                             <strong>Status: </strong>${objetivos.objStat}<br>
                             <strong>Prazo: </strong>${dataPrazoAjustada}<br>
-                            <strong>Criação: </strong>${dataCriacaoAjustada}<br>
-                            <strong>Descrição: </strong>${objetivos.objDesc}<br>
-                            <strong>Motivação: </strong>${objetivos.objMot}<br>
-                            <strong>Riscos: </strong>${objetivos.objRisk}<br>
-                            
+                            <strong>Criação: </strong>${dataCriacaoAjustada}
+                            <div>
+                                <div class="col-sm">
+                                    <strong>Descrição: </strong>
+                                    <div id="desc_${objetivos._id}">${objetivos.objDesc}</div>
+                                </div>
+                                <div class="col-sm">
+                                    <strong>Motivação: </strong>
+                                    <div id="motv_${objetivos._id}">${objetivos.objMot}</div>
+                                </div>
+                                <div class="col-sm">
+                                    <strong>Riscos: </strong>
+                                    <div id="risc_${objetivos._id}">${objetivos.objRisk}</div>
+                                </div>
+                            </div>
+                            <br>
                             <i style="display: none">
                                 <strong>ID Objetivo: </strong>${objetivos._id}<br>
                                 <strong>ID Usuário: </strong>${objetivos.userID}<br>
@@ -111,31 +122,52 @@ function listarObjetivos(objetivos){
                                         </span>
                                     </a>
                                 </div>
-                                <div class="col bg-dark botao">
-                                    <a  href="#!"  
+                                <div class="col bg-success botao">
+                                    <a  href="#!" 
                                         class="text-white" 
-                                        onclick="javascript: alterarStatus('${objetivos._id}', 'Objetivo')"
+                                        onclick="javascript: concluir('${objetivos._id}', 'Objetivo')"
                                         style="text-decoration: none;"
                                     >
                                         <span class="fas">
-                                            &#xf044;&nbsp;<strong>Alterar Status</strong>
+                                            &#xf00c;&nbsp;<strong>Concluído</strong>
                                         </span>
                                     </a>
                                 </div>
-                                <div class="col bg-dark botao">
+                                <div class="col bg-warning botao">
+                                    <a  href="#!"
+                                        onclick="javascript: alterarStatus('${objetivos._id}', 'Objetivo')"
+                                        style="text-decoration: none; color: black;"
+                                    >
+                                        <span class="fas"> 
+                                            &#xf071;&nbsp;<strong>Alterar Status</strong>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="col bg-warning botao">
+                                    <a  href="#!"
+                                        onclick="javascript: alterarPrazo('${objetivos._id}', 'Objetivo')"
+                                        style="text-decoration: none; color: black;"
+                                    >
+                                        <span class="fas">
+                                            &#xf2f2;&nbsp;<strong>Alterar Prazo</strong>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="row bg-dark botao">
                                     <a  href="#!" 
                                         class="text-white" 
-                                        onclick="javascript: alterarPrazo('${objetivos._id}', 'Objetivo')"
+                                        onclick="javascript: alterarDetalhe('${objetivos._id}', 'Objetivo')"
                                         style="text-decoration: none;"
                                     >
                                         <span class="fas">
-                                            &#xf017;&nbsp;<strong>Alterar Prazo</strong>
+                                            &#xf044;&nbsp;<strong>Editar Descrição / Motivos / Riscos</strong>
                                         </span>
                                     </a>
                                 </div>
                             </div>
                             <div class="row text-danger" id="novoPrazoDiv_${objetivos._id}"></div> 
                             <div class="row text-danger" id="novoStatusDiv_${objetivos._id}"></div>  
+                            <div class="row text-danger" id="novoEdit_${objetivos._id}"></div> 
                         </p>
                     </div>
                 </div>

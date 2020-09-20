@@ -36,7 +36,7 @@ function listarAtividades(atividades){
     var dataCriacaoAjustada = transformarDataString(atividades.ativDataCria)    
 
     var a = `  
-        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 align-content-stretch teste" id="${atividades._id}" data-value="id="${atividades._id}">
+        <div class="col-md-12 col-lg-6 align-content-stretch teste" id="${atividades._id}" data-value="id="${atividades._id}">
             
             <!-- início do cartão -->
             <div class="card mt-2">
@@ -93,11 +93,22 @@ function listarAtividades(atividades){
                             <strong>Status: </strong>${atividades.ativStat}<br>
                             <strong>Iniciativa Associada: </strong>${atividades.ativIni}<br>
                             <strong>Prazo: </strong>${dataPrazoAjustada}<br>
-                            <strong>Criação: </strong>${dataCriacaoAjustada}<br>
-                            <strong>Descrição: </strong>${atividades.ativDesc}<br>
-                            <strong>Motivação: </strong>${atividades.ativMot}<br>
-                            <strong>Riscos: </strong>${atividades.ativRisk}<br>
-                            
+                            <strong>Criação: </strong>${dataCriacaoAjustada}
+                            <div>
+                                <div class="col-sm">
+                                    <strong>Descrição: </strong>
+                                    <div id="desc_${atividades._id}">${atividades.ativDesc}</div>
+                                </div>
+                                <div class="col-sm">
+                                    <strong>Motivação: </strong>
+                                    <div id="motv_${atividades._id}">${atividades.ativMot}</div>
+                                </div>
+                                <div class="col-sm">
+                                    <strong>Riscos: </strong>
+                                    <div id="risc_${atividades._id}">${atividades.ativRisk}</div>
+                                </div>
+                            </div>
+                            <br>
                             <i style="display: none">
                                 <strong>ID Atividade: </strong>${atividades._id}<br>
                                 <strong>ID Usuário: </strong>${atividades.userID}<br>
@@ -115,31 +126,52 @@ function listarAtividades(atividades){
                                         </span>
                                     </a>
                                 </div>
-                                <div class="col bg-dark botao">
+                                <div class="col bg-success botao">
                                     <a  href="#!" 
                                         class="text-white" 
-                                        onclick="javascript: alterarStatus('${atividades._id}', 'Atividade')"
+                                        onclick="javascript: concluir('${atividades._id}', 'Atividade')"
                                         style="text-decoration: none;"
                                     >
                                         <span class="fas">
-                                            &#xf044;&nbsp;<strong>Alterar Status</strong>
+                                            &#xf00c;&nbsp;<strong>Concluído</strong>
                                         </span>
                                     </a>
                                 </div>
-                                <div class="col bg-dark botao">
+                                <div class="col bg-warning botao">
+                                    <a  href="#!"  
+                                        onclick="javascript: alterarStatus('${atividades._id}', 'Atividade')"
+                                        style="text-decoration: none; color: black;"
+                                    >
+                                        <span class="fas">
+                                            &#xf071;&nbsp;<strong>Alterar Status</strong>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="col bg-warning botao">
+                                    <a  href="#!"  
+                                        onclick="javascript: alterarPrazo('${atividades._id}', 'Atividade')"
+                                        style="text-decoration: none; color: black;"
+                                    >
+                                        <span class="fas">
+                                            &#xf2f2;&nbsp;<strong>Alterar Prazo</strong>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="row bg-dark botao">
                                     <a  href="#!" 
                                         class="text-white" 
-                                        onclick="javascript: alterarPrazo('${atividades._id}', 'Atividade')"
+                                        onclick="javascript: alterarDetalhe('${atividades._id}', 'Atividade')"
                                         style="text-decoration: none;"
                                     >
                                         <span class="fas">
-                                            &#xf017;&nbsp;<strong>Alterar Prazo</strong>
+                                            &#xf044;&nbsp;<strong>Editar Descrição / Motivos / Riscos</strong>
                                         </span>
                                     </a>
                                 </div>
                             </div>
                             <div class="row text-danger" id="novoPrazoDiv_${atividades._id}"></div> 
-                            <div class="row text-danger" id="novoStatusDiv_${atividades._id}"></div>  
+                            <div class="row text-danger" id="novoStatusDiv_${atividades._id}"></div>
+                            <div class="row text-danger" id="novoEdit_${atividades._id}"></div>  
                         </p>
                     </div>
                 </div>

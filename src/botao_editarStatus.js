@@ -3,7 +3,7 @@ function alterarStatus(ID, tipoItem) {
     const chaveInput = "novoStatusInput_" + ID
     console.log("tipo do item: " + tipoItem)
     document.getElementById(chaveDiv).innerHTML = `
-        <div class="row">
+        <div class="row py-2 align-items-center">
             <div class="col text-center"> 
                 <strong>Novo Status:</strong>
             </div>
