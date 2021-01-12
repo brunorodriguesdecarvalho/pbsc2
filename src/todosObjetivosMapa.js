@@ -84,28 +84,35 @@ function listarObjetivos(resultado){
             colorirStatus(valorStat, idBola)
         </script>
     `
-    if(resultado.objSaude == "Física") {
-        $("#Fis").append(a)
-    } else if(resultado.objSaude == "Emocional") {
-        $("#Emo").append(a)
-    } else if(resultado.objSaude == "Espiritual") {
-        $("#Esp").append(a)
-    } else if(resultado.objSaude == "Social") {
-        $("#Soc").append(a)
-    } else if(resultado.objSaude == "Intelectual") {
-        $("#Int").append(a)
-    } else if(resultado.objSaude == "Profissional") {
-        $("#Pro").append(a)
-    } else if(resultado.objSaude == "Financeira") {
-        $("#Fin").append(a)
-    } else {
-        $("#Obj").append(a)
-    }
 
-    var nomeDestino = "ini_" + `${resultado._id}`
-    var b = `<div class="col px-0"id=` + nomeDestino + `></div>`
-    var id = "#" + resultado._id
-    $(id).append(b)
+    if (`${resultado.objStat}` != '3 - Concluído') {
+        if (`${resultado.objStat}` != '4 - Cancelado') {
+
+            if(resultado.objSaude == "Física") {
+                $("#Fis").append(a)
+            } else if(resultado.objSaude == "Emocional") {
+                $("#Emo").append(a)
+            } else if(resultado.objSaude == "Espiritual") {
+                $("#Esp").append(a)
+            } else if(resultado.objSaude == "Social") {
+                $("#Soc").append(a)
+            } else if(resultado.objSaude == "Intelectual") {
+                $("#Int").append(a)
+            } else if(resultado.objSaude == "Profissional") {
+                $("#Pro").append(a)
+            } else if(resultado.objSaude == "Financeira") {
+                $("#Fin").append(a)
+            } else {
+                $("#Obj").append(a)
+            }
+        
+            var nomeDestino = "ini_" + `${resultado._id}`
+            var b = `<div class="col px-0"id=` + nomeDestino + `></div>`
+            var id = "#" + resultado._id
+            $(id).append(b)
+            
+        }
+    }  
 }
 
 
@@ -132,13 +139,18 @@ function listarIniciativas(iniciativas){
         colorirStatus(valorStat, idBola)
     </script>
 `
-    var endObj = "#ini_" + `${iniciativas.iniObjID}`
-    $(endObj).append(a)
+    if (`${iniciativas.iniStat}` != '3 - Concluído') {
+        if (`${iniciativas.iniStat}` != '4 - Cancelado') {
+            var endObj = "#ini_" + `${iniciativas.iniObjID}`
+            $(endObj).append(a)
 
-    var nomeDestino = "ativ_" + `${iniciativas._id}`
-    var b = `<div class="col px-0"id=` + nomeDestino + `></div>`
-    var id = "#" + iniciativas._id
-    $(id).append(b)
+            var nomeDestino = "ativ_" + `${iniciativas._id}`
+            var b = `<div class="col px-0"id=` + nomeDestino + `></div>`
+            var id = "#" + iniciativas._id
+            $(id).append(b)
+        }
+    }
+    
 }
 
 
@@ -166,5 +178,9 @@ function listarAtividades(atividades){
         </script>
     `
     var endAtiv = "#ativ_" + `${atividades.ativIniID}`
-    $(endAtiv).append(a)
+    if (`${atividades.ativStat}` != '3 - Concluído') {
+        if (`${atividades.ativStat}` != '4 - Cancelado') {
+            $(endAtiv).append(a)
+        }
+    }
 }

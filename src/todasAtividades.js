@@ -3,11 +3,11 @@ function getAtividades() {
         '/atividades',
         (atividades) => { 
             var qtd = Object.keys(atividades).length
-            if (qtd == 0) {
+            if (qtd == 0 ) {
                 console.log("sem registros")
                 $("#Ativ").append(`
                     <div class="mx-auto">
-                    <br>
+                    <br> 
                     <p style="font-weight:bold">Você ainda não criou nenhuma atividade...</p>
                         <img 
                             src="../img/startup-vector-free-icon-set-14.png" 
@@ -22,6 +22,7 @@ function getAtividades() {
                 `)
             } else { 
                 console.log("Qtd de registros: ", qtd)
+                console.log("status da atividade: " + atividades.ativStat + "\n")
                 atividades.forEach(listarAtividades)
             }
         }

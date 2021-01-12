@@ -96,7 +96,7 @@ app.get('/yeKsPaMG', (req, res) => {
 let fs = require('fs');
 
 //Variáveis para operações CRUD 
-var ordemAtiv = { ativDataFim: 1, ativStat: 1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
+var ordemAtiv = { ativDataFim: 1, ativStat: -1, ativIni: 1, ativDataCria: 1, ativNome: 1 }
 var ordemIni = { iniDataFim: 1, iniStat: 1, iniObj: -1, iniDataCria: 1, iniNome: 1 }
 var ordemObj = { objDataFim: 1, objStat: 1, objDataCria: 1, objNome: 1 }
 var ordemRun = { DataCorridaOrigem: 1 }
@@ -214,6 +214,13 @@ app.get('/corridas', (req, res) => {
 app.get('/atividades', (req, res) => {
     var busca = { $and: [ {userID: ObjectID(req.user._id)} /*, { ativStat: { $not: { $regex: "^3 - Concluído.*" } } }*/ ] }
     dbModelAtiv.find(busca, (err, atividades) => {
+        if (err) throw err
+        res.send(atividades)    
+    }).sort(ordemAtiv) 
+})
+app.get('/map/ativ', (req, res) => {
+    var buscaMapa = { $and: [ {userID: ObjectID(req.user._id)} , { $nor: [ { ativStat: { $regex: "^3 - Concluíd*" } }, { ativStat: { $regex: "^4 - Canc*" } } ] } ] }
+    dbModelAtiv.find(buscaMapa, (err, atividades) => {
         if (err) throw err
         res.send(atividades)    
     }).sort(ordemAtiv) 
